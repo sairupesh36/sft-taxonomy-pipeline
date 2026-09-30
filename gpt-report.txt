@@ -1,0 +1,1754 @@
+I went through the **full 1,000-sample file**, not just the first 20 or a convenient subset. The file contains **87,262 lines**, and all 1,000 `MAPPED RESULT` objects were parsed and audited. 
+
+I’m going to be blunt because this is exactly the stage where being polite would actually hurt the project.
+
+# My verdict
+
+### Your taxonomy design: **8/10**
+
+### Your current mapping quality: **5.5/10**
+
+### Production readiness of the mapper: **4/10**
+
+### Potential after fixing the mapper: **8.5–9/10**
+
+The important distinction is:
+
+> **Your taxonomy is substantially better than your mapper's current behavior.**
+
+I do **not** think you need to throw away the taxonomy.
+
+I **do** think you need to substantially change the mapping logic.
+
+The biggest problem isn't that the taxonomy lacks categories. The biggest problem is that the mapper is **not consistently understanding what exactly is being classified**.
+
+And there are some genuinely nasty examples in this 1,000-sample set.
+
+---
+
+# 1. The biggest problem: the mapper is sometimes classifying the ANSWER instead of the TASK
+
+This is the single most important finding.
+
+Your taxonomy should primarily answer:
+
+> **"What task is this SFT example asking the model to perform?"**
+
+But several mappings behave as if the question is:
+
+> **"What did the assistant happen to output?"**
+
+Those are very different things.
+
+### Example: idx 264
+
+The user asks where they can learn about fair-use guidelines for a YouTube book-review video.
+
+That's fundamentally:
+
+* legal
+* copyright / intellectual property
+* information seeking / QA / retrieval
+
+But the assistant bizarrely answers in rhyme.
+
+Your mapper labels it:
+
+* `domain = legal`
+* `task_family = generation`
+* `subfamily = creative_generation`
+
+The `legal` part is good.
+
+The **generation / creative_generation part is wrong if you're classifying the underlying SFT task**. The user didn't ask for a poem. The model independently decided to answer as a poem. 
+
+This is exactly the kind of example that exposes the problem.
+
+### Correct interpretation
+
+I'd map the task more like:
+
+```text
+domain:
+  legal
+
+domain_subdomain:
+  intellectual_property
+
+task_family:
+  question_answering
+  or search_and_retrieval
+
+task_subfamily:
+  open_domain_qa
+  / legal_information_qa
+```
+
+Then separately:
+
+```text
+response_behavior:
+  answer
+```
+
+or, if you want to capture what actually happened:
+
+```text
+response_style:
+  creative_style
+```
+
+But **creative generation should not replace the underlying task**.
+
+---
+
+# 2. Refusals are destroying your domain mapping
+
+This is another major issue.
+
+Take idx 375.
+
+The user asks for a detailed clandestine chemistry laboratory setup for illicit drug production.
+
+The assistant refuses.
+
+Your mapper produces:
+
+```text
+domain = general
+task_family = generation
+domain_subdomain = general_assistance
+task_subfamily = text_generation
+```
+
+That's a poor representation of the actual task. 
+
+The underlying task is clearly chemistry / illicit drug production / laboratory procedure.
+
+The fact that the assistant refused does **not** magically turn the user's task into "general assistance."
+
+This is where I strongly recommend adding a separate axis:
+
+```text
+response_behavior:
+    normal_answer
+    refusal
+    partial_refusal
+    safe_redirection
+    tool_error
+    unable_to_answer
+```
+
+Then the same example can be represented as:
+
+```text
+domain:
+    pharmaceuticals_and_life_sciences / science_and_research
+
+task_family:
+    generation
+
+task_subfamily:
+    procedural_generation
+
+safety:
+    restricted_harmful_request
+
+response_behavior:
+    refusal
+```
+
+Now you preserve both pieces of information.
+
+Your current mapping is throwing away the **actual task identity** because the model refused.
+
+That's bad for SFT analysis.
+
+---
+
+# 3. The browser examples are a BIG red flag
+
+Idx 766 is probably one of the clearest mistakes in the entire file.
+
+The task gives an accessibility tree and asks the model to:
+
+> navigate to an article and download a related guide.
+
+The assistant reasons about:
+
+```text
+click [17]
+click [4]
+```
+
+Your mapper labels it:
+
+```text
+domain = software_engineering
+domain_subdomain = frontend_development
+task_family = extraction
+task_subfamily = entity_extraction
+```
+
+That's simply not what the task is.
+
+The task is **browser interaction / web navigation / computer use**.
+
+The assistant is extracting IDs as part of accomplishing the navigation task, but the core task isn't entity extraction. 
+
+This tells me your mapper is heavily influenced by **surface representation**.
+
+It sees:
+
+> accessibility tree → IDs → extracting entities
+
+instead of:
+
+> webpage environment → choose action → navigate/download
+
+### I'd want:
+
+```text
+domain:
+    information_technology
+    or general
+
+task_family:
+    tool_use_and_function_calling
+
+task_subfamily:
+    browser_navigation
+    web_interaction
+    action_selection
+
+tool_category:
+    browser
+
+interaction_mode:
+    agentic_loop / single_turn
+```
+
+Depending on your exact taxonomy definitions.
+
+### This also tells you something important about your taxonomy
+
+You need a **computer-use / browser-interaction branch**.
+
+Don't shove browser tasks into `frontend_development`.
+
+Frontend development means:
+
+> build/change/debug the webpage.
+
+Browser interaction means:
+
+> operate a webpage.
+
+Those are completely different capabilities.
+
+---
+
+# 4. `other` is becoming a dumping ground
+
+This is probably your biggest taxonomy-coverage problem.
+
+Across the 1,000 samples:
+
+* **108** have `domain_subdomain = other`
+* **24** have `task_subfamily = other`
+
+That's too much.
+
+Not catastrophic, but definitely too much.
+
+The interesting part is that many of these aren't genuinely impossible to classify.
+
+For example, there are database tasks being classified as:
+
+```text
+data_and_information_management
+→ other
+```
+
+when you clearly have:
+
+```text
+database_operations
+→ query_generation
+```
+
+available.
+
+There are household agent tasks classified as:
+
+```text
+general
+→ general_assistance
+→ other
+```
+
+when the task is actually action planning / environment interaction.
+
+There are gaming tasks classified as:
+
+```text
+gaming
+→ other
+```
+
+even though the task clearly belongs to a gaming-specific operational category.
+
+There are browser tasks mapped to `other`.
+
+There are biomedical extraction tasks mapped to `other`.
+
+So the problem isn't simply "taxonomy isn't exhaustive."
+
+It's also:
+
+> **The mapper is giving up too early.**
+
+---
+
+# 5. `cross_domain` is being used incorrectly
+
+This is another one I would fix.
+
+You have **46 cross_domain records**.
+
+But a lot of them aren't actually cross-domain.
+
+For example, this repeated task:
+
+> "Which country does the village belong to that lies in the district sharing a border with the district within the city twinned with Mbabane?"
+
+gets mapped variously to:
+
+```text
+general
+cross_domain
+humanities
+science_and_research
+aerospace_and_aviation
+legal + business
+...
+```
+
+That's absurdly unstable.
+
+The underlying task is a geographic / geopolitical multi-hop information retrieval problem.
+
+It doesn't become:
+
+> aerospace
+
+just because some retrieved entity happened to be connected to an aviation source.
+
+And it doesn't become:
+
+> cross_domain
+
+just because the reasoning traverses several entities.
+
+This is an important conceptual distinction:
+
+### Multi-hop ≠ multi-domain
+
+A task can be:
+
+```text
+one domain
++
+multiple reasoning hops
+```
+
+without being cross-domain.
+
+Your taxonomy currently appears to conflate these sometimes.
+
+---
+
+# 6. The repeated identical samples expose a serious determinism problem
+
+This is probably the most damning evidence in the entire dataset.
+
+I found repeated **identical full contexts** with wildly different mappings.
+
+## Regenerative farming example
+
+The exact same user task appears **29 times**.
+
+The system context is also the same.
+
+The user asks about regenerative farming practices and soil health. The assistant transfers the request to a farm representative. 
+
+Yet your mappings vary across things like:
+
+```text
+customer_support
+customer_support + education
+customer_support + media
+customer_support + ecommerce
+customer_support + HR
+agriculture + customer_support
+customer_support + healthcare
+customer_support + gaming
+construction + customer_support
+...
+```
+
+And task families vary between:
+
+```text
+generation
+question_answering
+knowledge_management
+tool_use_and_function_calling
+planning_and_scheduling
+```
+
+That's **not acceptable** for a deterministic taxonomy mapper.
+
+For the same task, you shouldn't get 20+ different interpretations because the LLM woke up on the wrong side of the bed.
+
+The underlying task is essentially:
+
+```text
+domain:
+    customer_support
+    possibly agriculture as secondary domain
+
+task_family:
+    question_answering
+    or knowledge_management / escalation depending on your exact definition
+
+response_behavior:
+    escalation / transfer
+```
+
+But it should be **stable**.
+
+---
+
+# 7. The Mbabane example is even worse
+
+That exact question occurs **29 times**.
+
+The mapping varies between:
+
+```text
+general
+cross_domain
+humanities
+science_and_research
+aerospace_and_aviation
+legal + business
+```
+
+while also changing:
+
+```text
+multi_step
+complex_workflow
+```
+
+and sometimes:
+
+```text
+question_answering
+question_answering + search_and_retrieval
+question_answering + tool_use
+```
+
+The underlying question itself is unchanged. 
+
+This means your mapper currently has a serious **consistency problem**.
+
+And consistency is actually more important than squeezing out another 2% of taxonomy coverage.
+
+---
+
+# 8. Your SQL benchmark exposes another structural issue
+
+The MySQL agent example is repeated **21 times**. 
+
+One mapping correctly identifies:
+
+```text
+data_and_information_management
+database_operations
+query_generation
+```
+
+But another version gives:
+
+```text
+database_operations
++
+calculation
+```
+
+with:
+
+```text
+query_generation
++
+arithmetic_calculation
+```
+
+That's questionable.
+
+The SQL query:
+
+```sql
+SELECT u.DisplayName
+...
+ORDER BY COUNT(b.Id) DESC
+LIMIT 1
+```
+
+is doing **aggregation/ranking inside a database query**.
+
+That doesn't mean the SFT task is an arithmetic-calculation task.
+
+The core task is:
+
+> generate and execute a database query to answer a question.
+
+The numeric operation is incidental to the database operation.
+
+This is another example of your mapper confusing **an operation inside a task** with **the task itself**. 
+
+---
+
+# 9. Your `task_subfamily` layer mixes different dimensions
+
+This is subtle, but very important.
+
+Look at your QA labels:
+
+```text
+factoid_qa
+closed_domain_qa
+open_domain_qa
+multi_hop_qa
+conversational_qa
+```
+
+These aren't all the same kind of property.
+
+For example:
+
+### `open_domain`
+
+describes **knowledge grounding**
+
+### `closed_domain`
+
+also describes **knowledge grounding**
+
+### `multi_hop`
+
+describes **reasoning structure**
+
+### `factoid`
+
+describes **answer type**
+
+### `conversational`
+
+describes **interaction style**
+
+You're currently putting all of them into one `task_subfamily` bucket.
+
+That's why you end up with things like:
+
+```json
+"task_subfamily": [
+    "multi_hop_qa",
+    "open_domain_qa"
+]
+```
+
+That combination is actually telling you something useful.
+
+But you're forcing two dimensions into one field.
+
+---
+
+# 10. I would split task subfamily into orthogonal facets
+
+This would make your taxonomy much stronger.
+
+Instead of:
+
+```text
+task_subfamily:
+    multi_hop_qa
+    open_domain_qa
+```
+
+use something like:
+
+```text
+task_family:
+    question_answering
+
+qa_grounding:
+    open_domain
+
+reasoning_depth:
+    multi_hop
+
+answer_type:
+    factoid
+```
+
+Now the taxonomy becomes much cleaner.
+
+Same for generation:
+
+```text
+task_family:
+    generation
+
+generation_type:
+    creative
+```
+
+And classification:
+
+```text
+task_family:
+    classification
+
+classification_type:
+    binary
+```
+
+And extraction:
+
+```text
+task_family:
+    extraction
+
+extraction_target:
+    entity
+```
+
+This will drastically reduce the mapper's ambiguity.
+
+---
+
+# 11. `task_composition` is actually pretty decent
+
+This part surprised me.
+
+You have:
+
+```text
+atomic = 677
+composed = 323
+```
+
+That overall distribution looks plausible.
+
+And I don't think you should define:
+
+> composed = multiple task families
+
+That's too restrictive.
+
+A task can be composed while remaining within one family.
+
+For example:
+
+```text
+tool_use_and_function_calling
+```
+
+with:
+
+```text
+search → retrieve → compare → call API → return result
+```
+
+is composed even if the overarching task family is still tool use.
+
+So your current instinct here is good.
+
+### But define it explicitly:
+
+**Atomic**
+
+> one independently meaningful task objective.
+
+**Composed**
+
+> two or more dependent/independent subtasks required to fulfill the user's objective.
+
+Don't derive it merely from:
+
+* number of sentences
+* number of labels
+* number of tools
+* prompt length.
+
+---
+
+# 12. Complexity is being contaminated by prompt scaffolding
+
+You have:
+
+```text
+single_step = 512
+multi_step = 456
+complex_workflow = 32
+```
+
+The problem is that `complex_workflow` appears to sometimes describe the **benchmark wrapper**, rather than the underlying task.
+
+The Mbabane question is a good example.
+
+The user asks one final question, but because the agent performs several web searches, it sometimes becomes:
+
+```text
+complex_workflow
+```
+
+That's defensible if complexity means **execution complexity**.
+
+But then a simple customer-support question can also become a complex workflow because the surrounding agent policy/tool environment is complicated.
+
+That's dangerous.
+
+You need to define complexity around the **required work**, not the length of the system prompt.
+
+I'd use:
+
+```text
+single_step
+multi_step
+complex_workflow
+```
+
+based on the minimum number/structure of operations required to complete the user's goal.
+
+Not based on:
+
+> "this prompt had a 100-line system policy, therefore complex."
+
+Humans have already invented enough bureaucracy without teaching the taxonomy to reproduce it.
+
+---
+
+# 13. Your tool taxonomy needs another separation
+
+Right now you have:
+
+```text
+tool_requirement
+tool_category
+```
+
+That's good in principle.
+
+But the data shows contradictions.
+
+I found:
+
+### 56 records
+
+where:
+
+```text
+tool_requirement = none
+```
+
+but:
+
+```text
+tool_category != []
+```
+
+And:
+
+### 11 records
+
+where:
+
+```text
+tool_requirement = required
+```
+
+but:
+
+```text
+tool_category = []
+```
+
+So the axes aren't enforcing each other.
+
+---
+
+# 14. You should distinguish 3 different tool concepts
+
+This would fix a lot:
+
+### A. Tool dependency
+
+```text
+tool_requirement:
+    none
+    optional
+    required
+```
+
+Meaning:
+
+> Does fulfilling the task require an external tool?
+
+### B. Tool actually used
+
+```text
+tool_usage:
+    none
+    attempted
+    successful
+    failed
+```
+
+### C. Tool type
+
+```text
+tool_category:
+    browser
+    api
+    database
+    code_execution
+    search_engine
+    filesystem
+    ...
+```
+
+This is much cleaner.
+
+Because consider:
+
+> "Given these APIs, determine which function should be called."
+
+The task **requires reasoning over tool specifications**, but the assistant may not actually execute a tool.
+
+That's different from:
+
+> "Call this API and return the result."
+
+Your current representation doesn't cleanly distinguish those.
+
+---
+
+# 15. `reasoning_scratchpad` should NOT be a tool category
+
+I would remove this from `tool_category`.
+
+You currently have:
+
+```text
+tool_category:
+    reasoning_scratchpad
+```
+
+alongside:
+
+```text
+api
+browser
+database
+code_execution
+```
+
+Those aren't the same ontological thing.
+
+An API is an external capability.
+
+A reasoning scratchpad is an internal reasoning mechanism.
+
+I'd create a separate axis if you genuinely need it:
+
+```text
+reasoning_support:
+    none
+    scratchpad
+    chain_of_thought_required
+```
+
+Although I'd be cautious about making hidden reasoning itself a taxonomy target. For SFT data, you're usually better off classifying the **reasoning demand**, not whether hidden CoT happened.
+
+---
+
+# 16. Your strongest parts
+
+Now, before I completely set fire to the workbook, there is a lot here that is genuinely good.
+
+### Your top-level task families are strong.
+
+You've captured:
+
+* QA
+* generation
+* calculation
+* classification
+* extraction
+* summarization
+* search/retrieval
+* recommendation
+* tool use
+* code generation
+* code debugging
+* transformation
+* comparison
+* planning
+* database operations
+* validation
+* reasoning
+* software design
+
+That's a very solid SFT task ontology.
+
+### Your domain taxonomy is broad.
+
+You're covering:
+
+* software
+* mathematics
+* finance
+* healthcare
+* science
+* legal
+* sports
+* gaming
+* ecommerce
+* customer support
+* humanities
+* agriculture
+* aerospace
+* government
+* religion
+* media
+* education
+* etc.
+
+That's good.
+
+### Your IO schema is useful.
+
+This part:
+
+```text
+input:
+    type
+    format
+    language
+
+output:
+    type
+    format
+    language
+```
+
+is actually valuable for dataset curation.
+
+Keep it.
+
+### Your constraint layer is also useful.
+
+You've got:
+
+```text
+tone_and_style
+output_format
+content_requirement
+compliance
+length_limit
+citation_required
+confidentiality
+```
+
+That's exactly the sort of metadata that becomes useful when constructing SFT mixtures.
+
+---
+
+# 17. The 1,000 samples reveal the taxonomy is already discovering real task structure
+
+The distribution itself is encouraging.
+
+You have:
+
+| Dimension                 | Observation |
+| ------------------------- | ----------: |
+| Samples                   |       1,000 |
+| Domains                   |         ~30 |
+| Task families             |        ~30+ |
+| Domain subdomains         |         140 |
+| Task subfamilies          |        100+ |
+| Multi-domain records      |         101 |
+| Multi-task-family records |         146 |
+| Composed tasks            |         323 |
+| Agentic loops             |         206 |
+| Required-tool tasks       |         287 |
+
+That tells me the taxonomy isn't some toy classification scheme.
+
+It is actually capturing meaningful SFT variation.
+
+The problem is **mapping discipline**.
+
+---
+
+# 18. Another serious problem: your mapper isn't deterministic enough
+
+This is the thing I'd attack first in Claude Code.
+
+For a fixed input:
+
+```text
+same system
+same user
+same assistant/tool trace
+```
+
+your mapper should produce:
+
+```text
+same taxonomy
+```
+
+Every.
+
+Single.
+
+Time.
+
+The fact that the same regenerative-farming example can become:
+
+```text
+customer_support
+```
+
+one time,
+
+then:
+
+```text
+customer_support + ecommerce
+```
+
+then:
+
+```text
+agriculture + customer_support
+```
+
+then:
+
+```text
+customer_support + healthcare
+```
+
+is not a taxonomy problem.
+
+It's a **mapper architecture problem**.
+
+The file itself demonstrates this instability.  
+
+---
+
+# 19. I would introduce a hierarchical mapping process
+
+Do **NOT** ask the LLM to generate this entire JSON in one shot.
+
+That's what's causing a lot of your chaos.
+
+Instead:
+
+## Stage 1: Determine the task objective
+
+```text
+What is the user actually asking the model to do?
+```
+
+Output:
+
+```text
+primary_task = answer a question
+```
+
+---
+
+## Stage 2: Determine task family
+
+```text
+question_answering
+```
+
+---
+
+## Stage 3: Determine task facets
+
+For example:
+
+```text
+answer_type = factoid
+grounding = closed_domain
+reasoning_depth = multi_hop
+```
+
+---
+
+## Stage 4: Determine domain
+
+```text
+domain = healthcare
+```
+
+---
+
+## Stage 5: Determine subdomain
+
+```text
+clinical_care
+```
+
+---
+
+## Stage 6: Determine tool requirements
+
+```text
+tool_requirement = required
+tool_category = browser
+```
+
+---
+
+## Stage 7: Determine complexity
+
+```text
+multi_step
+```
+
+---
+
+## Stage 8: Determine composition
+
+```text
+composed
+```
+
+---
+
+## Stage 9: Determine constraints
+
+```text
+output_format
+tone_and_style
+length_limit
+...
+```
+
+---
+
+## Stage 10: Determine response behavior
+
+This is the piece you're missing.
+
+```text
+response_behavior:
+    normal
+    refusal
+    partial_refusal
+    safe_redirection
+    tool_failure
+    hallucination
+    incomplete
+```
+
+This makes the mapper dramatically more robust.
+
+---
+
+# 20. I would NOT make every field LLM-generated
+
+Some fields should be deterministic.
+
+For example:
+
+### Output format
+
+If the assistant output is:
+
+```json
+{"answer": "..."}
+```
+
+you can detect JSON.
+
+If:
+
+```sql
+SELECT ...
+```
+
+you can detect SQL.
+
+If Python code:
+
+```python
+def ...
+```
+
+you can detect PY.
+
+Don't waste expensive reasoning tokens asking an LLM what format a string is.
+
+Same for:
+
+* language
+* number of turns
+* number of tool calls
+* whether tools were actually invoked
+* whether output contains code
+* whether user explicitly requested JSON
+* whether there are numbered subtasks.
+
+Use code.
+
+Save LLM reasoning for semantic decisions.
+
+---
+
+# 21. The mapping should have confidence
+
+I strongly recommend:
+
+```json
+"confidence": {
+    "overall": 0.91,
+    "domain": 0.97,
+    "task_family": 0.98,
+    "subdomain": 0.74,
+    "subfamily": 0.81
+}
+```
+
+And more importantly:
+
+```json
+"ambiguity": [
+    "healthcare vs pharmaceuticals_and_life_sciences"
+]
+```
+
+This allows you to send only uncertain examples to a second agent/human.
+
+Otherwise you're pretending every mapping is equally certain.
+
+It isn't.
+
+---
+
+# 22. Add a `primary` vs `secondary` distinction
+
+Your current multi-domain representation:
+
+```json
+"domain": [
+    "software_engineering",
+    "sports_and_recreation"
+]
+```
+
+is useful, but I'd make it:
+
+```json
+"primary_domain": "software_engineering",
+
+"secondary_domains": [
+    "sports_and_recreation"
+]
+```
+
+Same for task families:
+
+```json
+"primary_task_family": "tool_use_and_function_calling",
+
+"secondary_task_families": [
+    "question_answering"
+]
+```
+
+That solves a massive amount of ambiguity.
+
+Otherwise two systems can both say:
+
+```text
+A + B
+```
+
+but disagree completely about which one is the actual task.
+
+---
+
+# 23. Your domain hierarchy needs a rule for "domain of subject" vs "domain of operation"
+
+This is especially important for your SFT taxonomy.
+
+Consider:
+
+> "Write Python code to calculate a baseball player's batting average."
+
+You currently sometimes get:
+
+```text
+software_engineering
++
+sports_and_recreation
+```
+
+That is reasonable.
+
+But what is primary?
+
+I'd say:
+
+```text
+primary_domain = sports_and_recreation
+secondary_domain = software_engineering
+```
+
+if the task is primarily about baseball analytics.
+
+Or:
+
+```text
+primary_domain = software_engineering
+secondary_domain = sports_and_recreation
+```
+
+if the task is primarily programming.
+
+You need an explicit rule.
+
+Otherwise the mapper will decide randomly.
+
+### My proposed rule:
+
+> **Primary domain = domain of the user's substantive objective.**
+>
+> **Secondary domain = domain(s) providing context, data, or application setting.**
+
+That rule would fix many examples.
+
+---
+
+# 24. Your "general" bucket is being abused in a few important cases
+
+`general` appears **173 times**.
+
+Some are legitimate:
+
+```text
+Hello
+What is your name?
+Are you ChatGPT?
+Can you replace Google?
+```
+
+Fine.
+
+But some should clearly stay domain-specific even when the model refuses.
+
+For example:
+
+> neural connections in Elon Musk's brain
+
+should not become generic simply because the request is impossible.
+
+The task's subject is neuroscience / human biology, while the safety/privacy property should be separately represented. 
+
+Likewise, a harmful chemistry request is still chemistry.
+
+This is one of the strongest changes I'd make.
+
+---
+
+# 25. One thing I would NOT change
+
+Don't start creating 500 hyper-specific task families.
+
+That would be the opposite mistake.
+
+Your taxonomy already has a nice hierarchy:
+
+```text
+domain
+    ↓
+domain_subdomain
+
+task_family
+    ↓
+task_subfamily
+```
+
+Keep that.
+
+But make the **facets orthogonal**.
+
+You want:
+
+```text
+Task family
+Task subtype
+Domain
+Domain subtype
+Reasoning depth
+Grounding
+Tool dependency
+Tool type
+Composition
+Complexity
+Constraints
+Response behavior
+```
+
+rather than trying to encode all of those concepts inside `task_subfamily`.
+
+---
+
+# 26. My proposed final schema
+
+If I were rebuilding your mapper now, I'd move toward:
+
+```json
+{
+  "domain": {
+    "primary": "...",
+    "secondary": ["..."]
+  },
+
+  "task": {
+    "family": "...",
+    "subfamily": "..."
+  },
+
+  "reasoning": {
+    "depth": "single_hop | multi_hop",
+    "complexity": "single_step | multi_step | complex_workflow"
+  },
+
+  "grounding": {
+    "type": "open_domain | closed_domain | conversational | tool_grounded"
+  },
+
+  "composition": {
+    "type": "atomic | composed"
+  },
+
+  "interaction": {
+    "mode": "single_turn | multi_turn | agentic_loop"
+  },
+
+  "tools": {
+    "required": true,
+    "categories": ["browser"],
+    "actually_used": true,
+    "successful": true
+  },
+
+  "io": {
+    "input": {
+      "type": "...",
+      "format": "...",
+      "language": "..."
+    },
+    "output": {
+      "type": "...",
+      "format": "...",
+      "language": "..."
+    }
+  },
+
+  "constraints": [],
+
+  "response_behavior": "normal",
+
+  "confidence": {
+    "overall": 0.94
+  }
+}
+```
+
+You don't have to adopt this exact JSON, but **this conceptual separation is where I'd take your system.**
+
+---
+
+# 27. Priority ranking of problems
+
+If you're going to fix this with Claude Code, don't randomly tweak labels. Do it in this order.
+
+### 🔴 P0: Fix task-vs-response classification
+
+The mapper must classify:
+
+> **what the user asked**
+
+not:
+
+> what the assistant happened to produce.
+
+This alone will fix a huge number of errors.
+
+---
+
+### 🔴 P0: Add response behavior
+
+Especially:
+
+```text
+refusal
+partial_refusal
+safe_redirection
+tool_failure
+normal_answer
+```
+
+This prevents refusals from corrupting domain/task labels.
+
+---
+
+### 🔴 P0: Make mapping deterministic
+
+Run the same example multiple times.
+
+If:
+
+```text
+temperature = 0
+```
+
+still gives different labels, your prompt/schema is underspecified.
+
+Use explicit decision rules.
+
+---
+
+### 🔴 P1: Split task-subfamily dimensions
+
+Separate:
+
+```text
+QA type
+reasoning depth
+grounding type
+answer type
+```
+
+Don't cram them together.
+
+---
+
+### 🔴 P1: Fix browser/computer-use taxonomy
+
+Don't map browser navigation to:
+
+```text
+frontend_development
+```
+
+You need a browser/computer-use category.
+
+---
+
+### 🔴 P1: Reduce `other`
+
+`other` should mean:
+
+> **the taxonomy genuinely has no suitable category.**
+
+It should NOT mean:
+
+> the mapper wasn't confident.
+
+Those are completely different things.
+
+---
+
+### 🟠 P2: Separate primary/secondary domain
+
+This will clean up your multi-domain mappings.
+
+---
+
+### 🟠 P2: Separate tool requirement from tool execution
+
+This will clean up your tool-heavy SFT data enormously.
+
+---
+
+### 🟠 P2: Deterministically derive IO metadata
+
+Don't spend LLM reasoning on JSON detection.
+
+---
+
+# 28. The most important metric you should add
+
+Forget raw accuracy for a second.
+
+For this kind of taxonomy mapper, I want:
+
+## **Mapping Consistency Rate**
+
+Take identical examples.
+
+Run them through the mapper 5 times.
+
+Then calculate:
+
+```text
+same_mapping / total_runs
+```
+
+You want:
+
+```text
+>99%
+```
+
+for easy examples.
+
+And then:
+
+## **Hierarchy Consistency**
+
+Check:
+
+```text
+domain → valid subdomain
+task_family → valid subfamily
+tool_requirement → valid tool_category
+```
+
+No impossible combinations.
+
+And:
+
+## **Ambiguity Rate**
+
+```text
+examples requiring human adjudication
+/
+total examples
+```
+
+This should ideally become small.
+
+---
+
+# 29. The good news
+
+I don't think you're far away.
+
+Actually, this 1,000-sample set is **very useful** because it exposed problems that 20 examples wouldn't reveal.
+
+Your taxonomy has enough structure to handle:
+
+* conventional SFT
+* coding
+* math
+* domain QA
+* tool calling
+* browsing
+* agentic tasks
+* safety/refusal
+* multi-domain tasks
+* structured outputs
+* database agents
+* retrieval
+* reasoning
+
+That's a strong foundation.
+
+The problem is that your current mapper is trying to make a **single semantic judgment across too many independent dimensions at once**.
+
+That's why it occasionally produces beautiful mappings and occasionally decides that a web-navigation task is frontend development because humanity apparently needed one more reason to suffer.
+
+---
+
+# 30. My final honest assessment
+
+If you asked me:
+
+> **"Can I use these 1,000 mappings as ground truth for training another model right now?"**
+
+### **No.**
+
+I would **not** use them as ground truth yet.
+
+There is too much label noise and too much inconsistency.
+
+The biggest evidence is the identical-context repetitions. The same regenerative-farming example appears 29 times with substantially different taxonomy outputs, and the Mbabane task likewise changes domain/task interpretation across repetitions.  
+
+But:
+
+> **"Should I abandon the taxonomy?"**
+
+### Also no.
+
+I'd keep roughly **80–90% of the conceptual architecture** and rebuild the mapping engine around it.
+
+Your next iteration should be:
+
+```text
+RAW SFT SAMPLE
+      ↓
+Understand user objective
+      ↓
+Determine primary task
+      ↓
+Determine domain
+      ↓
+Determine orthogonal facets
+      ↓
+Determine tool dependency
+      ↓
+Determine complexity/composition
+      ↓
+Determine constraints
+      ↓
+Determine response behavior
+      ↓
+Validate hierarchy
+      ↓
+Confidence / ambiguity
+      ↓
+FINAL MAPPING
+```
+
+And crucially:
+
+```text
+                 ┌── task identity
+RAW SAMPLE ──────┼── domain identity
+                 ├── execution/tool metadata
+                 ├── reasoning metadata
+                 └── response behavior
+```
+
+**Don't let one label contaminate another.**
+
+That is the core architectural lesson from these 1,000 samples.
+
+I also created an exhaustive workbook containing **all 1,000 samples**, their mappings, and the high-risk structural cases I identified, so you have the full audit rather than having to trust a cherry-picked handful.
+
+[Download the 1,000-sample taxonomy audit](sandbox:/mnt/data/taxonomy_mapping_1000_sample_audit.xlsx)

@@ -1,0 +1,1371 @@
+# V3 SFT Taxonomy Mapping
+
+## Full 1,000-Sample Semantic & Structural Audit
+
+### Executive conclusion
+
+**V3 is the strongest version so far.**
+
+The mapper has moved from a system that frequently classified the assistant's implementation behavior to one that much more often captures the **actual user task** and then represents execution separately.
+
+My overall assessment is:
+
+| Dimension                       |          Score |
+| ------------------------------- | -------------: |
+| Core taxonomy architecture      |     **8.5/10** |
+| Semantic task mapping           | **7.8–8.0/10** |
+| Domain assignment               |     **7.8/10** |
+| Task-family assignment          |     **8.0/10** |
+| Subfamily assignment            |     **7.2/10** |
+| Tool / agent mapping            |     **8.5/10** |
+| IO metadata                     |     **9.0/10** |
+| Constraints                     |     **7.5/10** |
+| Safety / refusal representation |     **7.0/10** |
+| Consistency                     |     **7.3/10** |
+| Production readiness            |     **7.5/10** |
+
+### Overall verdict: **~7.8/10**
+
+I would **continue with V3**.
+
+I would **not rebuild the taxonomy from scratch**.
+
+I would also **not freeze V3 yet**.
+
+The remaining problems are increasingly concentrated in a small set of systematic rules, which is actually a very good sign. You no longer have a chaotic mapper. You have a mostly-working mapper with a handful of ontology and decision-policy problems.
+
+---
+
+# 1. Audit scope
+
+The V3 corpus contains:
+
+* **1,000 unique samples**
+* **1,000 mapping objects**
+* every mapping has the same major schema:
+
+  * domain
+  * task_family
+  * interaction_mode
+  * tool_requirement
+  * complexity
+  * task_composition
+  * domain_subdomain
+  * task_subfamily
+  * tool_category
+  * constraints
+  * input
+  * output
+
+The full file contains approximately **85,700 lines**, so the raw conversations are substantially larger than the mapping records themselves.
+
+The audit checked:
+
+1. Whether the assigned domain matches the user's actual objective.
+2. Whether task_family matches what the user is asking for.
+3. Whether domain_subdomain is semantically compatible with the domain.
+4. Whether task_subfamily actually represents the task.
+5. Whether tools are classified as execution metadata rather than task identity.
+6. Whether `tool_requirement` and `tool_category` make sense together.
+7. Whether `complexity` and `task_composition` are sensible.
+8. Whether input/output metadata reflects the actual exchange.
+9. Whether constraints are actually present.
+10. Whether refusals and capability limitations are represented correctly.
+11. Whether multiple labels are genuinely necessary.
+12. Whether `other` is being used appropriately.
+
+---
+
+# 2. V3's strongest improvements
+
+## 2.1 Task vs execution is much better
+
+This is the biggest success.
+
+Math problems where the assistant happens to use Python are now usually classified as mathematics rather than code generation.
+
+For example, the trigonometry problem is:
+
+`mathematics → calculation → geometry_and_topology → algebraic_and_symbolic_calculation`
+
+while Python appears separately as:
+
+`tool_category = code_execution`
+
+That is exactly what you want.
+
+Likewise, the polynomial calculation remains a mathematics task despite SymPy being used.
+
+The truck-profit problem is also correctly treated as arithmetic even though Python is used in the response.
+
+### Verdict
+
+**Excellent improvement.**
+
+This fixes one of the largest conceptual errors in V2.
+
+---
+
+# 3. Tool and agent mapping is substantially better
+
+V3 now recognizes agent-style interaction much more reliably.
+
+Examples include:
+
+`tool_use_and_function_calling`
+
+combined with:
+
+`agentic_loop`
+
+and:
+
+`tool_requirement = required`
+
+for actual tool-driven workflows.
+
+The MySQL task is a good example:
+
+`database_operations`
+
+→ `database_querying_and_operations`
+
+→ `query_generation`
+
+→ `database`
+
+with structured SQL output.
+
+This is strong.
+
+The mapper is increasingly distinguishing:
+
+**"This is a database task"**
+
+from:
+
+**"This is a normal coding task that happens to output SQL."**
+
+That distinction matters enormously for your eventual SFT dataset analysis.
+
+---
+
+# 4. Refusal handling has improved dramatically
+
+V2's refusal representation was weak.
+
+V3 now frequently adds:
+
+`declined_request`
+
+and:
+
+`compliance`
+
+For example, the harmful misinformation request is mapped with both:
+
+`declined_request`
+
+and:
+
+`compliance`.
+
+The casino-cheating request is handled similarly.
+
+Across the dataset:
+
+* `declined_request` appears in about **65** mappings.
+* `compliance` appears in about **44** mappings.
+* 63 assistant responses were detected as refusal/capability-limitation-like by the audit pattern.
+* About 44 of those are explicitly tagged `declined_request`.
+
+This is a major improvement.
+
+---
+
+# 5. But refusal representation is still conceptually incomplete
+
+This is one of the most important remaining problems.
+
+You are currently using `declined_request` for multiple different phenomena:
+
+### Policy refusal
+
+Example:
+
+User wants to hack FBI infrastructure.
+
+That is a genuine safety/policy refusal.
+
+V3 captures:
+
+`declined_request`
+
+which is appropriate.
+
+### Capability limitation
+
+Example:
+
+> "Can you describe the texture of this fabric I am touching?"
+
+The assistant says it cannot physically sense the fabric.
+
+That isn't a policy refusal.
+
+It is a **capability limitation**.
+
+Yet V3 uses:
+
+`declined_request`.
+
+### Missing information
+
+The dentist-medication request is another case.
+
+The assistant doesn't have access to the user's historical records.
+
+That's primarily:
+
+`unavailable_information`
+
+rather than a safety refusal.
+
+### Required change
+
+Add a separate:
+
+`response_behavior`
+
+such as:
+
+```text
+normal
+policy_refusal
+capability_limitation
+clarification_required
+unavailable_information
+partial_completion
+safe_redirection
+tool_failure
+```
+
+Then leave `compliance` as an actual constraint.
+
+This will make your dataset analysis dramatically cleaner.
+
+---
+
+# 6. Domain assignment is good, but still not completely stable
+
+A major remaining issue is:
+
+> **domain of the user objective vs domain appearing in the prompt/context**
+
+V3 gets this right much more often than V2.
+
+However, there are still cases where the surrounding subject matter influences the domain too strongly.
+
+The most important example is logical reasoning.
+
+The physician conference exclusivity problem is mapped:
+
+`mathematics → proof_and_formal_reasoning → discrete_mathematics → logical_deduction`
+
+The task does require logical deduction.
+
+But the user isn't asking for mathematics.
+
+The underlying task is a **constraint-based reasoning / selection problem**.
+
+This illustrates a critical rule:
+
+> Reasoning method does not automatically determine domain.
+
+A legal question requiring deduction remains law.
+
+A scheduling problem requiring deduction remains scheduling.
+
+A medical diagnosis requiring deduction remains healthcare.
+
+Do not convert all logical reasoning into mathematics.
+
+---
+
+# 7. `cross_domain` is better behaved, but still needs tighter rules
+
+V3 uses multi-domain labels in a way that is generally more defensible.
+
+For example, queries that actually combine healthcare + media, or human resources + hospitality, can reasonably have multiple domains.
+
+The problem is not the existence of multiple domains.
+
+The problem is that the structure doesn't make clear which one is primary.
+
+For example:
+
+```text
+domain:
+[
+    "media_and_entertainment",
+    "healthcare"
+]
+```
+
+is less useful downstream than:
+
+```text
+primary_domain: "media_and_entertainment"
+
+secondary_domains:
+[
+    "healthcare"
+]
+```
+
+You should make this explicit.
+
+Otherwise downstream dataset analysis will have to guess which domain represents the actual task.
+
+---
+
+# 8. Multi-task classification needs stricter discipline
+
+V3 has:
+
+* **74 multi-valued task_family mappings**
+* **174 multi-valued task_subfamily mappings**
+
+Some are absolutely correct.
+
+For instance, an agent task may genuinely perform:
+
+`function_call_construction + tool_selection`
+
+That is a legitimate composed operation.
+
+However, some multiple labels are clearly inflated.
+
+The Armstrong-number example is a good illustration.
+
+User asks to:
+
+1. determine whether 371 is an Armstrong number
+2. provide a range from 50 to 75
+
+V3 assigns:
+
+`calculation + generation`
+
+and:
+
+`combinatorial_enumeration + text_generation`
+
+The `text_generation` component isn't really an independent task.
+
+The assistant must naturally produce text. That doesn't mean the user requested a text-generation task.
+
+### Rule to implement
+
+A secondary task label should only be added if:
+
+> **The second task remains independently meaningful even if the assistant's implementation strategy changes.**
+
+This will eliminate a lot of label inflation.
+
+---
+
+# 9. The `reasoning_scratchpad` issue still exists
+
+This is the most annoying thing that survived into V3.
+
+`reasoning_scratchpad` still appears inside `tool_category`.
+
+There are approximately **66 rows** containing it.
+
+Examples include:
+
+`api + reasoning_scratchpad`
+
+and even:
+
+`reasoning_scratchpad`
+
+alone.
+
+For example, V3 maps a function-routing task with:
+
+`tool_category = [api, reasoning_scratchpad]`.
+
+This should be removed.
+
+A reasoning scratchpad is not an external tool.
+
+You currently have:
+
+```text
+external execution
+```
+
+and:
+
+```text
+internal reasoning
+```
+
+inside the same ontology.
+
+They are fundamentally different.
+
+### Recommendation
+
+Either remove scratchpad entirely or create a separate facet:
+
+```text
+reasoning_support:
+    none
+    explicit_reasoning
+```
+
+Do not keep it inside `tool_category`.
+
+---
+
+# 10. `tool_requirement` itself is conceptually useful
+
+There are approximately:
+
+* `none`: 611
+* `required`: 337
+* `optional`: 52
+
+This is actually a useful distribution.
+
+Importantly, V3 still has around **18** cases where:
+
+`tool_requirement = required`
+
+but:
+
+`tool_category = []`
+
+This is not automatically an error.
+
+Consider:
+
+> "Give me the current flight status."
+
+The task requires live retrieval.
+
+But the assistant may answer:
+
+> "I don't have access to live flight data."
+
+Therefore:
+
+```text
+tool_requirement = required
+tool_category = []
+```
+
+is actually meaningful.
+
+It means:
+
+> The task requires a tool, but the tool was not used.
+
+What is missing is a separate concept for:
+
+```text
+tools_used
+```
+
+### Ideal structure
+
+```text
+tool_requirement:
+    required
+
+tools_used:
+    []
+```
+
+This is better than forcing `tool_category` to represent both concepts.
+
+---
+
+# 11. `other` is still too overloaded
+
+Current counts are roughly:
+
+* `domain_subdomain = other`: **72**
+* `task_subfamily = other`: **31**
+
+Some are legitimate taxonomy gaps.
+
+For example, the FBI/CJIS hacking request being `cybersecurity → other` can be defended if the taxonomy has no appropriate offensive-security category.
+
+But `other` cannot also mean:
+
+> "The mapper wasn't sure."
+
+That destroys your ability to distinguish ontology gaps from model uncertainty.
+
+### Recommended addition
+
+```text
+mapping_status:
+    normal
+    taxonomy_gap
+    ambiguous
+```
+
+Then:
+
+```text
+other = taxonomy_gap
+```
+
+rather than:
+
+```text
+other = uncertainty
+```
+
+This will be extremely valuable when you later review the taxonomy itself.
+
+---
+
+# 12. Some current taxonomy gaps are real
+
+Not every bad-looking mapping is a mapper failure.
+
+Some reveal that the taxonomy itself needs additional concepts.
+
+## Software engineering
+
+GitHub-style issues and enhancement requests are sometimes being forced into:
+
+`requirements_analysis → functional_requirements_gathering`
+
+For example, the Qiskit `TimeUnitConversion` issue is classified that way.
+
+A better software-engineering taxonomy probably needs:
+
+```text
+bug_report
+feature_request
+enhancement_request
+performance_optimization
+refactoring
+technical_design
+```
+
+rather than treating all such work as requirements analysis.
+
+This is a **taxonomy gap**, not necessarily an LLM failure.
+
+---
+
+# 13. Some hardware/product requests are still vulnerable to software-domain confusion
+
+You previously had the keyboard comparison problem.
+
+That general class of issue still matters.
+
+A user comparing:
+
+* keyboards
+* cameras
+* routers
+* headphones
+* phones
+* GPUs
+
+should not end up under a software subdomain simply because the mapper associates technology with software.
+
+Your domain and subdomain hierarchy needs a hard distinction between:
+
+```text
+software
+hardware
+consumer electronics
+digital services
+```
+
+where applicable.
+
+---
+
+# 14. Structured-data classification is getting much better
+
+The hateful-post examples are correctly recognized as classification tasks.
+
+For example:
+
+`classification → multi_label_classification`
+
+or:
+
+`classification → binary_classification`
+
+with:
+
+`output.type = LABEL`.
+
+Those mappings are good.
+
+This is an important sign that your IO/task-family separation is working.
+
+The mapper isn't calling these "text generation" merely because the output is textual.
+
+Good.
+
+---
+
+# 15. IO metadata is one of the strongest parts of V3
+
+The straightforward examples are excellent.
+
+Tamil input/output is correctly:
+
+`TA → TA`
+
+while remaining:
+
+`general → question_answering`.
+
+Structured SQL is correctly represented as:
+
+`output.type = STRUCTURED_QUERY`
+
+`output.format = SQL`.
+
+Classification gets:
+
+`output.type = LABEL`.
+
+These are exactly the kinds of deterministic metadata your mapper should preserve.
+
+### Recommendation
+
+Keep IO classification mostly deterministic.
+
+Do not spend expensive reasoning tokens asking an LLM whether a Python block is Python.
+
+That can be handled by parsing.
+
+---
+
+# 16. Mathematical classification is now generally strong
+
+The basic math examples are very good.
+
+### Bee problem
+
+`mathematics → calculation → arithmetic_and_basic_computation → arithmetic_calculation`
+
+Correct.
+
+### Maria shopping arithmetic
+
+Same classification.
+
+Correct.
+
+### Hiking/kayaking/biking calculation
+
+Again:
+
+`arithmetic_calculation`
+
+Correct.
+
+### Complex probability problem
+
+The microservices probability problem is reasonably classified as:
+
+`mathematics → calculation`
+
+with:
+
+`applied_mathematics + statistics_and_probability`
+
+and:
+
+`statistical_calculation`.
+
+That is a strong result.
+
+---
+
+# 17. One important mathematical problem remains
+
+The mapper sometimes treats:
+
+`reasoning`
+
+as:
+
+`mathematics`
+
+when the actual task is merely logical deduction.
+
+The physician scheduling example is the clearest confirmed case.
+
+This means your task-family ontology should distinguish:
+
+```text
+mathematical_reasoning
+logical_reasoning
+constraint_reasoning
+causal_reasoning
+planning
+```
+
+or your domain classifier needs a stronger rule:
+
+> **Only assign mathematics when the task's substantive subject is mathematics, not merely because mathematical/logical reasoning techniques could be used.**
+
+This rule should go directly into the mapper.
+
+---
+
+# 18. Agent tasks are much healthier in V3
+
+The MySQL agent examples are particularly strong.
+
+So are household/environment interaction examples.
+
+The important change is that V3 now recognizes:
+
+```text
+agentic_loop
+required
+tool_use_and_function_calling
+```
+
+instead of pretending everything is a normal single-turn QA task.
+
+This is a major positive for your intended SFT use case, because agentic datasets need execution metadata to be represented separately from ordinary linguistic tasks.
+
+---
+
+# 19. Browser tasks are improved, but domain contamination remains a risk
+
+V3 is substantially better at recognizing browser interaction.
+
+You now see:
+
+`tool_use_and_function_calling`
+
+*
+
+`browser`
+
+for accessibility-tree tasks.
+
+That's exactly the direction you wanted.
+
+The remaining danger is:
+
+> webpage topic = task domain
+
+which isn't always true.
+
+For example:
+
+A webpage may be about medicine, but the user's task may simply be:
+
+> click a button
+
+or:
+
+> search the site
+
+or:
+
+> navigate to a page.
+
+The browser operation shouldn't suddenly become a healthcare task just because the website is a medical website.
+
+### Rule
+
+Classify:
+
+**what the user is trying to accomplish**
+
+not:
+
+**what the webpage happens to contain**.
+
+---
+
+# 20. Safety-sensitive mappings need stronger separation
+
+Several harmful requests are now at least identified with:
+
+`declined_request`
+
+and often:
+
+`compliance`.
+
+That's good.
+
+But the underlying domain/task should still describe the **requested task**, not the assistant's refusal.
+
+For example:
+
+> "Create fake vaccine advertising."
+
+The underlying task is still a generation/advertising task in healthcare/public health.
+
+The refusal is an additional response-behavior property.
+
+That means a clean representation would be:
+
+```text
+domain:
+    healthcare
+
+task_family:
+    generation
+
+task_subfamily:
+    persuasive_content_generation
+
+response_behavior:
+    policy_refusal
+
+constraints:
+    compliance
+```
+
+rather than changing task identity because the assistant refused.
+
+---
+
+# 21. One clear example of a capability-vs-policy distinction
+
+The fabric question:
+
+> "Can you describe the texture of this fabric I am touching?"
+
+gets:
+
+`general → question_answering → general_assistance → other`
+
+plus:
+
+`declined_request`.
+
+The task classification itself is acceptable.
+
+The problem is the response classification.
+
+This should be:
+
+```text
+response_behavior = capability_limitation
+```
+
+not:
+
+```text
+declined_request
+```
+
+That distinction will matter if your eventual analysis wants to measure:
+
+* refusal datasets
+* capability limitation datasets
+* tool failure datasets
+* hallucination recovery
+* safe redirection
+
+Those are different training signals.
+
+---
+
+# 22. There are still empty/garbled samples
+
+There are some samples where the `[USER]` section is empty or effectively unavailable.
+
+For example, an empty input paired with:
+
+> "Oops, you didn't enter a message..."
+
+is mapped as:
+
+`general → generation → everyday_conversation → text_generation`.
+
+That is understandable, but this category deserves explicit handling.
+
+You should introduce:
+
+```text
+input_quality:
+    valid
+    empty
+    malformed
+    incomplete
+```
+
+Otherwise those examples contaminate your semantic mapping benchmarks.
+
+A mapper cannot infer a meaningful task from an empty prompt.
+
+---
+
+# 23. Current V3 distribution looks healthy
+
+The main top-level distributions are:
+
+### Interaction
+
+```text
+single_turn     731
+agentic_loop    221
+multi_turn       48
+```
+
+### Tool requirement
+
+```text
+none            611
+required        337
+optional         52
+```
+
+### Complexity
+
+```text
+single_step      477
+multi_step       481
+complex_workflow  42
+```
+
+### Composition
+
+```text
+atomic           691
+composed         309
+```
+
+These distributions look substantially more believable than the earlier versions.
+
+They do not prove correctness, but they suggest the mapper is no longer collapsing everything into a handful of categories.
+
+---
+
+# 24. Domain diversity is high
+
+V3 produces about **120 unique domain combinations** across the 1,000 samples.
+
+The most common single domains include:
+
+```text
+general                     209
+mathematics                 147
+software_engineering        140
+humanities                   74
+science_and_research        51
+finance                      29
+ecommerce_and_retail         27
+media_and_entertainment      22
+sports_and_recreation        22
+healthcare                   20
+```
+
+This diversity looks appropriate for the mixed SFT benchmark you're mapping.
+
+The main question isn't whether you have enough domains.
+
+It's whether domain boundaries remain consistent.
+
+---
+
+# 25. Task-family distribution is also healthy
+
+The strongest categories include:
+
+```text
+tool_use_and_function_calling    192
+question_answering               170
+calculation                       135
+generation                        103
+search_and_retrieval               62
+code_generation                    45
+classification                     32
+explanation_and_tutoring           32
+recommendation                     20
+proof_and_formal_reasoning        13
+```
+
+This is sensible.
+
+The dominant categories also line up with the kinds of SFT examples present in the dataset.
+
+---
+
+# 26. What I would NOT change
+
+Do not destroy the following parts of V3.
+
+### Keep
+
+**Task vs execution separation**
+
+Math + Python remains math.
+
+**Explicit tool requirement**
+
+Keep `required`, `optional`, `none`.
+
+**Agentic loop**
+
+Very useful.
+
+**Composition**
+
+Keep `atomic` vs `composed`.
+
+**IO metadata**
+
+This is one of the strongest parts.
+
+**Domain-specific subdomains**
+
+They provide useful granularity.
+
+**Structured query output**
+
+Especially SQL.
+
+**Multilingual IO**
+
+Working well.
+
+**Classification task families**
+
+Working well.
+
+---
+
+# 27. What I WOULD change before V4
+
+## Priority 1: Add response behavior
+
+```text
+response_behavior:
+    normal
+    policy_refusal
+    capability_limitation
+    clarification_required
+    unavailable_information
+    partial_completion
+    safe_redirection
+    tool_failure
+```
+
+This is the single most important schema change.
+
+---
+
+## Priority 2: Remove `reasoning_scratchpad` from tools
+
+No more:
+
+```text
+tool_category:
+    api
+    reasoning_scratchpad
+```
+
+Reasoning is not a tool.
+
+---
+
+## Priority 3: Add primary/secondary labels
+
+Instead of:
+
+```text
+domain:
+    [A, B]
+```
+
+use:
+
+```text
+primary_domain:
+    A
+
+secondary_domains:
+    [B]
+```
+
+Do the same for task family where needed.
+
+---
+
+## Priority 4: Separate required tools from used tools
+
+Use:
+
+```text
+tool_requirement
+tools_used
+tool_category
+```
+
+instead of forcing one field to do several jobs.
+
+---
+
+## Priority 5: Kill multi-label inflation
+
+Apply:
+
+> A secondary task label must represent an independently meaningful user objective.
+
+No second label merely because:
+
+* Python was used.
+* SQL happened to appear.
+* the answer contained prose.
+* a reasoning step happened.
+* the output needed formatting.
+
+---
+
+## Priority 6: Formalize `other`
+
+Use:
+
+```text
+mapping_status:
+    normal
+    taxonomy_gap
+    ambiguous
+```
+
+`other` should mean:
+
+> taxonomy genuinely lacks the right category.
+
+Nothing else.
+
+---
+
+## Priority 7: Distinguish reasoning from domain
+
+Do not map every logical problem to mathematics.
+
+---
+
+## Priority 8: Add missing software-engineering request types
+
+Consider:
+
+```text
+bug_report
+feature_request
+enhancement_request
+performance_optimization
+refactoring
+technical_design
+```
+
+---
+
+## Priority 9: Add modality-aware generation
+
+Your schema should eventually support:
+
+```text
+text_generation
+code_generation
+image_generation
+audio_generation
+video_generation
+structured_generation
+```
+
+because otherwise multimodal SFT data will eventually be shoved into `text_generation`, which would be rather unfortunate.
+
+---
+
+# 28. The most important mapper rules for V4
+
+Your mapper prompt/decision engine should explicitly contain these rules:
+
+```text
+RULE 1
+Classify the user's underlying objective first.
+
+RULE 2
+Do not use the assistant's execution strategy to redefine the task.
+
+RULE 3
+Tool used ≠ tool required.
+
+RULE 4
+Refusal ≠ task domain.
+
+RULE 5
+Capability limitation ≠ policy refusal.
+
+RULE 6
+Reasoning method ≠ domain.
+
+RULE 7
+Multi-hop reasoning ≠ multi-domain.
+
+RULE 8
+A secondary task label requires an independently meaningful sub-objective.
+
+RULE 9
+Webpage/document subject ≠ browser task domain.
+
+RULE 10
+'Other' means taxonomy gap, not uncertainty.
+
+RULE 11
+Primary and secondary domains must be distinguishable.
+
+RULE 12
+Internal reasoning is not an external tool.
+
+RULE 13
+IO metadata should be inferred deterministically wherever possible.
+
+RULE 14
+Empty or malformed inputs should be explicitly marked.
+
+RULE 15
+If the requested task cannot be completed because a required tool is unavailable,
+preserve the underlying task and record the failure separately.
+```
+
+These rules will probably improve V4 more than adding another 50 taxonomy labels.
+
+---
+
+# 29. Final score by problem category
+
+| Problem                          | V3 status                            |
+| -------------------------------- | ------------------------------------ |
+| Basic QA                         | **Very good**                        |
+| Basic mathematics                | **Very good**                        |
+| Coding                           | **Very good**                        |
+| SQL/database agents              | **Very good**                        |
+| Tool use                         | **Very good**                        |
+| Browser agents                   | **Good**                             |
+| Multilingual mapping             | **Very good**                        |
+| Classification                   | **Very good**                        |
+| Creative generation              | **Good**                             |
+| Retrieval                        | **Good**                             |
+| Complex reasoning                | **Good but unstable**                |
+| Multi-domain tasks               | **Good but needs primary/secondary** |
+| Multi-task prompts               | **Needs stricter rules**             |
+| Refusals                         | **Much better, still incomplete**    |
+| Capability limitations           | **Needs separate category**          |
+| `other` handling                 | **Needs improvement**                |
+| Reasoning vs tools               | **Still wrong**                      |
+| Reasoning vs mathematics         | **Still wrong in some cases**        |
+| Software-engineering issue types | **Taxonomy gap**                     |
+| Multimodal generation            | **Taxonomy gap**                     |
+
+---
+
+# 30. Final verdict
+
+### V1
+
+The mapper frequently classified:
+
+**what the assistant did**
+
+instead of:
+
+**what the user asked.**
+
+### V2
+
+Tool/browser handling improved substantially, but there was still:
+
+* execution leakage
+* refusal confusion
+* excessive multi-labeling
+* weak distinction between task and implementation
+
+### V3
+
+Now the mapper much more often follows:
+
+```text
+USER OBJECTIVE
+      ↓
+TASK
+      ↓
+DOMAIN
+      ↓
+ORTHOGONAL FACETS
+      ↓
+TOOL REQUIREMENT
+      ↓
+ACTUAL TOOL USE
+      ↓
+IO
+      ↓
+RESPONSE BEHAVIOR
+```
+
+That is the right architecture.
+
+### The remaining problem
+
+You are now at the point where **more taxonomy labels are not the main solution**.
+
+The bigger problem is **decision policy**.
+
+Your current ontology is already rich enough to represent most of the 1,000 examples.
+
+What it lacks is a strict enough set of rules telling the mapper:
+
+> which dimension is allowed to affect which other dimension.
+
+That is the next stage.
+
+---
+
+# Final recommendation
+
+**Do not roll back V3.**
+
+**Do not freeze V3.**
+
+**Do not massively expand the taxonomy yet.**
+
+Instead, make V4 primarily a **consistency/rule-enforcement release**.
+
+The highest-value V4 changes are:
+
+1. `response_behavior`
+2. `primary_domain / secondary_domains`
+3. `primary_task_family / secondary_task_families`
+4. remove `reasoning_scratchpad` from tools
+5. separate `tool_requirement` from `tools_used`
+6. strict secondary-label rule
+7. strict reasoning-vs-domain rule
+8. explicit `taxonomy_gap / ambiguous`
+9. better software-engineering task categories
+10. explicit empty/malformed input handling
+
+After those changes, run the **same 1,000 samples again**.
+
+That A/B run will be much more informative than simply adding more taxonomy values. If V4 improves the same known failure cases without creating new ones, then you're getting close to a genuinely production-grade taxonomy mapper.
+
+**Current overall assessment: V3 ≈ 7.8/10, and importantly, the remaining ~2.2 points are now identifiable rather than mysterious.**

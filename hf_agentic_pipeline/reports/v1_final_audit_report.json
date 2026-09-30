@@ -1,0 +1,94 @@
+{
+ "total_files": 331,
+ "total_rows": 8361557,
+ "violation_counts": {
+  "tool_without_call": 130631,
+  "system_not_first": 42
+ },
+ "files_with_violations": 9,
+ "per_file": {
+  "akseljoonas__codeagent-traces-answers.jsonl": {
+   "rows": 1845,
+   "violations": {
+    "tool_without_call": 1472
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "akseljoonas__codeagent-traces-tool-role.jsonl": {
+   "rows": 1710,
+   "violations": {
+    "tool_without_call": 1710
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "akseljoonas__codeagent-traces.jsonl": {
+   "rows": 7023,
+   "violations": {
+    "tool_without_call": 5139
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "bespokelabs__sonnet-3-7-1800-traces-sharegpt.jsonl": {
+   "rows": 1864,
+   "violations": {
+    "tool_without_call": 1859,
+    "system_not_first": 42
+   },
+   "first_line": {
+    "tool_without_call": 0,
+    "system_not_first": 120
+   }
+  },
+  "DJLougen__hermes-agent-traces-filtered.jsonl": {
+   "rows": 3679,
+   "violations": {
+    "tool_without_call": 3679
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "smolagents__synthetic-traces.jsonl": {
+   "rows": 1964,
+   "violations": {
+    "tool_without_call": 1964
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "r0b0tlab__nemotron-nano-hermes-traces.jsonl": {
+   "rows": 28000,
+   "violations": {
+    "tool_without_call": 14087
+   },
+   "first_line": {
+    "tool_without_call": 1
+   }
+  },
+  "lambda__hermes-agent-reasoning-traces.jsonl": {
+   "rows": 22347,
+   "violations": {
+    "tool_without_call": 22347
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "smolagents__codeagent-traces.jsonl": {
+   "rows": 97035,
+   "violations": {
+    "tool_without_call": 78374
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  }
+ }
+}

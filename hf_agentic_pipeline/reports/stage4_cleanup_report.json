@@ -1,0 +1,13 @@
+{
+ "drop_system_then_assistant": true,
+ "totals": {
+  "unchanged": 36327297,
+  "trimmed": 326
+ },
+ "per_file": {
+  "Exgentic__agent-llm-traces.jsonl": {
+   "unchanged": 1454,
+   "trimmed": 326
+  }
+ }
+}

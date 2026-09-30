@@ -1,0 +1,585 @@
+{
+ "total_files": 331,
+ "total_rows": 7166850,
+ "violation_counts": {
+  "answer_empty_after_think": 1768,
+  "content_not_string": 2,
+  "think_answer_boxed_mismatch": 5544,
+  "system_not_first": 42,
+  "final_answer_empty": 534
+ },
+ "files_with_violations": 63,
+ "per_file": {
+  "DCAgent__DCAgent_dev_set_71_tasks_DCAgent_code-contests-sandboxes-traces-terminus-2_max-g8138dde5.jsonl": {
+   "rows": 1877,
+   "violations": {
+    "answer_empty_after_think": 67
+   },
+   "first_line": {
+    "answer_empty_after_think": 502
+   }
+  },
+  "DCAgent__DCAgent_dev_set_71_tasks_DCAgent_code-contests-sandboxes-traces-terminus-2_max-gf1d6467b.jsonl": {
+   "rows": 1909,
+   "violations": {
+    "answer_empty_after_think": 17
+   },
+   "first_line": {
+    "answer_empty_after_think": 1415
+   }
+  },
+  "DCAgent__DCAgent_dev_set_71_tasks_DCAgent_code-contests-sandboxes-traces-terminus-2_max-g50d8f5a5.jsonl": {
+   "rows": 2208,
+   "violations": {
+    "answer_empty_after_think": 51
+   },
+   "first_line": {
+    "answer_empty_after_think": 723
+   }
+  },
+  "DCAgent__DCAgent_dev_set_tblite_tasks_DCAgent_staqc-ot3-100k-math-subset-traces-terminus2496a325.jsonl": {
+   "rows": 1148,
+   "violations": {
+    "answer_empty_after_think": 16
+   },
+   "first_line": {
+    "answer_empty_after_think": 77
+   }
+  },
+  "cfahlgren1__gpt-4o-mini-vision-traces.jsonl": {
+   "rows": 2,
+   "violations": {
+    "content_not_string": 2
+   },
+   "first_line": {
+    "content_not_string": 0
+   }
+  },
+  "aochongoliverli__math8k-sft-QwQ-32B-16k-reasoning-traces-limo1500.jsonl": {
+   "rows": 1459,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 18
+   }
+  },
+  "DCAgent__code-contests-sandboxes-traces-terminus-2_max-grad-norm_0.05_Qwen3-8B.jsonl": {
+   "rows": 1332,
+   "violations": {
+    "answer_empty_after_think": 27
+   },
+   "first_line": {
+    "answer_empty_after_think": 1288
+   }
+  },
+  "aochongoliverli__math8k-sft-QwQ-32B-16k-reasoning-traces-limo1000-len-4096.jsonl": {
+   "rows": 1075,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 14
+   }
+  },
+  "bespokelabs__sonnet-3-7-1800-traces-sharegpt.jsonl": {
+   "rows": 1864,
+   "violations": {
+    "system_not_first": 42
+   },
+   "first_line": {
+    "system_not_first": 120
+   }
+  },
+  "fedric95__LIMO-Traces.jsonl": {
+   "rows": 3332,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 307
+   }
+  },
+  "jonathanyin__aime_1983_2023_grok-3-mini-high_traces_16392_r1_formatted.jsonl": {
+   "rows": 702,
+   "violations": {
+    "think_answer_boxed_mismatch": 103
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 4
+   }
+  },
+  "jonathanyin__aime_1983_2023_grok-3-mini-high_traces_32768_r1_formatted.jsonl": {
+   "rows": 866,
+   "violations": {
+    "think_answer_boxed_mismatch": 76
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 4
+   }
+  },
+  "DCAgent__DCAgent_dev_set_71_tasks_DCAgent_freelancer-projects-0-3k-traces_20251103.jsonl": {
+   "rows": 4148,
+   "violations": {
+    "answer_empty_after_think": 894
+   },
+   "first_line": {
+    "answer_empty_after_think": 14
+   }
+  },
+  "aochongoliverli__math8k-sft-AM-Distill-Qwen-32B-16k-reasoning-traces.jsonl": {
+   "rows": 8079,
+   "violations": {
+    "think_answer_boxed_mismatch": 9
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 1540
+   }
+  },
+  "aochongoliverli__math8k-sft-QwQ-32B-reasoning-traces.jsonl": {
+   "rows": 7052,
+   "violations": {
+    "think_answer_boxed_mismatch": 2
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 5340
+   }
+  },
+  "aochongoliverli__math8k-sft-Qwen3-32B-16k-reasoning-traces.jsonl": {
+   "rows": 7890,
+   "violations": {
+    "think_answer_boxed_mismatch": 41
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 545
+   }
+  },
+  "aochongoliverli__math8k-sft-QwQ-32B-16k-reasoning-traces.jsonl": {
+   "rows": 7927,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 172
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_DeepSeek-R1-Distill-Llama-8B.jsonl": {
+   "rows": 877,
+   "violations": {
+    "think_answer_boxed_mismatch": 10
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 130
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_DeepSeek-R1-Distill-Qwen-1.5B.jsonl": {
+   "rows": 509,
+   "violations": {
+    "think_answer_boxed_mismatch": 2
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 164
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_DeepSeek-R1-Distill-Qwen-14B.jsonl": {
+   "rows": 1052,
+   "violations": {
+    "think_answer_boxed_mismatch": 6
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 139
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_DeepSeek-R1-Distill-Qwen-7B.jsonl": {
+   "rows": 865,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 162
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_DeepSeek-R1-Distill-Qwen-32B.jsonl": {
+   "rows": 1066,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 245
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_Llama-3.1-Nemotron-Nano-8B-v1.jsonl": {
+   "rows": 891,
+   "violations": {
+    "think_answer_boxed_mismatch": 6
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 143
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_QwQ-32B.jsonl": {
+   "rows": 1059,
+   "violations": {
+    "think_answer_boxed_mismatch": 12
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 132
+   }
+  },
+  "reasoning-proj___judged_logic_traces_original_Phi-4-reasoning-plus.jsonl": {
+   "rows": 1062,
+   "violations": {
+    "think_answer_boxed_mismatch": 143
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 3
+   }
+  },
+  "jonathanyin__aime_1983_2023_grok-3-mini-high_traces.jsonl": {
+   "rows": 4869,
+   "violations": {
+    "think_answer_boxed_mismatch": 255
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 1573
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_DeepSeek-R1-Distill-Llama-8B.jsonl": {
+   "rows": 437,
+   "violations": {
+    "think_answer_boxed_mismatch": 17
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 121
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_DeepSeek-R1-Distill-Qwen-1.5B.jsonl": {
+   "rows": 409,
+   "violations": {
+    "think_answer_boxed_mismatch": 3
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 209
+   }
+  },
+  "reasoning-proj___judged_math_traces_original_DeepSeek-R1-Distill-Qwen-1.5B.jsonl": {
+   "rows": 1423,
+   "violations": {
+    "think_answer_boxed_mismatch": 3
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 586
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_DeepSeek-R1-Distill-Qwen-14B.jsonl": {
+   "rows": 634,
+   "violations": {
+    "think_answer_boxed_mismatch": 10
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 184
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_DeepSeek-R1-Distill-Qwen-32B.jsonl": {
+   "rows": 656,
+   "violations": {
+    "think_answer_boxed_mismatch": 14
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 190
+   }
+  },
+  "hoanganhpham__Medical-Train-MedReason-with-traces.jsonl": {
+   "rows": 15494,
+   "violations": {
+    "think_answer_boxed_mismatch": 37
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 120
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_Llama-3.1-Nemotron-Nano-8B-v1.jsonl": {
+   "rows": 621,
+   "violations": {
+    "think_answer_boxed_mismatch": 26
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 58
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_DeepSeek-R1-Distill-Qwen-7B.jsonl": {
+   "rows": 598,
+   "violations": {
+    "think_answer_boxed_mismatch": 13
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 148
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_QwQ-32B.jsonl": {
+   "rows": 683,
+   "violations": {
+    "think_answer_boxed_mismatch": 16
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 81
+   }
+  },
+  "reasoning-proj___judged_math_traces_original_Llama-3.1-Nemotron-Nano-8B-v1.jsonl": {
+   "rows": 1902,
+   "violations": {
+    "think_answer_boxed_mismatch": 26
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 5
+   }
+  },
+  "reasoning-proj___judged_science_traces_original_Phi-4-reasoning-plus.jsonl": {
+   "rows": 721,
+   "violations": {
+    "think_answer_boxed_mismatch": 240
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 13
+   }
+  },
+  "reasoning-proj___judged_math_traces_original_Phi-4-reasoning-plus.jsonl": {
+   "rows": 2241,
+   "violations": {
+    "think_answer_boxed_mismatch": 171
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 11
+   }
+  },
+  "reasoning-proj___judged_math_traces_original_DeepSeek-R1-Distill-Llama-8B.jsonl": {
+   "rows": 1958,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 327
+   }
+  },
+  "hoanganhpham__Medical-Train-MedMCQA-hard-with-traces.jsonl": {
+   "rows": 44407,
+   "violations": {
+    "think_answer_boxed_mismatch": 132
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 75
+   }
+  },
+  "DCAgent__staqc-ot3-100k-code-subset-traces-terminus-2_Qwen3-8B.jsonl": {
+   "rows": 5745,
+   "violations": {
+    "answer_empty_after_think": 48
+   },
+   "first_line": {
+    "answer_empty_after_think": 1833
+   }
+  },
+  "DJLougen__hermes-agent-traces-filtered.jsonl": {
+   "rows": 3679,
+   "violations": {
+    "answer_empty_after_think": 2
+   },
+   "first_line": {
+    "answer_empty_after_think": 3652
+   }
+  },
+  "tech-tao__my-reasoning-traces-10k.jsonl": {
+   "rows": 10000,
+   "violations": {
+    "think_answer_boxed_mismatch": 18
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 164
+   }
+  },
+  "tech-tao__dpo-reasoning-traces-10k.jsonl": {
+   "rows": 9898,
+   "violations": {
+    "think_answer_boxed_mismatch": 18
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 162
+   }
+  },
+  "aochongoliverli__limo-math8k-distill-16k-reasoning-traces.jsonl": {
+   "rows": 26919,
+   "violations": {
+    "think_answer_boxed_mismatch": 51
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 172
+   }
+  },
+  "sbhambr1__sft_dataset_r1_traces_10k.jsonl": {
+   "rows": 10000,
+   "violations": {
+    "think_answer_boxed_mismatch": 35
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 31
+   }
+  },
+  "DCAgent__staqc-ot3-100k-science-subset-traces-terminus-2.jsonl": {
+   "rows": 18040,
+   "violations": {
+    "think_answer_boxed_mismatch": 221
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 896
+   }
+  },
+  "shaafsalman__reasoning-traces-37k.jsonl": {
+   "rows": 29375,
+   "violations": {
+    "think_answer_boxed_mismatch": 202
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 0
+   }
+  },
+  "hoanganhpham__Medical-Train-PubMedQA-hard-with-traces.jsonl": {
+   "rows": 98332,
+   "violations": {
+    "think_answer_boxed_mismatch": 6
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 13196
+   }
+  },
+  "tech-tao__my-reasoning-traces-50k.jsonl": {
+   "rows": 50000,
+   "violations": {
+    "think_answer_boxed_mismatch": 49
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 1262
+   }
+  },
+  "FrontisAI__OpenMLE-SFT-Traces.jsonl": {
+   "rows": 26259,
+   "violations": {
+    "think_answer_boxed_mismatch": 3
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 5844
+   }
+  },
+  "hoanganhpham__HealthBench_Knowledge_Question_250K_traces.jsonl": {
+   "rows": 83014,
+   "violations": {
+    "think_answer_boxed_mismatch": 7
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 47783
+   }
+  },
+  "DCAgent__staqc-ot3-100k-code-subset-traces-terminus-2.jsonl": {
+   "rows": 30676,
+   "violations": {
+    "think_answer_boxed_mismatch": 34
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 962
+   }
+  },
+  "lambda__hermes-agent-reasoning-traces.jsonl": {
+   "rows": 22347,
+   "violations": {
+    "answer_empty_after_think": 10
+   },
+   "first_line": {
+    "answer_empty_after_think": 1975
+   }
+  },
+  "smolagents__codeagent-traces.jsonl": {
+   "rows": 97035,
+   "violations": {
+    "answer_empty_after_think": 102,
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "answer_empty_after_think": 2840,
+    "think_answer_boxed_mismatch": 93798
+   }
+  },
+  "aochongoliverli__Qwen2.5-3B-countdown-level4-1epochs-4rollouts-1024max-length-reasoning-traces-rollout-sft.jsonl": {
+   "rows": 917977,
+   "violations": {
+    "answer_empty_after_think": 534,
+    "final_answer_empty": 534
+   },
+   "first_line": {
+    "answer_empty_after_think": 244840,
+    "final_answer_empty": 244840
+   }
+  },
+  "tech-tao__my-reasoning-traces-200k.jsonl": {
+   "rows": 200000,
+   "violations": {
+    "think_answer_boxed_mismatch": 576
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 41
+   }
+  },
+  "DCAgent__staqc-ot3-100k-math-subset-traces-terminus-2.jsonl": {
+   "rows": 80955,
+   "violations": {
+    "think_answer_boxed_mismatch": 91
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 11357
+   }
+  },
+  "fimbulvntr__deepseek-r1-traces-no-cjk.jsonl": {
+   "rows": 271753,
+   "violations": {
+    "think_answer_boxed_mismatch": 397
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 1138
+   }
+  },
+  "DCAgent__staqc-ot3-100k-traces-terminus-2.jsonl": {
+   "rows": 109877,
+   "violations": {
+    "think_answer_boxed_mismatch": 346
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 10114
+   }
+  },
+  "allenai__big-reasoning-traces.jsonl": {
+   "rows": 676965,
+   "violations": {
+    "think_answer_boxed_mismatch": 1607
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 215
+   }
+  },
+  "zeju-0727__dyve_plus_120k_traces.jsonl": {
+   "rows": 2014254,
+   "violations": {
+    "think_answer_boxed_mismatch": 501
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 2601
+   }
+  },
+  "nvidia__Open-SWE-Traces.jsonl": {
+   "rows": 511668,
+   "violations": {
+    "think_answer_boxed_mismatch": 1
+   },
+   "first_line": {
+    "think_answer_boxed_mismatch": 508844
+   }
+  }
+ }
+}

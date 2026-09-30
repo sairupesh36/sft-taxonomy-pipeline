@@ -1,0 +1,34 @@
+=======================================================================================================================================
+                                      TULU-3 SFT MIXTURE: SUB-DATASET COVERAGE & 10K CAP ANALYSIS                                      
+=======================================================================================================================================
+#   | Dataset Source Name                        | Total Rows  | 10k Cap  | Tasks Done  | Tasks %  | Tasks Rem | Dom Done   | Dom %   | Dom Rem 
+---------------------------------------------------------------------------------------------------------------------------------------
+1   | ai2-adapt-dev/coconot_converted            | 10,983      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+2   | ai2-adapt-dev/evol_codealpaca_heval_decontaminated | 107,276     | 5,000    | 33,697      |  673.9%  | 0         | 19,473     | 389.5% | 0       
+3   | ai2-adapt-dev/flan_v2_converted            | 89,982      | 5,000    | 20,515      |  410.3%  | 0         | 4,025      |  80.5% | 975     
+4   | ai2-adapt-dev/no_robots_converted          | 9,500       | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+5   | ai2-adapt-dev/numinamath_tir_math_decontaminated | 64,312      | 5,000    | 35,359      |  707.2%  | 0         | 17,550     | 351.0% | 0       
+6   | ai2-adapt-dev/oasst1_converted             | 7,131       | 5,000    | 7,131       |  142.6%  | 0         | 7,136      | 142.7% | 0       
+7   | ai2-adapt-dev/personahub_code_v2_34999     | 34,999      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+8   | ai2-adapt-dev/personahub_ifdata_manual_seed_v3_29980 | 29,980      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+9   | ai2-adapt-dev/personahub_math_v5_regen_149960 | 149,960     | 5,000    | 28,346      |  566.9%  | 0         | 15,555     | 311.1% | 0       
+10  | ai2-adapt-dev/tulu_hard_coded_repeated_10  | 240         | 240      | 0           |    0.0%  | 240       | 0          |   0.0% | 240     
+11  | ai2-adapt-dev/tulu_v3.9_aya_100k           | 100,000     | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+12  | ai2-adapt-dev/tulu_v3.9_open_math_2_gsm8k_50k | 50,000      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+13  | ai2-adapt-dev/tulu_v3.9_personahub_math_interm_algebra_20k | 20,000      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+14  | ai2-adapt-dev/tulu_v3.9_sciriff_10k        | 10,000      | 5,000    | 9,319       |  186.4%  | 0         | 0          |   0.0% | 5,000   
+15  | ai2-adapt-dev/tulu_v3.9_synthetic_finalresp_wildguardmixtrain_decontaminated_50k | 50,000      | 5,000    | 41,557      |  831.1%  | 0         | 18,398     | 368.0% | 0       
+16  | ai2-adapt-dev/tulu_v3.9_table_gpt_5k       | 5,000       | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+17  | ai2-adapt-dev/tulu_v3.9_wildchat_100k      | 100,000     | 5,000    | 34,149      |  683.0%  | 0         | 17,189     | 343.8% | 0       
+18  | ai2-adapt-dev/tulu_v3.9_wildjailbreak_decontaminated_50k | 50,000      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+19  | allenai/tulu-3-sft-personas-math-grade     | 49,980      | 5,000    | 0           |    0.0%  | 5,000     | 0          |   0.0% | 5,000   
+=======================================================================================================================================
+TOTAL                                           | 939,343     | 90,240   | 210,073     |  232.8%  | 50,240    | 99,326     | 110.1% | 56,215  
+=======================================================================================================================================
+
+KEY TAKEAWAYS FOR 10K CAP:
+1. Original Full Dataset: 939,343 total rows across 19 dataset types.
+2. Capped Target (Max 10k per dataset): 90,240 total rows.
+3. Tasks Extraction Progress: 210,073 / 90,240 completed (Remaining to 10k: 50,240 rows).
+4. Domains Extraction Progress: 99,326 / 90,240 completed (Remaining to 10k: 56,215 rows).
+5. Total Extractions Saved by 10k Capping: 849,103 rows avoided per job!

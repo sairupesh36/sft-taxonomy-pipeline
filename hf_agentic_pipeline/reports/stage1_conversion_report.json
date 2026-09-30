@@ -1,0 +1,411 @@
+{
+ "rows_in": 37286501,
+ "rows_out": 36329213,
+ "datasets_converted": 38,
+ "datasets_skipped": {
+  "HuggingFaceH4__MATH-500": "benchmark (test set)",
+  "cais__mmlu": "benchmark (test set)",
+  "HuggingFaceH4__mt_bench_prompts": "benchmark (test set)",
+  "google-research-datasets__mbpp": "benchmark (test set)",
+  "THU-KEG__AgentIF": "benchmark (test set)",
+  "Qwen__AgentWorldBench": "benchmark (test set)",
+  "ScaleAI__MCP-Atlas": "benchmark (test set)",
+  "Salesforce__CRMArena": "benchmark (test set)",
+  "ai-safety-institute__AgentHarm": "benchmark (harmful-behaviour eval, 6 rows)",
+  "Lakera__b3-agent-security-benchmark-weak": "benchmark (security eval)",
+  "eth-sri__agentbench": "benchmark (PR metadata, no trajectories)",
+  "hkust-nlp__agentboard": "benchmark (goals only, no trajectories)",
+  "JasperHaozhe__AgentGen-Bench": "benchmark manifest (no conversations)",
+  "agentsea__wave-ui-25k": "image grounding data",
+  "Hcompany__WebClick": "image grounding data",
+  "cua-lite__UI-Genie-Agent": "image-based GUI agent data",
+  "derek-thomas__ScienceQA": "image QA (and a benchmark)",
+  "AgentGym__AgentGym-RL-Data-ID": "item ids only",
+  "automatelab__mcp-servers-tool-catalog": "tool catalog, no conversations",
+  "BlueZeros__AgentEHR-Bench": "EHR tables, no conversations",
+  "BytedTsinghua-SIA__CUDA-Agent-Ops-6K": "op specs + reference code, no prompt/response",
+  "DeepNLP__ai-agent-teacher": "web listing metadata",
+  "DeepNLP__Coding-Agent-Github-2025-Feb": "repo listing metadata",
+  "DeepNLP__mcp-servers": "web listing metadata",
+  "disco-eth__AgentsNet": "graph definitions",
+  "McGill-NLP__WebLINX": "split index only (1 row)",
+  "PresageLabs__NewsBench": "news articles, no conversations",
+  "R2E-Gym__R2E-Gym-Subset": "environment specs, no trajectories",
+  "SWE-Gym__SWE-Gym-Raw": "issues/patches, no trajectories",
+  "II-Vietnam__Agentic-Multi-SWE-RL": "RL environment specs, no trajectories",
+  "Snowflake__AgentWorldModel-1K": "environment specs, no trajectories",
+  "data-for-agents__insta-150k-v3": "task + planned steps only, no executed trajectory",
+  "data-agents__jupyter-agent-dataset": "corrupt parquet (footer missing)",
+  "artillerywu__DeepResearch-9K": "broken: every tool observation is replaced by a copy of the question (12,596/12,974 rows)",
+  "inference-net__HALO-Gemini-3-Flash-AppWorld": "57 traces in flattened OTel attributes; too few to justify a bespoke parser",
+  "armand0e__gpt-5.5-agent": "2 sessions of raw Codex event logs",
+  "Srijan-Chakraborty__GLM-5.2-Agent-Distilled": "broken: tool results follow the user turn with no assistant tool call before them (315/318 rows) -- the calls are missing from the source",
+  "Multi-Agent-LLMs__DEBATE": "multi-agent debate logs, no user/assistant structure",
+  "HuggingFaceH4__ultrafeedback_binarized": "same UltraFeedback prompts as allenai__ultrafeedback_binarized_cleaned (kept)",
+  "argilla__ultrafeedback-binarized-preferences-cleaned": "same UltraFeedback prompts as allenai__ultrafeedback_binarized_cleaned (kept)"
+ },
+ "per_dataset": {
+  "Agent-Ark__Toucan-1.5M": {
+   "rows_in": 1646546,
+   "rows_out": 750223,
+   "rows_with_tools": 750223,
+   "reasons": {
+    "skip_no_quality_score": 278563,
+    "ok": 750223,
+    "skip_quality_below_4": 617760
+   },
+   "files": 2
+  },
+  "AgentGym__AgentTraj-L": {
+   "rows_in": 14485,
+   "rows_out": 14485,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 14485
+   },
+   "files": 1
+  },
+  "AlicanKiraz0__Agentic-Chain-of-Thought-Coding-SFT-Dataset": {
+   "rows_in": 429,
+   "rows_out": 429,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 429
+   },
+   "files": 1
+  },
+  "EleutherAI__hendrycks_math": {
+   "rows_in": 12500,
+   "rows_out": 12000,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 12000,
+    "skip_in_math500_benchmark": 500
+   },
+   "files": 1
+  },
+  "Exgentic__agent-llm-traces": {
+   "rows_in": 1781,
+   "rows_out": 1780,
+   "rows_with_tools": 1157,
+   "reasons": {
+    "ok": 1780,
+    "skip_no_assistant": 1
+   },
+   "files": 1
+  },
+  "FinGPT__fingpt-forecaster-dow30-202305-202405": {
+   "rows_in": 1530,
+   "rows_out": 1530,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 1530
+   },
+   "files": 1
+  },
+  "HuggingFaceH4__no_robots": {
+   "rows_in": 20000,
+   "rows_out": 20000,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 20000
+   },
+   "files": 1
+  },
+  "HuggingFaceH4__ultrachat_200k": {
+   "rows_in": 515311,
+   "rows_out": 515293,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 515293,
+    "skip_no_assistant": 18
+   },
+   "files": 1
+  },
+  "HuggingFaceTB__cosmopedia": {
+   "rows_in": 31064744,
+   "rows_out": 31064744,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 31064744
+   },
+   "files": 32
+  },
+  "Jarrodbarnes__tau2-sft-v4-dataset": {
+   "rows_in": 219,
+   "rows_out": 219,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 219
+   },
+   "files": 1
+  },
+  "Kwai-Klear__SWE-smith-mini_swe_agent_plus-trajectories-66k": {
+   "rows_in": 65994,
+   "rows_out": 65994,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 65994
+   },
+   "files": 1
+  },
+  "Lite-Coder__LiteCoder-SFT-Terminal-preview": {
+   "rows_in": 1880,
+   "rows_out": 1880,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 1880
+   },
+   "files": 1
+  },
+  "Lite-Coder__LiteCoder-Terminal-SFT": {
+   "rows_in": 11255,
+   "rows_out": 11255,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 11255
+   },
+   "files": 1
+  },
+  "Nanbeige__ToolMind": {
+   "rows_in": 12882,
+   "rows_out": 12882,
+   "rows_with_tools": 12882,
+   "reasons": {
+    "ok": 12882
+   },
+   "files": 1
+  },
+  "PersonalAILab__AFM-CodeAgent-SFT-Dataset": {
+   "rows_in": 59939,
+   "rows_out": 59939,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 59939
+   },
+   "files": 1
+  },
+  "PersonalAILab__AFM-MHQA-Agent-SFT-Dataset": {
+   "rows_in": 8826,
+   "rows_out": 8826,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 8826
+   },
+   "files": 1
+  },
+  "R2E-Gym__R2EGym-SFT-Trajectories": {
+   "rows_in": 3231,
+   "rows_out": 3231,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 3231
+   },
+   "files": 1
+  },
+  "SWE-Gym__OpenHands-Sampled-Trajectories": {
+   "rows_in": 6055,
+   "rows_out": 491,
+   "rows_with_tools": 491,
+   "reasons": {
+    "skip_not_resolved": 5564,
+    "ok": 491
+   },
+   "files": 1
+  },
+  "Solaris99__AgentBank": {
+   "rows_in": 53205,
+   "rows_out": 53205,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 53205
+   },
+   "files": 1
+  },
+  "TIGER-Lab__SWE-Next-SFT-Trajectories": {
+   "rows_in": 3693,
+   "rows_out": 3693,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 3693
+   },
+   "files": 1
+  },
+  "TIGER-Lab__SWE-QA-Pro-SFT-Trajectories": {
+   "rows_in": 1000,
+   "rows_out": 1000,
+   "rows_with_tools": 1000,
+   "reasons": {
+    "ok": 1000
+   },
+   "files": 1
+  },
+  "WaltonFuture__agentic-sft-new": {
+   "rows_in": 640354,
+   "rows_out": 640354,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 640354
+   },
+   "files": 1
+  },
+  "agent-data__misc-merged-claude-code-traces-v1": {
+   "rows_in": 32133,
+   "rows_out": 901,
+   "rows_with_tools": 864,
+   "reasons": {
+    "skip_shorter_prefix_of_same_session": 28400,
+    "skip_no_assistant": 2832,
+    "ok": 901
+   },
+   "files": 1
+  },
+  "allenai__SciRIFF": {
+   "rows_in": 432740,
+   "rows_out": 432740,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 432740
+   },
+   "files": 1
+  },
+  "allenai__WildChat": {
+   "rows_in": 529428,
+   "rows_out": 529428,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 529428
+   },
+   "files": 1
+  },
+  "allenai__WildChat-1M": {
+   "rows_in": 837989,
+   "rows_out": 837989,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 837989
+   },
+   "files": 1
+  },
+  "allenai__ultrafeedback_binarized_cleaned": {
+   "rows_in": 186421,
+   "rows_out": 186421,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 186421
+   },
+   "files": 1
+  },
+  "argilla__dpo-mix-7k": {
+   "rows_in": 7500,
+   "rows_out": 7500,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 7500
+   },
+   "files": 1
+  },
+  "camel-ai__code": {
+   "rows_in": 367059,
+   "rows_out": 367006,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 367006,
+    "skip_empty_side": 53
+   },
+   "files": 1
+  },
+  "deepmind__aqua_rat": {
+   "rows_in": 195950,
+   "rows_out": 195950,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 195950
+   },
+   "files": 1
+  },
+  "deepmind__code_contests": {
+   "rows_in": 13611,
+   "rows_out": 11377,
+   "rows_with_tools": 0,
+   "reasons": {
+    "skip_no_py3_cpp_java_solution": 2234,
+    "ok": 11377
+   },
+   "files": 1
+  },
+  "fuvty__tau-bench-synthetic": {
+   "rows_in": 6014,
+   "rows_out": 1200,
+   "rows_with_tools": 1200,
+   "reasons": {
+    "skip_empty_or_invalid": 280,
+    "ok": 1200,
+    "skip_reward_not_1": 264,
+    "skip_partial_round_prefix": 4270
+   },
+   "files": 1
+  },
+  "glaiveai__glaive-function-calling-v2": {
+   "rows_in": 112960,
+   "rows_out": 112960,
+   "rows_with_tools": 78362,
+   "reasons": {
+    "ok": 112960
+   },
+   "files": 1
+  },
+  "groundhogLLM__ACC-dataset": {
+   "rows_in": 10802,
+   "rows_out": 10802,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 10802
+   },
+   "files": 1
+  },
+  "ibm__duorc": {
+   "rows_in": 187213,
+   "rows_out": 170666,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 170666,
+    "skip_no_answer": 16547
+   },
+   "files": 1
+  },
+  "internlm__Agent-FLAN": {
+   "rows_in": 34442,
+   "rows_out": 34440,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 34440,
+    "skip_no_assistant": 2
+   },
+   "files": 1
+  },
+  "ise-uiuc__Magicoder-Evol-Instruct-110K": {
+   "rows_in": 111183,
+   "rows_out": 111183,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 111183
+   },
+   "files": 1
+  },
+  "ise-uiuc__Magicoder-OSS-Instruct-75K": {
+   "rows_in": 75197,
+   "rows_out": 75197,
+   "rows_with_tools": 0,
+   "reasons": {
+    "ok": 75197
+   },
+   "files": 1
+  }
+ },
+ "errors": {},
+ "last_run_min": 0.4,
+ "last_run_datasets": [
+  "Exgentic__agent-llm-traces"
+ ]
+}

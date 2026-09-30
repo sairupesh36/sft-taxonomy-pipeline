@@ -1,0 +1,15 @@
+{
+ "totals": {
+  "rows_in": 1,
+  "seconds": 0.0
+ },
+ "rejected": {
+  "think_junk": 1
+ },
+ "repaired": {},
+ "examples": {
+  "think_junk": [
+   "{\"messages\": [{\"role\": \"user\", \"content\": \"How do small cap stocks perform vs. large cap stocks (like Dow constituents) during bear trends?\"}, {\"role\": \"assistant\", \"content\": \"<think> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ]
+ }
+}

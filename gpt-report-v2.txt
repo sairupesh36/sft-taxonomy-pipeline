@@ -1,0 +1,434 @@
+Man, **V2 is materially better in some important places, but I would NOT call it fixed yet**.
+
+The biggest improvement is that the mapper is now much better at recognizing **actual tool/browser tasks** instead of misclassifying them as ordinary extraction or frontend-development tasks. For example, the browser samples are now consistently coming through as `tool_use_and_function_calling + browser`, which is much closer to the real task. 
+
+But I found a few problems that are still serious.
+
+### What improved
+
+The V2 tool logic is clearly stronger.
+
+For the household agent, the mapper correctly sees:
+
+`tool_use_and_function_calling`
+`agentic_loop`
+`tool_requirement = required`
+`complexity = multi_step`
+`task_composition = composed`
+
+That is exactly the sort of structural understanding I wanted to see. The underlying sample really is an interactive action sequence, not generic QA.  
+
+Your tool consistency also improved dramatically. I found **zero cases where `tool_requirement = none` while a tool category is still assigned**. That's a real fix.
+
+Your output-format recognition also looks more disciplined. JSON, SQL, Python, etc. are being identified much more systematically.
+
+And some of the semantic mappings are now genuinely good:
+
+The medical-treatment request is correctly identified as healthcare → clinical care → personalized recommendation, with a compliance constraint. 
+
+The table-column matching task is correctly recognized as `matching_and_resolution → schema_matching`, which is much cleaner than forcing it into generic extraction. The V2 result is semantically appropriate.
+
+The fact-checking example is also good because V2 recognizes that the task contains both **claim verification and evidence extraction**, instead of flattening everything into generic QA.
+
+### But here's the ugly part
+
+Your mapper is **still conflating the task with the assistant's execution path**.
+
+The clearest example is the math coloring problem.
+
+The user asks a pure combinatorics problem. The assistant happened to use Python. V2 then maps it to:
+
+`mathematics + software_engineering`
+`calculation + code_generation`
+`tool_requirement = optional`
+`tool_category = code_execution`
+
+That is not a good task-level representation.
+
+The user did **not** ask for Python.
+
+The task is:
+
+`mathematics → discrete_mathematics → combinatorial_enumeration`
+
+The Python execution is an execution strategy used by the assistant, not the fundamental SFT task.
+
+This distinction is still not completely fixed.
+
+Same issue appears in a bunch of computational math examples. V2 is much more willing to add code-execution metadata whenever the assistant used Python.
+
+For your intended taxonomy, I'd strongly recommend:
+
+> **Classify the task demanded by the user first. Treat execution method as a separate metadata layer.**
+
+So this:
+
+```json
+{
+  "domain": ["mathematics"],
+  "task_family": ["calculation"],
+  "domain_subdomain": ["discrete_mathematics"],
+  "task_subfamily": ["combinatorial_enumeration"],
+  "tool_requirement": "none"
+}
+```
+
+with something separately like:
+
+```json
+{
+  "assistant_execution": {
+    "used_code_execution": true
+  }
+}
+```
+
+would be much cleaner.
+
+### Another remaining problem: refusals
+
+This one **still isn't fixed**.
+
+I checked refusal-style responses. There are **55 refusal-like samples**, and **50 of those do not carry a compliance constraint**.
+
+That's too high.
+
+The Fire Challenge example is a very good illustration. The user asks for guidance on filming/sharing the dangerous activity without legal consequences. The assistant refuses, but V2 maps it to:
+
+`legal → other → text_generation`
+
+with no compliance/safety marker.
+
+That is missing an important attribute of the example.
+
+The user's underlying task remains a harmful procedural request. The assistant's refusal should not erase that.
+
+You need something like:
+
+```json
+"response_behavior": "refusal"
+```
+
+and optionally:
+
+```json
+"risk_type": "dangerous_activity"
+```
+
+while retaining the underlying task classification.
+
+Otherwise you're still teaching your mapper:
+
+> "model refused → generic generation"
+
+which is exactly the failure we were trying to kill.
+
+---
+
+### Domain mapping is better, but still not stable enough conceptually
+
+This example:
+
+> "Where is the Camino del Mayab?"
+
+is mapped to:
+
+`hospitality_and_food_services → travel_and_tourism`
+
+That is defensible because the content is explicitly travel-related. 
+
+But another class of examples shows that the mapper is still sometimes over-weighting the **contextual domain** rather than the actual objective.
+
+Your primary/secondary domain rule is still necessary.
+
+I would enforce:
+
+```text
+primary_domain = what the user is substantively trying to accomplish
+secondary_domain = contextual/application domain
+```
+
+That rule needs to exist in the mapper prompt, not merely in our heads.
+
+---
+
+# The biggest V2 concern: you changed A LOT
+
+I compared V1 and V2 at the field level.
+
+Out of 1,000 samples:
+
+| Field            | Changed |
+| ---------------- | ------: |
+| Domain           | **666** |
+| Task family      | **572** |
+| Interaction mode |     129 |
+| Tool requirement |     104 |
+| Complexity       |     268 |
+| Task composition |     257 |
+| Domain subdomain | **814** |
+| Task subfamily   | **741** |
+| Tool category    |     207 |
+| Constraints      |     281 |
+| Input metadata   |     230 |
+| Output metadata  |     293 |
+
+That's **huge**.
+
+I'm not saying "many changes = bad". The mapper was bad before, so changes are expected.
+
+But it means V2 isn't a small correction. You've effectively created a **substantially different mapper**.
+
+So don't validate V2 by looking at whether it "feels better".
+
+You need **adjudicated benchmark evaluation**.
+
+---
+
+# Some V2 mappings I would explicitly mark as wrong
+
+### 1. Math task → code generation because assistant used Python
+
+The combinatorics example is the obvious one.
+
+### 2. Religious transcript → software engineering
+
+The user asks for a Python function, so `software_engineering` is absolutely correct even though the content happens to be religious. That's actually a good demonstration of the distinction between **subject matter and task domain**.
+
+V2 correctly maps that one to code generation. Good. 
+
+This is important because it shows your mapper **can** get the distinction right sometimes.
+
+### 3. Multi-step math examples marked `composed`
+
+This needs tighter definition.
+
+For example, the math examples with multiple algebraic steps are frequently:
+
+`complexity = multi_step`
+
+but:
+
+`task_composition = atomic`
+
+That is actually correct under the definition we've been discussing.
+
+So don't "fix" this by making every multi-step task composed.
+
+You want:
+
+`complexity = how much reasoning/work`
+`composition = how many semantically distinct subtasks`
+
+Keep those separate.
+
+---
+
+# Your `other` problem improved, but still exists
+
+V2 reduced the dump considerably.
+
+`domain_subdomain = other` is now around **48 samples**, versus the much uglier behavior in V1.
+
+That's progress.
+
+But I still see examples where `other` is being used because the mapper doesn't know what to do.
+
+For instance:
+
+The Fire Challenge request gets:
+
+`legal → other`
+
+when the actual taxonomy likely needs a safety/harm classification alongside the underlying task.
+
+So I'd define:
+
+> `other` means **taxonomy has no valid category**.
+
+Not:
+
+> mapper is uncertain.
+
+Uncertainty should be:
+
+```json
+"confidence": 0.52
+```
+
+not:
+
+```json
+"other"
+```
+
+This distinction matters enormously.
+
+---
+
+# Your browser mapping is finally heading in the right direction
+
+This deserves explicit credit.
+
+V1 had browser tasks being called things like:
+
+`software_engineering → frontend_development → entity_extraction`
+
+which was just wrong.
+
+V2 now has browser examples like:
+
+`tool_use_and_function_calling`
+`browser`
+`required`
+
+That's a significant improvement. 
+
+The fact that you now recognize browser as a tool category is exactly what your taxonomy needed.
+
+---
+
+# Your database-agent mapping is also closer
+
+V2 maps the MySQL benchmark as:
+
+`software_engineering`
+`database_operations + tool_use_and_function_calling`
+`backend_development`
+`query_generation + function_call_construction`
+`database`
+
+That is much closer to the actual agentic structure than V1.
+
+The sample explicitly gives the agent SQL and Answer actions and requires iterative execution, so the agentic/tool classification is justified. 
+
+However, I'd still question whether `software_engineering` should always be the primary domain for database QA. Some of these datasets are fundamentally **data analysis/database reasoning**, not software engineering.
+
+This is where your primary/secondary domain distinction will save you.
+
+---
+
+# One thing I REALLY like in V2
+
+The mapper is starting to understand **multifaceted tasks**.
+
+This example:
+
+```text
+fact_checking_and_claim_verification
++
+extraction
+```
+
+with:
+
+```text
+source_based_fact_checking
++
+field_extraction
+```
+
+is actually sensible because the user genuinely asks the system to make a verdict and return evidence.
+
+That is the kind of multi-label behavior I **do** want.
+
+The problem isn't multi-labeling itself.
+
+The problem is deciding **when a second label represents a real second task versus merely describing how the assistant solved the first task**.
+
+That's the central rule your mapper still needs.
+
+---
+
+# My V2 score
+
+I'd rate it:
+
+### Taxonomy architecture: **8.5/10**
+
+Still strong.
+
+### V2 semantic mapping: **7/10**
+
+Clearly better.
+
+### Tool/agent mapping: **8/10**
+
+Big improvement.
+
+### Task-vs-execution separation: **5.5/10**
+
+Still a real weakness.
+
+### Refusal/safety representation: **4/10**
+
+Needs work.
+
+### Consistency: **6.5/10**
+
+Better structurally, but still needs a formal benchmark.
+
+### Production readiness: **6/10**
+
+Not ready to trust as ground truth yet.
+
+---
+
+# What I would change NOW, before another 1,000-sample run
+
+Don't add another 50 taxonomy labels.
+
+Don't keep endlessly tweaking domain names.
+
+Your next mapper version should focus on **decision rules**:
+
+```text
+RULE 1
+Classify the user's underlying objective.
+
+RULE 2
+Do not use assistant execution strategy to redefine the task.
+
+RULE 3
+Tool used ≠ tool required.
+
+RULE 4
+Refusal does not change the underlying task domain.
+
+RULE 5
+Multi-hop reasoning ≠ multi-domain.
+
+RULE 6
+Primary domain = substantive objective.
+Secondary domain = contextual/application domain.
+
+RULE 7
+"other" means genuinely unmapped, not uncertain.
+
+RULE 8
+Every multi-label field needs an explicit reason for why
+the second label is independently justified.
+```
+
+That last one is especially important.
+
+Before emitting:
+
+```json
+"task_family": [
+  "calculation",
+  "code_generation"
+]
+```
+
+the mapper should effectively ask:
+
+> "Would this still be a code-generation task if the assistant had solved it without executing code?"
+
+If the answer is yes, keep both.
+
+If the answer is no, don't contaminate the task label with execution details.
+
+That one rule alone would fix a surprising amount of your remaining noise.
+
+And man, **this V2 is absolutely worth continuing**. I would not roll back to V1. You've fixed real structural issues, especially around browser/tool tasks. But you're now at the point where more prompt tweaking without a formal adjudication layer will just make the mapper do interpretive gymnastics. Humanity has suffered enough from systems that "mostly work."

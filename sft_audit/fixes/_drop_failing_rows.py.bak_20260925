@@ -1,0 +1,64 @@
+"""In-place pass for datasets that are ALREADY cleaned: drop every row that
+fails any sft_audit.py rule (all checks except INFO_CHECKS). Same gate as
+step 6 of sft_clean.py. Only files with at least one failing row are
+rewritten; each is backed up first to <dataset>/_backup_before_rule_drop/
+(the "_" prefix keeps the audit and cleaner from reading it).
+
+    python3 drop_failing_rows.py DATASET_DIR
+"""
+
+import json
+import os
+import shutil
+import sys
+from collections import Counter
+from concurrent.futures import ProcessPoolExecutor, as_completed
+
+sys.path.insert(0, "/projects/data/datasets/code_data/sai_rupesh/taxonomy/sft_audit")
+import sft_audit as AUDIT  # noqa: E402
+
+
+def run(args):
+    top, rel = args
+    path = os.path.join(top, rel)
+    c = Counter()
+    tmp = path + ".droptmp"
+    with open(path) as fi, open(tmp, "w") as fo:
+        for line in fi:
+            if not line.strip():
+                continue
+            failed = AUDIT.check_row(json.loads(line)) - AUDIT.INFO_CHECKS
+            if failed:
+                c["rows_dropped"] += 1
+                for f in failed:
+                    c[f"fails:{f}"] += 1
+            else:
+                fo.write(line)
+    if c["rows_dropped"]:
+        b = os.path.join(top, "_backup_before_rule_drop", rel)
+        os.makedirs(os.path.dirname(b), exist_ok=True)
+        shutil.copy2(path, b)
+        os.replace(tmp, path)
+    else:
+        os.remove(tmp)
+    return rel, dict(c)
+
+
+def main():
+    top = sys.argv[1].rstrip("/")
+    jobs = []
+    for r, dirs, fs in os.walk(top):
+        dirs[:] = [d for d in dirs if not d.startswith("_")]
+        jobs += [(top, os.path.relpath(os.path.join(r, f), top)) for f in fs if f.endswith(".jsonl")]
+    tot = Counter()
+    with ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", 64))) as ex:
+        for fu in as_completed([ex.submit(run, j) for j in jobs]):
+            rel, c = fu.result()
+            tot.update(c)
+            if c:
+                print(rel, c, flush=True)
+    print("TOTAL", dict(tot), flush=True)
+
+
+if __name__ == "__main__":
+    main()

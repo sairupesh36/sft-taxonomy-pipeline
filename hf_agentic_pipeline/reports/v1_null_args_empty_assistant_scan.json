@@ -1,0 +1,332 @@
+{
+ "totals": {
+  "null_arg_calls": 106556,
+  "null_arg_rows": 17742,
+  "empty_asst_msgs": 543815,
+  "empty_asst_rows": 2425
+ },
+ "files_affected": 20,
+ "per_file": {
+  "DCAgent__DCAgent_dev_set_71_tasks_DCAgent_staqc-sandboxes-traces-terminus-2_Qwen3-8B-Base_20251102.jsonl": {
+   "rows": 3820,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 543439,
+   "empty_asst_rows": 2146,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 306
+   }
+  },
+  "KermitCO__qwen3.5-9B-tau2bench-retail-traces.jsonl": {
+   "rows": 1092,
+   "total_calls": 8004,
+   "null_arg_calls": 8004,
+   "null_arg_rows": 1092,
+   "empty_asst_msgs": 0,
+   "empty_asst_rows": 0,
+   "ex_null": {
+    "line": 0,
+    "call": {
+     "id": "chatcmpl-tool-9558cfda695fb32f",
+     "type": "function",
+     "function": {
+      "name": "find_user_id_by_name_zip",
+      "arguments": {
+       "first_name": "Mei",
+       "last_name": "Davis",
+       "zip": "80217",
+       "user_id": null,
+       "order_id": null,
+       "product_id": null,
+       "item_ids": null,
+       "new_item_ids": null,
+       "payment_method_id": null,
+       "address1": null,
+       "address2": null,
+       "city": null,
+       "state": null,
+       "country": null,
+       "reason": null,
+       "email": null,
+       "expression": null,
+       "summary": null,
+       "item_id": null
+      }
+     }
+    }
+   },
+   "ex_empty": null
+  },
+  "akseljoonas__codeagent-traces-answers.jsonl": {
+   "rows": 1845,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 3,
+   "empty_asst_rows": 2,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 346
+   }
+  },
+  "akseljoonas__codeagent-traces-tool-role.jsonl": {
+   "rows": 1710,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 4,
+   "empty_asst_rows": 3,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 301
+   }
+  },
+  "akseljoonas__codeagent-traces-user-role.jsonl": {
+   "rows": 1953,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 11,
+   "empty_asst_rows": 10,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 356
+   }
+  },
+  "DCAgent__neulab-openhands-sandboxes-traces-terminus-2.jsonl": {
+   "rows": 7295,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 1,
+   "empty_asst_rows": 1,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 4640
+   }
+  },
+  "akseljoonas__toolagent-traces.jsonl": {
+   "rows": 2819,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 56,
+   "empty_asst_rows": 29,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 523
+   }
+  },
+  "bobbyzhong__code-orchestrator-synth-traces-fixed.jsonl": {
+   "rows": 187,
+   "total_calls": 137,
+   "null_arg_calls": 85,
+   "null_arg_rows": 85,
+   "empty_asst_msgs": 0,
+   "empty_asst_rows": 0,
+   "ex_null": {
+    "line": 5,
+    "call": {
+     "id": "call_0",
+     "type": "function",
+     "function": {
+      "name": "code_change",
+      "arguments": {
+       "path": null
+      }
+     }
+    }
+   },
+   "ex_empty": null
+  },
+  "bobbyzhong__code-orchestrator-synth-traces.jsonl": {
+   "rows": 187,
+   "total_calls": 137,
+   "null_arg_calls": 85,
+   "null_arg_rows": 85,
+   "empty_asst_msgs": 0,
+   "empty_asst_rows": 0,
+   "ex_null": {
+    "line": 5,
+    "call": {
+     "id": "call_0",
+     "type": "function",
+     "function": {
+      "name": "code_change",
+      "arguments": {
+       "path": null
+      }
+     }
+    }
+   },
+   "ex_empty": null
+  },
+  "bespokelabs__sonnet-3-7-1800-traces-sharegpt.jsonl": {
+   "rows": 1864,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 65,
+   "empty_asst_rows": 15,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 121
+   }
+  },
+  "akseljoonas__codeagent-traces.jsonl": {
+   "rows": 7023,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 9,
+   "empty_asst_rows": 7,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 338
+   }
+  },
+  "DCAgent__neulab-nebius-swe-agent-trajectories-sandboxes-traces-terminus-2.jsonl": {
+   "rows": 12015,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 1,
+   "empty_asst_rows": 1,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 8341
+   }
+  },
+  "DCAgent__freelancer-random-instruction-filter-traces-terminus-2.jsonl": {
+   "rows": 9995,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 1,
+   "empty_asst_rows": 1,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 2590
+   }
+  },
+  "mlfoundations-dev__codeforces-gptoss120b-traces.jsonl": {
+   "rows": 8234,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 2,
+   "empty_asst_rows": 2,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 6958
+   }
+  },
+  "shamikbose89__gaia_traces.jsonl": {
+   "rows": 1204,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 13,
+   "empty_asst_rows": 12,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 13
+   }
+  },
+  "smolagents__training-traces.jsonl": {
+   "rows": 1928,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 13,
+   "empty_asst_rows": 12,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 13
+   }
+  },
+  "greghavens__gpt-5.6-sol-coding-and-debugging-traces.jsonl": {
+   "rows": 17939,
+   "total_calls": 98374,
+   "null_arg_calls": 98374,
+   "null_arg_rows": 16476,
+   "empty_asst_msgs": 0,
+   "empty_asst_rows": 0,
+   "ex_null": {
+    "line": 1,
+    "call": {
+     "id": "call_p4rtmN0YFEL70EuQFn28TRUW",
+     "type": "function",
+     "function": {
+      "name": "exec",
+      "arguments": {
+       "source": "const r = await tools.exec_command({\"cmd\":\"pwd && rg --files -g '!*runner*' -g '!*.o' && git status --short\",\"workdir\":\".\",\"yield_time_ms\":10000,\"max_output_tokens\":20000}); text(r.output);\n",
+       "cell_id": null,
+       "yield_time_ms": null,
+       "max_tokens": null,
+       "changes": null
+      }
+     }
+    }
+   },
+   "ex_empty": null
+  },
+  "r0b0tlab__nemotron-nano-hermes-traces.jsonl": {
+   "rows": 28000,
+   "total_calls": 8,
+   "null_arg_calls": 8,
+   "null_arg_rows": 4,
+   "empty_asst_msgs": 0,
+   "empty_asst_rows": 0,
+   "ex_null": {
+    "line": 865,
+    "call": {
+     "id": "tc1",
+     "type": "function",
+     "function": {
+      "name": "session_search",
+      "arguments": {
+       "query": "database migration strategy",
+       "action": null,
+       "pattern": null,
+       "file_glob": null,
+       "target": null,
+       "path": null,
+       "offset": null,
+       "limit": null,
+       "old_string": null,
+       "new_string": null
+      }
+     }
+    }
+   },
+   "ex_empty": null
+  },
+  "smolagents__codeagent-traces.jsonl": {
+   "rows": 97035,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 193,
+   "empty_asst_rows": 180,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 4394
+   }
+  },
+  "aochongoliverli__Qwen2.5-3B-countdown-level4-1epochs-4rollouts-1024max-length-reasoning-traces-rollout-sft.jsonl": {
+   "rows": 2104479,
+   "total_calls": 0,
+   "null_arg_calls": 0,
+   "null_arg_rows": 0,
+   "empty_asst_msgs": 4,
+   "empty_asst_rows": 4,
+   "ex_null": null,
+   "ex_empty": {
+    "line": 1365804
+   }
+  }
+ }
+}

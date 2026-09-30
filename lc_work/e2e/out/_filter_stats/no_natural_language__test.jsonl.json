@@ -1,0 +1,1 @@
+{"file": "no_natural_language/test.jsonl", "kept": 7754, "dropped": 117, "reasons": {"think_placeholder": 78, "replacement_chars": 12, "word_loop": 6, "control_char": 19, "prompt_missing_input": 1, "char_run": 1}}

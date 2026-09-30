@@ -1,0 +1,27 @@
+{
+ "axis": "task_family",
+ "config": "base",
+ "train_n": 86952,
+ "clean_val": {
+  "n": 14164,
+  "f1": 0.8172,
+  "exact": 0.7557,
+  "keep80": 0.7774,
+  "f1_keep80": 0.8984
+ },
+ "weak_val": {
+  "n": 1179,
+  "f1": 0.8053,
+  "exact": 0.743,
+  "keep80": 0.7549,
+  "f1_keep80": 0.8932
+ },
+ "target_test": {
+  "n": 1000,
+  "f1": 0.8012,
+  "exact": 0.736,
+  "keep80": 0.708,
+  "f1_keep80": 0.8842
+ },
+ "target_10k_accept80": 0.7283
+}

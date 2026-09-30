@@ -1,0 +1,2971 @@
+{
+ "total_files": 5011,
+ "total_rows": 521757429,
+ "violation_counts": {
+  "args_not_dict": 2254523
+ },
+ "files_with_violations": 329,
+ "per_file": {
+  "en/phase1_shard0of16_openai_sft_full__p0016.jsonl": {
+   "rows": 1542,
+   "violations": {
+    "args_not_dict": 1542
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard10of16_openai_sft_full__p0029.jsonl": {
+   "rows": 44333,
+   "violations": {
+    "args_not_dict": 6131
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard0of16_openai_sft_full__p0015.jsonl": {
+   "rows": 1888,
+   "violations": {
+    "args_not_dict": 1888
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard0of16_openai_sft_full__p0013.jsonl": {
+   "rows": 1908,
+   "violations": {
+    "args_not_dict": 1908
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard0of16_openai_sft_full__p0014.jsonl": {
+   "rows": 1846,
+   "violations": {
+    "args_not_dict": 1846
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard0of16_openai_sft_full__p0012.jsonl": {
+   "rows": 42615,
+   "violations": {
+    "args_not_dict": 324
+   },
+   "first_line": {
+    "args_not_dict": 42291
+   }
+  },
+  "en/phase1_shard0of16_openai_sft_full__p0020.jsonl": {
+   "rows": 128899,
+   "violations": {
+    "args_not_dict": 1484
+   },
+   "first_line": {
+    "args_not_dict": 125809
+   }
+  },
+  "en/phase1_shard10of16_openai_sft_full__p0028.jsonl": {
+   "rows": 18341,
+   "violations": {
+    "args_not_dict": 13248
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase1_shard10of16_openai_sft_full__p0027.jsonl": {
+   "rows": 21395,
+   "violations": {
+    "args_not_dict": 12340
+   },
+   "first_line": {
+    "args_not_dict": 4348
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0010.jsonl": {
+   "rows": 115493,
+   "violations": {
+    "args_not_dict": 2
+   },
+   "first_line": {
+    "args_not_dict": 6414
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0138.jsonl": {
+   "rows": 7265,
+   "violations": {
+    "args_not_dict": 83
+   },
+   "first_line": {
+    "args_not_dict": 60
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0141.jsonl": {
+   "rows": 5970,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 2366
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0136.jsonl": {
+   "rows": 9776,
+   "violations": {
+    "args_not_dict": 105
+   },
+   "first_line": {
+    "args_not_dict": 3445
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0139.jsonl": {
+   "rows": 8898,
+   "violations": {
+    "args_not_dict": 59
+   },
+   "first_line": {
+    "args_not_dict": 1600
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0137.jsonl": {
+   "rows": 9438,
+   "violations": {
+    "args_not_dict": 37
+   },
+   "first_line": {
+    "args_not_dict": 7368
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0142.jsonl": {
+   "rows": 17574,
+   "violations": {
+    "args_not_dict": 17405
+   },
+   "first_line": {
+    "args_not_dict": 167
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0144.jsonl": {
+   "rows": 26005,
+   "violations": {
+    "args_not_dict": 13788
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard11of16_openai_sft_full__p0143.jsonl": {
+   "rows": 17849,
+   "violations": {
+    "args_not_dict": 17848
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0066.jsonl": {
+   "rows": 49628,
+   "violations": {
+    "args_not_dict": 2
+   },
+   "first_line": {
+    "args_not_dict": 18768
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0158.jsonl": {
+   "rows": 4437,
+   "violations": {
+    "args_not_dict": 4437
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0160.jsonl": {
+   "rows": 2813,
+   "violations": {
+    "args_not_dict": 2813
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0161.jsonl": {
+   "rows": 3996,
+   "violations": {
+    "args_not_dict": 3996
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0155.jsonl": {
+   "rows": 3566,
+   "violations": {
+    "args_not_dict": 3566
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0153.jsonl": {
+   "rows": 4411,
+   "violations": {
+    "args_not_dict": 3693
+   },
+   "first_line": {
+    "args_not_dict": 718
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0154.jsonl": {
+   "rows": 4564,
+   "violations": {
+    "args_not_dict": 4564
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0166.jsonl": {
+   "rows": 5356,
+   "violations": {
+    "args_not_dict": 5356
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0156.jsonl": {
+   "rows": 7427,
+   "violations": {
+    "args_not_dict": 7427
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0159.jsonl": {
+   "rows": 8066,
+   "violations": {
+    "args_not_dict": 8066
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0162.jsonl": {
+   "rows": 5180,
+   "violations": {
+    "args_not_dict": 5180
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0163.jsonl": {
+   "rows": 3800,
+   "violations": {
+    "args_not_dict": 3800
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0165.jsonl": {
+   "rows": 2847,
+   "violations": {
+    "args_not_dict": 2847
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0167.jsonl": {
+   "rows": 9515,
+   "violations": {
+    "args_not_dict": 9515
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0157.jsonl": {
+   "rows": 17854,
+   "violations": {
+    "args_not_dict": 17836
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0169.jsonl": {
+   "rows": 32845,
+   "violations": {
+    "args_not_dict": 17103
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0164.jsonl": {
+   "rows": 3334,
+   "violations": {
+    "args_not_dict": 3334
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard12of16_openai_sft_full__p0168.jsonl": {
+   "rows": 6578,
+   "violations": {
+    "args_not_dict": 6578
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard14of16_openai_sft_full__p0000.jsonl": {
+   "rows": 38069,
+   "violations": {
+    "args_not_dict": 2
+   },
+   "first_line": {
+    "args_not_dict": 5632
+   }
+  },
+  "en/phase1_shard13of16_openai_sft_full__p0083.jsonl": {
+   "rows": 42150,
+   "violations": {
+    "args_not_dict": 5772
+   },
+   "first_line": {
+    "args_not_dict": 33954
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0016.jsonl": {
+   "rows": 242,
+   "violations": {
+    "args_not_dict": 242
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard13of16_openai_sft_full__p0084.jsonl": {
+   "rows": 46525,
+   "violations": {
+    "args_not_dict": 23973
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0017.jsonl": {
+   "rows": 368,
+   "violations": {
+    "args_not_dict": 368
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0019.jsonl": {
+   "rows": 730,
+   "violations": {
+    "args_not_dict": 729
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0018.jsonl": {
+   "rows": 528,
+   "violations": {
+    "args_not_dict": 528
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0020.jsonl": {
+   "rows": 976,
+   "violations": {
+    "args_not_dict": 975
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard1of16_openai_sft_full__p0018.jsonl": {
+   "rows": 4504,
+   "violations": {
+    "args_not_dict": 1497
+   },
+   "first_line": {
+    "args_not_dict": 1398
+   }
+  },
+  "en/phase1_shard14of16_openai_sft_full__p0041.jsonl": {
+   "rows": 106504,
+   "violations": {
+    "args_not_dict": 2906
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0015.jsonl": {
+   "rows": 11930,
+   "violations": {
+    "args_not_dict": 379
+   },
+   "first_line": {
+    "args_not_dict": 11551
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0001.jsonl": {
+   "rows": 113121,
+   "violations": {
+    "args_not_dict": 464
+   },
+   "first_line": {
+    "args_not_dict": 476
+   }
+  },
+  "en/phase1_shard14of16_openai_sft_full__p0039.jsonl": {
+   "rows": 49160,
+   "violations": {
+    "args_not_dict": 10793
+   },
+   "first_line": {
+    "args_not_dict": 36722
+   }
+  },
+  "en/phase1_shard14of16_openai_sft_full__p0040.jsonl": {
+   "rows": 38445,
+   "violations": {
+    "args_not_dict": 26924
+   },
+   "first_line": {
+    "args_not_dict": 2
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0033.jsonl": {
+   "rows": 1476,
+   "violations": {
+    "args_not_dict": 1476
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard15of16_openai_sft_full__p0021.jsonl": {
+   "rows": 47220,
+   "violations": {
+    "args_not_dict": 2600
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0034.jsonl": {
+   "rows": 9344,
+   "violations": {
+    "args_not_dict": 9344
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0030.jsonl": {
+   "rows": 11598,
+   "violations": {
+    "args_not_dict": 11598
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard1of16_openai_sft_full__p0017.jsonl": {
+   "rows": 57578,
+   "violations": {
+    "args_not_dict": 18
+   },
+   "first_line": {
+    "args_not_dict": 56839
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0029.jsonl": {
+   "rows": 11663,
+   "violations": {
+    "args_not_dict": 11663
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0036.jsonl": {
+   "rows": 15660,
+   "violations": {
+    "args_not_dict": 15512
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0035.jsonl": {
+   "rows": 5463,
+   "violations": {
+    "args_not_dict": 5286
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0031.jsonl": {
+   "rows": 15012,
+   "violations": {
+    "args_not_dict": 15012
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard1of16_openai_sft_full__p0020.jsonl": {
+   "rows": 96428,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0038.jsonl": {
+   "rows": 42216,
+   "violations": {
+    "args_not_dict": 11736
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0032.jsonl": {
+   "rows": 25462,
+   "violations": {
+    "args_not_dict": 25462
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard3of16_openai_sft_full__p0028.jsonl": {
+   "rows": 19215,
+   "violations": {
+    "args_not_dict": 27
+   },
+   "first_line": {
+    "args_not_dict": 19065
+   }
+  },
+  "en/phase1_shard4of16_openai_sft_full__p0001.jsonl": {
+   "rows": 223755,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 211874
+   }
+  },
+  "en/phase1_shard3of16_openai_sft_full__p0031.jsonl": {
+   "rows": 90273,
+   "violations": {
+    "args_not_dict": 7281
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard2of16_openai_sft_full__p0037.jsonl": {
+   "rows": 51301,
+   "violations": {
+    "args_not_dict": 51301
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard5of16_openai_sft_full__p0034.jsonl": {
+   "rows": 4169,
+   "violations": {
+    "args_not_dict": 1143
+   },
+   "first_line": {
+    "args_not_dict": 1785
+   }
+  },
+  "en/phase1_shard4of16_openai_sft_full__p0025.jsonl": {
+   "rows": 118464,
+   "violations": {
+    "args_not_dict": 7754
+   },
+   "first_line": {
+    "args_not_dict": 60007
+   }
+  },
+  "en/phase1_shard5of16_openai_sft_full__p0035.jsonl": {
+   "rows": 56459,
+   "violations": {
+    "args_not_dict": 8524
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard5of16_openai_sft_full__p0030.jsonl": {
+   "rows": 132684,
+   "violations": {
+    "args_not_dict": 3956
+   },
+   "first_line": {
+    "args_not_dict": 753
+   }
+  },
+  "en/phase1_shard7of16_openai_sft_full__p0035.jsonl": {
+   "rows": 43396,
+   "violations": {
+    "args_not_dict": 14600
+   },
+   "first_line": {
+    "args_not_dict": 20054
+   }
+  },
+  "en/phase1_shard8of16_openai_sft_full__p0006.jsonl": {
+   "rows": 33758,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 32550
+   }
+  },
+  "en/phase1_shard8of16_openai_sft_full__p0007.jsonl": {
+   "rows": 34776,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 6934
+   }
+  },
+  "en/phase1_shard8of16_openai_sft_full__p0086.jsonl": {
+   "rows": 14589,
+   "violations": {
+    "args_not_dict": 7992
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase1_shard8of16_openai_sft_full__p0085.jsonl": {
+   "rows": 42056,
+   "violations": {
+    "args_not_dict": 3446
+   },
+   "first_line": {
+    "args_not_dict": 38610
+   }
+  },
+  "en/phase1_shard9of16_openai_sft_full__p0092.jsonl": {
+   "rows": 24068,
+   "violations": {
+    "args_not_dict": 4758
+   },
+   "first_line": {
+    "args_not_dict": 17382
+   }
+  },
+  "en/phase2_shard0of32_openai_sft_full__p0039.jsonl": {
+   "rows": 17078,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 14372
+   }
+  },
+  "en/phase2_shard0of32_openai_sft_full__p0042.jsonl": {
+   "rows": 15013,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 1380
+   }
+  },
+  "en/phase2_shard0of32_openai_sft_full__p0047.jsonl": {
+   "rows": 13422,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 2932
+   }
+  },
+  "en/phase2_shard0of32_openai_sft_full__p0040.jsonl": {
+   "rows": 16871,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 5596
+   }
+  },
+  "en/phase1_shard9of16_openai_sft_full__p0109.jsonl": {
+   "rows": 83847,
+   "violations": {
+    "args_not_dict": 17
+   },
+   "first_line": {
+    "args_not_dict": 2344
+   }
+  },
+  "en/phase2_shard10of32_openai_sft_full__p0017.jsonl": {
+   "rows": 51655,
+   "violations": {
+    "args_not_dict": 4
+   },
+   "first_line": {
+    "args_not_dict": 9949
+   }
+  },
+  "en/phase2_shard11of32_openai_sft_full__p0034.jsonl": {
+   "rows": 15220,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 11466
+   }
+  },
+  "en/phase2_shard11of32_openai_sft_full__p0048.jsonl": {
+   "rows": 18226,
+   "violations": {
+    "args_not_dict": 2
+   },
+   "first_line": {
+    "args_not_dict": 17572
+   }
+  },
+  "en/phase2_shard11of32_openai_sft_full__p0049.jsonl": {
+   "rows": 18097,
+   "violations": {
+    "args_not_dict": 6
+   },
+   "first_line": {
+    "args_not_dict": 2722
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0013.jsonl": {
+   "rows": 11870,
+   "violations": {
+    "args_not_dict": 10686
+   },
+   "first_line": {
+    "args_not_dict": 1184
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0022.jsonl": {
+   "rows": 11756,
+   "violations": {
+    "args_not_dict": 4633
+   },
+   "first_line": {
+    "args_not_dict": 7123
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0014.jsonl": {
+   "rows": 12081,
+   "violations": {
+    "args_not_dict": 12081
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0023.jsonl": {
+   "rows": 11861,
+   "violations": {
+    "args_not_dict": 11861
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0026.jsonl": {
+   "rows": 11833,
+   "violations": {
+    "args_not_dict": 5441
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0015.jsonl": {
+   "rows": 11583,
+   "violations": {
+    "args_not_dict": 338
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0025.jsonl": {
+   "rows": 12166,
+   "violations": {
+    "args_not_dict": 12166
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0024.jsonl": {
+   "rows": 12054,
+   "violations": {
+    "args_not_dict": 12054
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0039.jsonl": {
+   "rows": 11769,
+   "violations": {
+    "args_not_dict": 3104
+   },
+   "first_line": {
+    "args_not_dict": 8665
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0045.jsonl": {
+   "rows": 11755,
+   "violations": {
+    "args_not_dict": 5515
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0041.jsonl": {
+   "rows": 12232,
+   "violations": {
+    "args_not_dict": 12232
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0042.jsonl": {
+   "rows": 12058,
+   "violations": {
+    "args_not_dict": 12058
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0043.jsonl": {
+   "rows": 11861,
+   "violations": {
+    "args_not_dict": 11861
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0040.jsonl": {
+   "rows": 12520,
+   "violations": {
+    "args_not_dict": 12520
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0044.jsonl": {
+   "rows": 11801,
+   "violations": {
+    "args_not_dict": 11801
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0058.jsonl": {
+   "rows": 11761,
+   "violations": {
+    "args_not_dict": 2458
+   },
+   "first_line": {
+    "args_not_dict": 9303
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0060.jsonl": {
+   "rows": 12056,
+   "violations": {
+    "args_not_dict": 8138
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0064.jsonl": {
+   "rows": 11760,
+   "violations": {
+    "args_not_dict": 5989
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0062.jsonl": {
+   "rows": 11758,
+   "violations": {
+    "args_not_dict": 5243
+   },
+   "first_line": {
+    "args_not_dict": 6515
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0068.jsonl": {
+   "rows": 11685,
+   "violations": {
+    "args_not_dict": 4111
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0066.jsonl": {
+   "rows": 11675,
+   "violations": {
+    "args_not_dict": 7079
+   },
+   "first_line": {
+    "args_not_dict": 4596
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0063.jsonl": {
+   "rows": 11820,
+   "violations": {
+    "args_not_dict": 11820
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0067.jsonl": {
+   "rows": 11877,
+   "violations": {
+    "args_not_dict": 11877
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0073.jsonl": {
+   "rows": 12067,
+   "violations": {
+    "args_not_dict": 12066
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0075.jsonl": {
+   "rows": 12137,
+   "violations": {
+    "args_not_dict": 12122
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0059.jsonl": {
+   "rows": 12488,
+   "violations": {
+    "args_not_dict": 12487
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0074.jsonl": {
+   "rows": 12086,
+   "violations": {
+    "args_not_dict": 12086
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard17of32_openai_sft_full__p0072.jsonl": {
+   "rows": 13548,
+   "violations": {
+    "args_not_dict": 9881
+   },
+   "first_line": {
+    "args_not_dict": 3666
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0011.jsonl": {
+   "rows": 11973,
+   "violations": {
+    "args_not_dict": 11973
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0009.jsonl": {
+   "rows": 12206,
+   "violations": {
+    "args_not_dict": 12206
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0010.jsonl": {
+   "rows": 12094,
+   "violations": {
+    "args_not_dict": 12094
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0022.jsonl": {
+   "rows": 12543,
+   "violations": {
+    "args_not_dict": 12543
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0025.jsonl": {
+   "rows": 11893,
+   "violations": {
+    "args_not_dict": 2671
+   },
+   "first_line": {
+    "args_not_dict": 9222
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0027.jsonl": {
+   "rows": 12028,
+   "violations": {
+    "args_not_dict": 8365
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0029.jsonl": {
+   "rows": 11696,
+   "violations": {
+    "args_not_dict": 5018
+   },
+   "first_line": {
+    "args_not_dict": 6678
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0023.jsonl": {
+   "rows": 12437,
+   "violations": {
+    "args_not_dict": 11407
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0030.jsonl": {
+   "rows": 11948,
+   "violations": {
+    "args_not_dict": 11948
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0008.jsonl": {
+   "rows": 147112,
+   "violations": {
+    "args_not_dict": 6212
+   },
+   "first_line": {
+    "args_not_dict": 140900
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0026.jsonl": {
+   "rows": 12070,
+   "violations": {
+    "args_not_dict": 12070
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0012.jsonl": {
+   "rows": 144130,
+   "violations": {
+    "args_not_dict": 3627
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0032.jsonl": {
+   "rows": 12519,
+   "violations": {
+    "args_not_dict": 12519
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0021.jsonl": {
+   "rows": 11839,
+   "violations": {
+    "args_not_dict": 11838
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0033.jsonl": {
+   "rows": 11946,
+   "violations": {
+    "args_not_dict": 4452
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0020.jsonl": {
+   "rows": 13006,
+   "violations": {
+    "args_not_dict": 10372
+   },
+   "first_line": {
+    "args_not_dict": 2634
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0031.jsonl": {
+   "rows": 12217,
+   "violations": {
+    "args_not_dict": 12217
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0040.jsonl": {
+   "rows": 12323,
+   "violations": {
+    "args_not_dict": 10947
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0039.jsonl": {
+   "rows": 12499,
+   "violations": {
+    "args_not_dict": 12163
+   },
+   "first_line": {
+    "args_not_dict": 336
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0044.jsonl": {
+   "rows": 11773,
+   "violations": {
+    "args_not_dict": 4009
+   },
+   "first_line": {
+    "args_not_dict": 7764
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0045.jsonl": {
+   "rows": 12000,
+   "violations": {
+    "args_not_dict": 12000
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0058.jsonl": {
+   "rows": 11539,
+   "violations": {
+    "args_not_dict": 38
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0056.jsonl": {
+   "rows": 12049,
+   "violations": {
+    "args_not_dict": 12049
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0055.jsonl": {
+   "rows": 12006,
+   "violations": {
+    "args_not_dict": 12006
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0057.jsonl": {
+   "rows": 12189,
+   "violations": {
+    "args_not_dict": 12188
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0046.jsonl": {
+   "rows": 11878,
+   "violations": {
+    "args_not_dict": 7025
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0062.jsonl": {
+   "rows": 12046,
+   "violations": {
+    "args_not_dict": 12045
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0063.jsonl": {
+   "rows": 14360,
+   "violations": {
+    "args_not_dict": 8660
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0054.jsonl": {
+   "rows": 12016,
+   "violations": {
+    "args_not_dict": 9974
+   },
+   "first_line": {
+    "args_not_dict": 2042
+   }
+  },
+  "en/phase2_shard18of32_openai_sft_full__p0061.jsonl": {
+   "rows": 11613,
+   "violations": {
+    "args_not_dict": 2423
+   },
+   "first_line": {
+    "args_not_dict": 9190
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0031.jsonl": {
+   "rows": 12088,
+   "violations": {
+    "args_not_dict": 11297
+   },
+   "first_line": {
+    "args_not_dict": 791
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0032.jsonl": {
+   "rows": 12147,
+   "violations": {
+    "args_not_dict": 11787
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0040.jsonl": {
+   "rows": 11851,
+   "violations": {
+    "args_not_dict": 4753
+   },
+   "first_line": {
+    "args_not_dict": 7098
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0042.jsonl": {
+   "rows": 12023,
+   "violations": {
+    "args_not_dict": 5854
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0044.jsonl": {
+   "rows": 11662,
+   "violations": {
+    "args_not_dict": 7497
+   },
+   "first_line": {
+    "args_not_dict": 4165
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0045.jsonl": {
+   "rows": 11841,
+   "violations": {
+    "args_not_dict": 11841
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0046.jsonl": {
+   "rows": 12184,
+   "violations": {
+    "args_not_dict": 12184
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0041.jsonl": {
+   "rows": 12486,
+   "violations": {
+    "args_not_dict": 12485
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0048.jsonl": {
+   "rows": 12028,
+   "violations": {
+    "args_not_dict": 12028
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0050.jsonl": {
+   "rows": 11656,
+   "violations": {
+    "args_not_dict": 1629
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0052.jsonl": {
+   "rows": 12179,
+   "violations": {
+    "args_not_dict": 11897
+   },
+   "first_line": {
+    "args_not_dict": 282
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0049.jsonl": {
+   "rows": 12081,
+   "violations": {
+    "args_not_dict": 12081
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0053.jsonl": {
+   "rows": 12058,
+   "violations": {
+    "args_not_dict": 11234
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0047.jsonl": {
+   "rows": 12050,
+   "violations": {
+    "args_not_dict": 12050
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0057.jsonl": {
+   "rows": 18550,
+   "violations": {
+    "args_not_dict": 2714
+   },
+   "first_line": {
+    "args_not_dict": 15836
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0067.jsonl": {
+   "rows": 12159,
+   "violations": {
+    "args_not_dict": 8515
+   },
+   "first_line": {
+    "args_not_dict": 3644
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0064.jsonl": {
+   "rows": 11841,
+   "violations": {
+    "args_not_dict": 11841
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0065.jsonl": {
+   "rows": 11669,
+   "violations": {
+    "args_not_dict": 4941
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0058.jsonl": {
+   "rows": 12140,
+   "violations": {
+    "args_not_dict": 12140
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0071.jsonl": {
+   "rows": 11976,
+   "violations": {
+    "args_not_dict": 11110
+   },
+   "first_line": {
+    "args_not_dict": 866
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0069.jsonl": {
+   "rows": 11694,
+   "violations": {
+    "args_not_dict": 2158
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0074.jsonl": {
+   "rows": 11841,
+   "violations": {
+    "args_not_dict": 11841
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0059.jsonl": {
+   "rows": 12028,
+   "violations": {
+    "args_not_dict": 8241
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0076.jsonl": {
+   "rows": 11729,
+   "violations": {
+    "args_not_dict": 11729
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0082.jsonl": {
+   "rows": 11772,
+   "violations": {
+    "args_not_dict": 4979
+   },
+   "first_line": {
+    "args_not_dict": 6793
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0078.jsonl": {
+   "rows": 12065,
+   "violations": {
+    "args_not_dict": 9685
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0063.jsonl": {
+   "rows": 11698,
+   "violations": {
+    "args_not_dict": 6310
+   },
+   "first_line": {
+    "args_not_dict": 5388
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0073.jsonl": {
+   "rows": 11785,
+   "violations": {
+    "args_not_dict": 11785
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0085.jsonl": {
+   "rows": 11976,
+   "violations": {
+    "args_not_dict": 11976
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0084.jsonl": {
+   "rows": 12050,
+   "violations": {
+    "args_not_dict": 12050
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0075.jsonl": {
+   "rows": 11780,
+   "violations": {
+    "args_not_dict": 11780
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0072.jsonl": {
+   "rows": 12148,
+   "violations": {
+    "args_not_dict": 12148
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0068.jsonl": {
+   "rows": 12399,
+   "violations": {
+    "args_not_dict": 12399
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0086.jsonl": {
+   "rows": 12028,
+   "violations": {
+    "args_not_dict": 12028
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0087.jsonl": {
+   "rows": 11994,
+   "violations": {
+    "args_not_dict": 11994
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0077.jsonl": {
+   "rows": 12156,
+   "violations": {
+    "args_not_dict": 12156
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0088.jsonl": {
+   "rows": 128876,
+   "violations": {
+    "args_not_dict": 1223
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard19of32_openai_sft_full__p0083.jsonl": {
+   "rows": 11900,
+   "violations": {
+    "args_not_dict": 11900
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0023.jsonl": {
+   "rows": 11645,
+   "violations": {
+    "args_not_dict": 1519
+   },
+   "first_line": {
+    "args_not_dict": 10126
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0027.jsonl": {
+   "rows": 16014,
+   "violations": {
+    "args_not_dict": 7358
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0031.jsonl": {
+   "rows": 11815,
+   "violations": {
+    "args_not_dict": 6939
+   },
+   "first_line": {
+    "args_not_dict": 4876
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0024.jsonl": {
+   "rows": 12413,
+   "violations": {
+    "args_not_dict": 12413
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0033.jsonl": {
+   "rows": 11586,
+   "violations": {
+    "args_not_dict": 4272
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0032.jsonl": {
+   "rows": 11873,
+   "violations": {
+    "args_not_dict": 11872
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0025.jsonl": {
+   "rows": 12496,
+   "violations": {
+    "args_not_dict": 12496
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0026.jsonl": {
+   "rows": 12440,
+   "violations": {
+    "args_not_dict": 12440
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0037.jsonl": {
+   "rows": 11673,
+   "violations": {
+    "args_not_dict": 1228
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0038.jsonl": {
+   "rows": 11605,
+   "violations": {
+    "args_not_dict": 109
+   },
+   "first_line": {
+    "args_not_dict": 11496
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0035.jsonl": {
+   "rows": 12384,
+   "violations": {
+    "args_not_dict": 9350
+   },
+   "first_line": {
+    "args_not_dict": 3034
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0042.jsonl": {
+   "rows": 11669,
+   "violations": {
+    "args_not_dict": 2416
+   },
+   "first_line": {
+    "args_not_dict": 9253
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0039.jsonl": {
+   "rows": 12099,
+   "violations": {
+    "args_not_dict": 12099
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0040.jsonl": {
+   "rows": 11970,
+   "violations": {
+    "args_not_dict": 10816
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0044.jsonl": {
+   "rows": 11860,
+   "violations": {
+    "args_not_dict": 8527
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0043.jsonl": {
+   "rows": 12057,
+   "violations": {
+    "args_not_dict": 12057
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0050.jsonl": {
+   "rows": 11967,
+   "violations": {
+    "args_not_dict": 4365
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0048.jsonl": {
+   "rows": 12048,
+   "violations": {
+    "args_not_dict": 6235
+   },
+   "first_line": {
+    "args_not_dict": 5813
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0057.jsonl": {
+   "rows": 11660,
+   "violations": {
+    "args_not_dict": 946
+   },
+   "first_line": {
+    "args_not_dict": 10714
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0058.jsonl": {
+   "rows": 11997,
+   "violations": {
+    "args_not_dict": 11997
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0036.jsonl": {
+   "rows": 12515,
+   "violations": {
+    "args_not_dict": 12515
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0049.jsonl": {
+   "rows": 12539,
+   "violations": {
+    "args_not_dict": 12539
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0021.jsonl": {
+   "rows": 200469,
+   "violations": {
+    "args_not_dict": 3175
+   },
+   "first_line": {
+    "args_not_dict": 197009
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0063.jsonl": {
+   "rows": 11795,
+   "violations": {
+    "args_not_dict": 4460
+   },
+   "first_line": {
+    "args_not_dict": 7335
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0064.jsonl": {
+   "rows": 12205,
+   "violations": {
+    "args_not_dict": 12205
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0059.jsonl": {
+   "rows": 11948,
+   "violations": {
+    "args_not_dict": 10117
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0065.jsonl": {
+   "rows": 11884,
+   "violations": {
+    "args_not_dict": 6449
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0071.jsonl": {
+   "rows": 11792,
+   "violations": {
+    "args_not_dict": 9181
+   },
+   "first_line": {
+    "args_not_dict": 2611
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0072.jsonl": {
+   "rows": 11840,
+   "violations": {
+    "args_not_dict": 11840
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0079.jsonl": {
+   "rows": 11887,
+   "violations": {
+    "args_not_dict": 11887
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0080.jsonl": {
+   "rows": 11845,
+   "violations": {
+    "args_not_dict": 7612
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0078.jsonl": {
+   "rows": 11664,
+   "violations": {
+    "args_not_dict": 3487
+   },
+   "first_line": {
+    "args_not_dict": 8177
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0073.jsonl": {
+   "rows": 12274,
+   "violations": {
+    "args_not_dict": 12274
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0074.jsonl": {
+   "rows": 13843,
+   "violations": {
+    "args_not_dict": 12781
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0084.jsonl": {
+   "rows": 11816,
+   "violations": {
+    "args_not_dict": 5625
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0082.jsonl": {
+   "rows": 11733,
+   "violations": {
+    "args_not_dict": 5507
+   },
+   "first_line": {
+    "args_not_dict": 6226
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0093.jsonl": {
+   "rows": 11580,
+   "violations": {
+    "args_not_dict": 205
+   },
+   "first_line": {
+    "args_not_dict": 11375
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0097.jsonl": {
+   "rows": 11737,
+   "violations": {
+    "args_not_dict": 2059
+   },
+   "first_line": {
+    "args_not_dict": 9678
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0083.jsonl": {
+   "rows": 12049,
+   "violations": {
+    "args_not_dict": 12049
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0095.jsonl": {
+   "rows": 11761,
+   "violations": {
+    "args_not_dict": 11015
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0099.jsonl": {
+   "rows": 11950,
+   "violations": {
+    "args_not_dict": 8993
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0094.jsonl": {
+   "rows": 11847,
+   "violations": {
+    "args_not_dict": 11847
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard20of32_openai_sft_full__p0098.jsonl": {
+   "rows": 11927,
+   "violations": {
+    "args_not_dict": 11927
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0014.jsonl": {
+   "rows": 11660,
+   "violations": {
+    "args_not_dict": 742
+   },
+   "first_line": {
+    "args_not_dict": 10918
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0015.jsonl": {
+   "rows": 12048,
+   "violations": {
+    "args_not_dict": 12048
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0016.jsonl": {
+   "rows": 12023,
+   "violations": {
+    "args_not_dict": 10312
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0030.jsonl": {
+   "rows": 11681,
+   "violations": {
+    "args_not_dict": 1243
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0029.jsonl": {
+   "rows": 12147,
+   "violations": {
+    "args_not_dict": 12147
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0028.jsonl": {
+   "rows": 12047,
+   "violations": {
+    "args_not_dict": 9713
+   },
+   "first_line": {
+    "args_not_dict": 2334
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0041.jsonl": {
+   "rows": 12185,
+   "violations": {
+    "args_not_dict": 6706
+   },
+   "first_line": {
+    "args_not_dict": 5478
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0043.jsonl": {
+   "rows": 11823,
+   "violations": {
+    "args_not_dict": 3959
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0042.jsonl": {
+   "rows": 12484,
+   "violations": {
+    "args_not_dict": 12484
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0053.jsonl": {
+   "rows": 12084,
+   "violations": {
+    "args_not_dict": 12084
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0050.jsonl": {
+   "rows": 11532,
+   "violations": {
+    "args_not_dict": 921
+   },
+   "first_line": {
+    "args_not_dict": 10611
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0054.jsonl": {
+   "rows": 12088,
+   "violations": {
+    "args_not_dict": 9230
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0062.jsonl": {
+   "rows": 11842,
+   "violations": {
+    "args_not_dict": 7316
+   },
+   "first_line": {
+    "args_not_dict": 4526
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0058.jsonl": {
+   "rows": 11736,
+   "violations": {
+    "args_not_dict": 5351
+   },
+   "first_line": {
+    "args_not_dict": 6385
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0059.jsonl": {
+   "rows": 11897,
+   "violations": {
+    "args_not_dict": 11897
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0063.jsonl": {
+   "rows": 11951,
+   "violations": {
+    "args_not_dict": 11951
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0064.jsonl": {
+   "rows": 11658,
+   "violations": {
+    "args_not_dict": 3845
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0068.jsonl": {
+   "rows": 11480,
+   "violations": {
+    "args_not_dict": 1691
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0060.jsonl": {
+   "rows": 11788,
+   "violations": {
+    "args_not_dict": 5852
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0051.jsonl": {
+   "rows": 12023,
+   "violations": {
+    "args_not_dict": 12023
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0052.jsonl": {
+   "rows": 11965,
+   "violations": {
+    "args_not_dict": 11965
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0070.jsonl": {
+   "rows": 12105,
+   "violations": {
+    "args_not_dict": 11487
+   },
+   "first_line": {
+    "args_not_dict": 618
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0071.jsonl": {
+   "rows": 12124,
+   "violations": {
+    "args_not_dict": 12124
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0066.jsonl": {
+   "rows": 11934,
+   "violations": {
+    "args_not_dict": 9416
+   },
+   "first_line": {
+    "args_not_dict": 2518
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0072.jsonl": {
+   "rows": 12059,
+   "violations": {
+    "args_not_dict": 12059
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0074.jsonl": {
+   "rows": 12045,
+   "violations": {
+    "args_not_dict": 12044
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0073.jsonl": {
+   "rows": 12012,
+   "violations": {
+    "args_not_dict": 12012
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0075.jsonl": {
+   "rows": 11950,
+   "violations": {
+    "args_not_dict": 9538
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard21of32_openai_sft_full__p0067.jsonl": {
+   "rows": 11997,
+   "violations": {
+    "args_not_dict": 11997
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0013.jsonl": {
+   "rows": 11625,
+   "violations": {
+    "args_not_dict": 51
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0014.jsonl": {
+   "rows": 11700,
+   "violations": {
+    "args_not_dict": 1308
+   },
+   "first_line": {
+    "args_not_dict": 10392
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0011.jsonl": {
+   "rows": 12431,
+   "violations": {
+    "args_not_dict": 10465
+   },
+   "first_line": {
+    "args_not_dict": 1966
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0012.jsonl": {
+   "rows": 12555,
+   "violations": {
+    "args_not_dict": 12555
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0018.jsonl": {
+   "rows": 11701,
+   "violations": {
+    "args_not_dict": 3601
+   },
+   "first_line": {
+    "args_not_dict": 8100
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0016.jsonl": {
+   "rows": 11913,
+   "violations": {
+    "args_not_dict": 9693
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0015.jsonl": {
+   "rows": 12167,
+   "violations": {
+    "args_not_dict": 12167
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0019.jsonl": {
+   "rows": 11767,
+   "violations": {
+    "args_not_dict": 11767
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0020.jsonl": {
+   "rows": 11637,
+   "violations": {
+    "args_not_dict": 7641
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0033.jsonl": {
+   "rows": 11565,
+   "violations": {
+    "args_not_dict": 830
+   },
+   "first_line": {
+    "args_not_dict": 10735
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0035.jsonl": {
+   "rows": 11976,
+   "violations": {
+    "args_not_dict": 11976
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0034.jsonl": {
+   "rows": 12087,
+   "violations": {
+    "args_not_dict": 12087
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0037.jsonl": {
+   "rows": 11949,
+   "violations": {
+    "args_not_dict": 11949
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0036.jsonl": {
+   "rows": 12041,
+   "violations": {
+    "args_not_dict": 12041
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0038.jsonl": {
+   "rows": 12113,
+   "violations": {
+    "args_not_dict": 12113
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0039.jsonl": {
+   "rows": 11891,
+   "violations": {
+    "args_not_dict": 8203
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0032.jsonl": {
+   "rows": 11525,
+   "violations": {
+    "args_not_dict": 345
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0031.jsonl": {
+   "rows": 12440,
+   "violations": {
+    "args_not_dict": 12440
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard22of32_openai_sft_full__p0030.jsonl": {
+   "rows": 13845,
+   "violations": {
+    "args_not_dict": 10272
+   },
+   "first_line": {
+    "args_not_dict": 3572
+   }
+  },
+  "en/phase2_shard25of32_openai_sft_full__p0019.jsonl": {
+   "rows": 142446,
+   "violations": {
+    "args_not_dict": 3485
+   },
+   "first_line": {
+    "args_not_dict": 2252
+   }
+  },
+  "en/phase2_shard25of32_openai_sft_full__p0018.jsonl": {
+   "rows": 71119,
+   "violations": {
+    "args_not_dict": 4
+   },
+   "first_line": {
+    "args_not_dict": 62868
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0027.jsonl": {
+   "rows": 41949,
+   "violations": {
+    "args_not_dict": 2400
+   },
+   "first_line": {
+    "args_not_dict": 20
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0021.jsonl": {
+   "rows": 111401,
+   "violations": {
+    "args_not_dict": 1900
+   },
+   "first_line": {
+    "args_not_dict": 107390
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0024.jsonl": {
+   "rows": 11260,
+   "violations": {
+    "args_not_dict": 6231
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0022.jsonl": {
+   "rows": 8605,
+   "violations": {
+    "args_not_dict": 4087
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0026.jsonl": {
+   "rows": 7102,
+   "violations": {
+    "args_not_dict": 3486
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase2_shard7of32_openai_sft_full__p0016.jsonl": {
+   "rows": 127532,
+   "violations": {
+    "args_not_dict": 561
+   },
+   "first_line": {
+    "args_not_dict": 126367
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0025.jsonl": {
+   "rows": 7410,
+   "violations": {
+    "args_not_dict": 3701
+   },
+   "first_line": {
+    "args_not_dict": 2
+   }
+  },
+  "en/phase2_shard6of32_openai_sft_full__p0023.jsonl": {
+   "rows": 8745,
+   "violations": {
+    "args_not_dict": 4232
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard7of32_openai_sft_full__p0019.jsonl": {
+   "rows": 141035,
+   "violations": {
+    "args_not_dict": 4218
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard7of32_openai_sft_full__p0018.jsonl": {
+   "rows": 8373,
+   "violations": {
+    "args_not_dict": 3954
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "en/phase2_shard9of32_openai_sft_full__p0038.jsonl": {
+   "rows": 51820,
+   "violations": {
+    "args_not_dict": 1761
+   },
+   "first_line": {
+    "args_not_dict": 15
+   }
+  },
+  "en/phase2_shard7of32_openai_sft_full__p0017.jsonl": {
+   "rows": 8827,
+   "violations": {
+    "args_not_dict": 4177
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "en/phase2_shard9of32_openai_sft_full__p0037.jsonl": {
+   "rows": 142997,
+   "violations": {
+    "args_not_dict": 1939
+   },
+   "first_line": {
+    "args_not_dict": 125314
+   }
+  },
+  "no_natural_language/phase2_shard19of32_openai_sft_full__p0002.jsonl": {
+   "rows": 373697,
+   "violations": {
+    "args_not_dict": 3
+   },
+   "first_line": {
+    "args_not_dict": 373052
+   }
+  },
+  "no_natural_language/phase2_shard17of32_openai_sft_full__p0002.jsonl": {
+   "rows": 355034,
+   "violations": {
+    "args_not_dict": 4
+   },
+   "first_line": {
+    "args_not_dict": 354557
+   }
+  },
+  "no_natural_language/phase2_shard22of32_openai_sft_full__p0002.jsonl": {
+   "rows": 389309,
+   "violations": {
+    "args_not_dict": 2
+   },
+   "first_line": {
+    "args_not_dict": 387648
+   }
+  },
+  "no_natural_language/phase2_shard21of32_openai_sft_full__p0002.jsonl": {
+   "rows": 610564,
+   "violations": {
+    "args_not_dict": 3
+   },
+   "first_line": {
+    "args_not_dict": 608251
+   }
+  },
+  "no_natural_language/phase2_shard20of32_openai_sft_full__p0002.jsonl": {
+   "rows": 769658,
+   "violations": {
+    "args_not_dict": 4
+   },
+   "first_line": {
+    "args_not_dict": 768134
+   }
+  },
+  "no_natural_language/phase2_shard18of32_openai_sft_full__p0003.jsonl": {
+   "rows": 1456360,
+   "violations": {
+    "args_not_dict": 5
+   },
+   "first_line": {
+    "args_not_dict": 1455817
+   }
+  },
+  "uncertain/phase1_shard10of16_openai_sft_full__p0002.jsonl": {
+   "rows": 7728,
+   "violations": {
+    "args_not_dict": 5696
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "uncertain/phase1_shard10of16_openai_sft_full__p0004.jsonl": {
+   "rows": 13065,
+   "violations": {
+    "args_not_dict": 5069
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "uncertain/phase1_shard12of16_openai_sft_full.jsonl": {
+   "rows": 33563,
+   "violations": {
+    "args_not_dict": 36
+   },
+   "first_line": {
+    "args_not_dict": 32499
+   }
+  },
+  "uncertain/phase1_shard2of16_openai_sft_full__p0002.jsonl": {
+   "rows": 10831,
+   "violations": {
+    "args_not_dict": 2488
+   },
+   "first_line": {
+    "args_not_dict": 7929
+   }
+  },
+  "uncertain/phase1_shard10of16_openai_sft_full__p0001.jsonl": {
+   "rows": 8701,
+   "violations": {
+    "args_not_dict": 6265
+   },
+   "first_line": {
+    "args_not_dict": 0
+   }
+  },
+  "uncertain/phase1_shard15of16_openai_sft_full.jsonl": {
+   "rows": 47765,
+   "violations": {
+    "args_not_dict": 132
+   },
+   "first_line": {
+    "args_not_dict": 10
+   }
+  },
+  "uncertain/phase1_shard13of16_openai_sft_full.jsonl": {
+   "rows": 73832,
+   "violations": {
+    "args_not_dict": 4209
+   },
+   "first_line": {
+    "args_not_dict": 69464
+   }
+  },
+  "uncertain/phase1_shard10of16_openai_sft_full__p0003.jsonl": {
+   "rows": 8094,
+   "violations": {
+    "args_not_dict": 5783
+   },
+   "first_line": {
+    "args_not_dict": 1
+   }
+  },
+  "uncertain/phase1_shard11of16_openai_sft_full__p0002.jsonl": {
+   "rows": 5963,
+   "violations": {
+    "args_not_dict": 14
+   },
+   "first_line": {
+    "args_not_dict": 4080
+   }
+  },
+  "uncertain/phase1_shard4of16_openai_sft_full__p0004.jsonl": {
+   "rows": 15886,
+   "violations": {
+    "args_not_dict": 5
+   },
+   "first_line": {
+    "args_not_dict": 9967
+   }
+  },
+  "uncertain/phase1_shard8of16_openai_sft_full__p0004.jsonl": {
+   "rows": 14686,
+   "violations": {
+    "args_not_dict": 2488
+   },
+   "first_line": {
+    "args_not_dict": 10993
+   }
+  },
+  "uncertain/phase1_shard5of16_openai_sft_full.jsonl": {
+   "rows": 105176,
+   "violations": {
+    "args_not_dict": 6228
+   },
+   "first_line": {
+    "args_not_dict": 93063
+   }
+  },
+  "uncertain/phase1_shard3of16_openai_sft_full__p0001.jsonl": {
+   "rows": 9783,
+   "violations": {
+    "args_not_dict": 5
+   },
+   "first_line": {
+    "args_not_dict": 9305
+   }
+  },
+  "uncertain/phase1_shard9of16_openai_sft_full__p0001.jsonl": {
+   "rows": 40063,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 32363
+   }
+  },
+  "uncertain/phase1_shard14of16_openai_sft_full.jsonl": {
+   "rows": 445384,
+   "violations": {
+    "args_not_dict": 5735
+   },
+   "first_line": {
+    "args_not_dict": 436617
+   }
+  },
+  "uncertain/phase1_shard11of16_openai_sft_full__p0001.jsonl": {
+   "rows": 44276,
+   "violations": {
+    "args_not_dict": 7
+   },
+   "first_line": {
+    "args_not_dict": 34926
+   }
+  },
+  "uncertain/phase2_shard0of32_openai_sft_full__p0004.jsonl": {
+   "rows": 101180,
+   "violations": {
+    "args_not_dict": 1
+   },
+   "first_line": {
+    "args_not_dict": 4
+   }
+  },
+  "uncertain/phase2_shard10of32_openai_sft_full__p0005.jsonl": {
+   "rows": 108592,
+   "violations": {
+    "args_not_dict": 3
+   },
+   "first_line": {
+    "args_not_dict": 107240
+   }
+  },
+  "uncertain/phase1_shard10of16_openai_sft_full__p0000.jsonl": {
+   "rows": 146644,
+   "violations": {
+    "args_not_dict": 2763
+   },
+   "first_line": {
+    "args_not_dict": 142863
+   }
+  },
+  "uncertain/phase2_shard0of32_openai_sft_full__p0003.jsonl": {
+   "rows": 264328,
+   "violations": {
+    "args_not_dict": 3
+   },
+   "first_line": {
+    "args_not_dict": 262103
+   }
+  },
+  "uncertain/phase1_shard7of16_openai_sft_full.jsonl": {
+   "rows": 166256,
+   "violations": {
+    "args_not_dict": 957
+   },
+   "first_line": {
+    "args_not_dict": 162171
+   }
+  },
+  "uncertain/phase2_shard11of32_openai_sft_full__p0002.jsonl": {
+   "rows": 396514,
+   "violations": {
+    "args_not_dict": 32
+   },
+   "first_line": {
+    "args_not_dict": 388570
+   }
+  },
+  "uncertain/phase2_shard18of32_openai_sft_full__p0001.jsonl": {
+   "rows": 273682,
+   "violations": {
+    "args_not_dict": 91
+   },
+   "first_line": {
+    "args_not_dict": 185837
+   }
+  },
+  "uncertain/phase2_shard20of32_openai_sft_full__p0001.jsonl": {
+   "rows": 187253,
+   "violations": {
+    "args_not_dict": 116
+   },
+   "first_line": {
+    "args_not_dict": 158360
+   }
+  },
+  "uncertain/phase2_shard22of32_openai_sft_full__p0001.jsonl": {
+   "rows": 262188,
+   "violations": {
+    "args_not_dict": 43
+   },
+   "first_line": {
+    "args_not_dict": 185316
+   }
+  },
+  "uncertain/phase2_shard19of32_openai_sft_full__p0001.jsonl": {
+   "rows": 210647,
+   "violations": {
+    "args_not_dict": 110
+   },
+   "first_line": {
+    "args_not_dict": 137484
+   }
+  },
+  "uncertain/phase2_shard17of32_openai_sft_full__p0000.jsonl": {
+   "rows": 813123,
+   "violations": {
+    "args_not_dict": 87
+   },
+   "first_line": {
+    "args_not_dict": 811512
+   }
+  },
+  "uncertain/phase2_shard21of32_openai_sft_full__p0001.jsonl": {
+   "rows": 591030,
+   "violations": {
+    "args_not_dict": 72
+   },
+   "first_line": {
+    "args_not_dict": 526098
+   }
+  },
+  "zh/phase1_shard5of16_openai_sft_full.jsonl": {
+   "rows": 2085,
+   "violations": {
+    "args_not_dict": 1371
+   },
+   "first_line": {
+    "args_not_dict": 696
+   }
+  },
+  "zh/phase2_shard17of32_openai_sft_full.jsonl": {
+   "rows": 307,
+   "violations": {
+    "args_not_dict": 60
+   },
+   "first_line": {
+    "args_not_dict": 173
+   }
+  },
+  "zh/phase2_shard19of32_openai_sft_full.jsonl": {
+   "rows": 457,
+   "violations": {
+    "args_not_dict": 98
+   },
+   "first_line": {
+    "args_not_dict": 5
+   }
+  },
+  "zh/phase2_shard22of32_openai_sft_full.jsonl": {
+   "rows": 54,
+   "violations": {
+    "args_not_dict": 40
+   },
+   "first_line": {
+    "args_not_dict": 11
+   }
+  },
+  "zh/phase2_shard20of32_openai_sft_full.jsonl": {
+   "rows": 284,
+   "violations": {
+    "args_not_dict": 106
+   },
+   "first_line": {
+    "args_not_dict": 5
+   }
+  },
+  "zh/phase2_shard21of32_openai_sft_full.jsonl": {
+   "rows": 2047,
+   "violations": {
+    "args_not_dict": 67
+   },
+   "first_line": {
+    "args_not_dict": 10
+   }
+  },
+  "zh/phase1_shard14of16_openai_sft_full.jsonl": {
+   "rows": 17213,
+   "violations": {
+    "args_not_dict": 7
+   },
+   "first_line": {
+    "args_not_dict": 16853
+   }
+  },
+  "zh/phase2_shard18of32_openai_sft_full.jsonl": {
+   "rows": 26170,
+   "violations": {
+    "args_not_dict": 56
+   },
+   "first_line": {
+    "args_not_dict": 8882
+   }
+  }
+ }
+}

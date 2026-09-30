@@ -1,0 +1,113 @@
+# ===== Backups that contain the OLD hardcoded API key, or are just scratch backups =====
+*.bak_before_key_redact
+*bak_before_*
+*bak_v*_nothink
+_CLAUDE.md.bak_before_10paths
+
+# ===== Nested git repo (a reference clone, not our code) =====
+lc_work/datatrove_ref/
+
+# ===== Status/progress files from background jobs =====
+*.done
+*.out
+*.progress
+
+# ===== Installed third-party libraries / caches (not our code) =====
+pylibs/
+.hf_cache/
+.cache/
+.piptmp/
+__pycache__/
+*.pyc
+classifier_experiments/hf_model_cache/
+.claude/
+
+# ===== Large data / output folders (hundreds of GB - TBs, not code) =====
+sft_hf_domain_data_openai_ready/
+sft_hf_traces_data_openai_ready/
+sft_hf_agentic_data_openai_ready/
+sft_code_math_text_openai_ready/
+sft_rl_reference_data_openai_ready/
+sft_posttraining_a_native_openai_ready/
+sft_posttraining_b1_marker_mapped_openai_ready/
+sft_posttraining_b2_heuristic_mapped_openai_ready/
+sft_datasets_sft_openai_ready/
+sft_synthetic_data_openai_ready/
+sft_final_deduped_domain_wise/
+sft_loss_report/
+sft_traces_v1/
+sft_language_wise/
+sft_openai_format/
+sft_output_data_coverage/
+sft_output_sample/
+sft_43_language_wise/
+sft_43_language_wise_clean/
+sft_43_language_wise_classified/
+posttraining_openai_sft/
+agentic_data/
+agentic_results/
+discovery_results/
+embeddings/
+lang_id_models/
+lang_id_progress/
+taxonomy_build/
+taxonomy_build_final/
+taxonomy_build_final_STALE_backup/
+backup_run1/
+backup_run2/
+backup_run3_flat_prompts/
+benchmark_results/
+logs/
+data/
+_rejects_context*/
+_rejects_context_run1_old/
+
+# classifier_experiments / lc_work / sft_audit own data+model subfolders (scripts stay, data doesn't)
+classifier_experiments/*.jsonl
+classifier_experiments/*.npy
+classifier_experiments/*.parquet
+classifier_experiments/*.txt
+classifier_experiments/*.json
+classifier_experiments/hf_model_cache/
+lc_work/models/
+lc_work/*.jsonl
+lc_work/*.json
+lc_work/*.log
+lc_work/*.txt
+lc_work/tmp/
+lc_work/chunk_out/
+lc_work/mini_out/
+lc_work/rerun_out/
+lc_work/fs_*/
+sft_audit/reports/
+sft_audit/*.log
+unique_values/
+
+# other big top-level data files not caught above
+sft_output_sample_mapped.jsonl.backup_before_rule18_fix
+
+# ===== Model binaries, embeddings, big data files anywhere =====
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.npy
+*.npz
+*.parquet
+*.jsonl
+*.jsonl.gz
+*.csv
+*.gz
+
+# ===== Misc large/generated top-level artifacts =====
+1000_samples_*.txt
+output_column_inventory.json
+chat_loss_probe.json
+yield_v1_vs_v4.json
+taxonomy_judge_report.json
+taxonomy_v4.json
+*.log
+*_run.log
+
+# Keep exceptions (explicitly un-ignore small, important reference files)
+!taxonomy_tree_final.xlsx

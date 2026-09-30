@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: taxonomy-domain-parallel
+  namespace: default
+spec:
+  completions: 6
+  parallelism: 6
+  completionMode: Indexed
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: taxonomy-domain-parallel
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: extractor
+        image: python:3.10
+        command:
+        - bash
+        - -c
+        - |
+          pip install --quiet aiohttp pandas pyarrow
+          python3 /projects/data/datasets/code_data/sai_rupesh/taxonomy/taxonomy_fast_extract.py
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+        volumeMounts:
+        - name: storage-data
+          mountPath: /projects/data
+      volumes:
+      - name: storage-data
+        hostPath:
+          path: /projects/data

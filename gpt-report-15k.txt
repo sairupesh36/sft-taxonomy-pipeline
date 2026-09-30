@@ -1,0 +1,1640 @@
+# Final SFT Sample Mapping Audit
+
+## Semantic correctness + JSONL line-level review
+
+**File audited:** `sft_output_sample_mapped.jsonl`
+**Total records:** 15,722
+**Audit objective:** determine whether the generated taxonomy mapping semantically represents the user's actual SFT task, while checking tool, interaction, composition, IO, constraints, and response behavior.
+
+---
+
+# 1. Executive verdict
+
+## Overall rating: **7.9 / 10**
+
+This is **good**, and I would continue using the taxonomy.
+
+I would **not** call the mappings ground truth yet.
+
+The strongest parts are:
+
+* basic domain mapping
+* ordinary QA
+* mathematics
+* straightforward code generation
+* healthcare
+* legal
+* retrieval
+* IO metadata
+* response behavior
+* agent/tool detection
+
+The biggest remaining problems are:
+
+1. **programming-problem datasets are often classified as mathematics/reasoning**
+2. **reasoning scratchpad is still being treated as a tool**
+3. **some simple tasks are incorrectly marked composed / multi-turn**
+4. **tool usage is sometimes inferred without evidence**
+5. **secondary task labels are occasionally inflated**
+6. **timezone conversion is being called unit conversion**
+7. **capability limitation is sometimes paired with `declined_request`**
+8. **domain/subdomain sometimes follows the reasoning technique instead of the substantive task**
+9. **task_subfamily still mixes multiple conceptual dimensions**
+
+---
+
+# 2. Scorecard
+
+| Dimension                  |     Rating | Verdict                                                |
+| -------------------------- | ---------: | ------------------------------------------------------ |
+| Primary domain             | **7.8/10** | Generally good, reasoning-domain contamination remains |
+| Task family                | **7.9/10** | Good overall, especially normal QA/calculation/code    |
+| Task subfamily             | **7.3/10** | Weakest semantic layer                                 |
+| Tool requirement           | **8.0/10** | Useful, but definition needs enforcement               |
+| Actual tool classification | **7.7/10** | Some false tool attribution                            |
+| Agentic interaction        | **8.4/10** | Strong                                                 |
+| Composition                | **7.6/10** | Some overclassification                                |
+| Complexity                 | **7.9/10** | Generally sensible                                     |
+| Constraints                | **7.8/10** | Much better, some response-behavior leakage            |
+| Input/output               | **9.0/10** | Excellent                                              |
+| Response behavior          | **8.5/10** | Major improvement                                      |
+| Hierarchical consistency   | **7.2/10** | Still needs validation rules                           |
+| **Overall**                | **7.9/10** | **Good, not yet ground truth**                         |
+
+---
+
+# 3. High-confidence semantic errors
+
+These are the rows I would actively fix.
+
+---
+
+## ERROR 1 — Programming problem classified as pure mathematics
+
+### JSONL line: **11494**
+
+**User task:**
+
+An airport control-tower programming problem involving runway lanes, divisibility, selecting aircraft, and input constraints.
+
+**Current mapping:**
+
+```text
+domain:
+    mathematics
+
+task_family:
+    calculation
+
+domain_subdomain:
+    discrete_mathematics
+
+task_subfamily:
+    algebraic_and_symbolic_calculation
+
+tool_category:
+    reasoning_scratchpad
+```
+
+### Verdict: ❌ WRONG
+
+This is a programming/algorithmic problem.
+
+The presence of mathematical constraints does **not** make the SFT task a mathematics calculation task.
+
+If the expected output is code, the primary classification should be closer to:
+
+```text
+domain:
+    software_engineering
+
+task_family:
+    code_generation
+
+domain_subdomain:
+    general_purpose_programming
+
+task_subfamily:
+    algorithmic_problem_solving
+```
+
+Then, separately, you could have:
+
+```text
+reasoning_type:
+    discrete_optimization / combinatorial
+```
+
+This is one of the most important recurring errors in the final sample.
+
+---
+
+# 4. ERROR 2 — Scheduling algorithm becomes mathematical proof
+
+### JSONL line: **11504**
+
+User asks for a programming problem involving:
+
+* crop deadlines
+* values
+* one crop per day
+* maximizing total value
+* input/output specification
+
+Current:
+
+```text
+domain:
+    mathematics
+
+task_family:
+    proof_and_formal_reasoning
+
+task_subfamily:
+    logical_deduction
+
+output.type:
+    CODE
+
+tool_category:
+    reasoning_scratchpad
+    code_execution
+```
+
+### Verdict: ❌ WRONG
+
+This is overwhelmingly a **code-generation / algorithmic problem**.
+
+The fact that the algorithm relies on greedy reasoning doesn't make it mathematical proof.
+
+Recommended:
+
+```text
+domain = software_engineering
+
+task_family = code_generation
+
+task_subfamily = algorithmic_problem_solving
+
+output.type = CODE
+```
+
+And `code_execution` should only exist if code was actually executed.
+
+---
+
+# 5. ERROR 3 — Hospital scheduling algorithm classified as mathematics
+
+### JSONL line: **11506**
+
+The user provides a scheduling algorithm problem involving:
+
+* patient arrivals
+* durations
+* priority
+* reordering
+* minimum steps
+* input/output format
+
+Current:
+
+```text
+mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+Again, this is an algorithmic programming problem.
+
+The correct primary task is likely:
+
+```text
+software_engineering
+→ code_generation
+→ algorithmic_problem_solving
+```
+
+The healthcare context should not make it a healthcare task either.
+
+This is exactly the principle:
+
+> **Scenario domain ≠ task domain.**
+
+---
+
+# 6. ERROR 4 — Archaeology optimization problem becomes mathematics
+
+### JSONL line: **11541**
+
+User describes an archaeological site with:
+
+* excavation costs
+* historical significance
+* budget
+* circular adjacency constraints
+* optimization objective
+
+Current:
+
+```text
+mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG as a primary task classification
+
+This is a programming/algorithmic optimization problem.
+
+The archaeology story is contextual.
+
+The important capability being requested is algorithmic problem solving.
+
+Recommended:
+
+```text
+software_engineering
+→ code_generation
+→ algorithmic_problem_solving
+```
+
+with something like:
+
+```text reasoning_type = combinatorial_optimization
+```
+
+if that facet exists.
+
+---
+
+# 7. ERROR 5 — Trading algorithm becomes mathematics
+
+### JSONL line: **11535**
+
+The user asks to determine profitable arbitrage opportunities across currency pairs and count the maximum number.
+
+Current:
+
+```text
+mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+The actual problem is algorithmic.
+
+Even though arbitrage is mathematically defined, the SFT task is not asking for a mathematical proof.
+
+Again:
+
+```text code-generation task
++
+mathematical problem structure
+```
+
+should not become:
+
+```text mathematics
+```
+
+automatically.
+
+This distinction is particularly important because your final SFT corpus contains a large programming-problem component.
+
+---
+
+# 8. ERROR 6 — KMP/Z-algorithm programming task classified as proof
+
+### JSONL line: **11570**
+
+User explicitly discusses:
+
+> Knuth-Morris-Pratt algorithm
+
+and:
+
+> Z-Algorithm
+
+for finding barcode patterns.
+
+Current:
+
+```text mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+This is an algorithm implementation task.
+
+It should be something like:
+
+```text software_engineering
+→ code_generation
+→ algorithmic_problem_solving
+```
+
+The algorithmic technique should not hijack the task family.
+
+This is a high-confidence error.
+
+---
+
+# 9. ERROR 7 — Hospital MRI scheduler again becomes mathematical proof
+
+### JSONL line: **11579**
+
+The user asks for a scheduling algorithm.
+
+Current:
+
+```text mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+Same underlying systematic error.
+
+The mapper is recognizing:
+
+> "There are constraints."
+
+and jumping to:
+
+> "Mathematics."
+
+That rule must be removed.
+
+---
+
+# 10. ERROR 8 — Robot routing problem becomes mathematical reasoning
+
+### JSONL line: **11588**
+
+User describes a robotic picking system on a grid and asks about path validity.
+
+Current:
+
+```text mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+Again, this is algorithmic programming.
+
+This is one of several near-identical errors, meaning it is **not an isolated model mistake**.
+
+It's a mapper policy problem.
+
+---
+
+# 11. ERROR 9 — Alternating-sequence programming problem becomes logical deduction
+
+### JSONL line: **11589**
+
+User asks to determine whether a stream can be rearranged into an alternating sequence under:
+
+* O(N) time
+* O(1) space
+
+Current:
+
+```text mathematics
+→ proof_and_formal_reasoning
+→ logical_deduction
+```
+
+### Verdict: ❌ WRONG
+
+The complexity requirements alone tell you this is a programming/algorithmic task.
+
+Recommended:
+
+```text software_engineering
+→ code_generation
+→ algorithmic_problem_solving
+```
+
+---
+
+# 12. ERROR 10 — Flight scheduling problem becomes mathematics
+
+### JSONL line: **11595**
+
+User asks to maximize the number of flights landed subject to:
+
+* priority
+* one flight per minute
+* same-priority constraints
+* deadline
+
+Current:
+
+```text mathematics
+→ proof_and_formal_reasoning
+```
+
+### Verdict: ❌ WRONG
+
+Again:
+
+**algorithmic scheduling problem**, not mathematics as the SFT task.
+
+---
+
+# 13. ERROR 11 — Programming problem with arithmetic gets `calculation`
+
+### JSONL line: **11774**
+
+User asks a programming problem:
+
+> maximize number of mangoes under a bridge weight constraint.
+
+Current:
+
+```text mathematics
+→ calculation
+→ arithmetic_calculation
+```
+
+### Verdict: ⚠️ PARTIALLY WRONG
+
+The underlying mathematical concept is arithmetic.
+
+But if this record's expected SFT output is code, the primary task should be:
+
+```text software_engineering
+→ code_generation
+```
+
+with the numeric constraint represented separately.
+
+This row illustrates why your mapper needs to know whether it is classifying:
+
+> **problem subject**
+
+or:
+
+> **SFT task type**.
+
+Right now it sometimes mixes the two.
+
+---
+
+# 14. ERROR 12 — Armstrong-number Python request has unnecessary transformation/refactoring
+
+### JSONL line: **13557**
+
+User:
+
+> "Could you write a Python program that prints all Armstrong numbers within a range I specify?"
+
+Current:
+
+```text task_family:
+    code_generation
+    code_transformation
+
+task_subfamily:
+    function_generation
+    refactoring
+
+interaction_mode:
+    multi_turn
+
+task_composition:
+    composed
+
+tool_category:
+    reasoning_scratchpad
+```
+
+### Verdict: ❌ WRONG / OVERCLASSIFIED
+
+The user asked for a Python program.
+
+Nothing in that request asks for:
+
+* code transformation
+* refactoring
+* multi-turn interaction
+* a composed task
+
+A much cleaner mapping is:
+
+```text domain = software_engineering
+task_family = code_generation
+task_subfamily = program_generation / function_generation
+interaction_mode = single_turn
+task_composition = atomic
+tool_category = []
+output.type = CODE
+output.format = PY
+```
+
+This is a **high-confidence error**.
+
+---
+
+# 15. ERROR 13 — Timezone conversion mislabeled as unit conversion
+
+### JSONL line: **9977**
+
+User:
+
+> "Convert the time 3 PM PST to local time in Paris."
+
+Current:
+
+```text task_family:
+    transformation
+
+task_subfamily:
+    unit_conversion
+
+response_behavior:
+    capability_limitation
+
+constraints:
+    declined_request
+    compliance
+```
+
+### Verdict: ❌ WRONG
+
+This is **timezone conversion**, not unit conversion.
+
+Recommended:
+
+```text task_family = transformation
+task_subfamily = timezone_conversion
+```
+
+And unless the assistant actually cannot perform the conversion:
+
+```text response_behavior = normal
+```
+
+There is also no reason for `compliance` here.
+
+This is a nice example of why the taxonomy needs more precise transformation subfamilies.
+
+---
+
+# 16. ERROR 14 — Simple finance calculation incorrectly becomes composed multi-turn tool task
+
+### JSONL line: **10088**
+
+User asks:
+
+> Company ABC paid $2M in dividends and has 500K shares. What is the quarterly dividend per share?
+
+The record also includes a previous result:
+
+```json
+{"dividend_per_share": 4.0}
+```
+
+Current mapping:
+
+```text finance + mathematics
+
+calculation
+
+multi_turn
+
+multi_step
+
+composed
+
+code_execution
+```
+
+### Verdict: ⚠️ MOSTLY WRONG
+
+The **finance + calculation** classification is good.
+
+But:
+
+```text composed
+```
+
+is questionable.
+
+This is one straightforward calculation.
+
+Also:
+
+```text tool_category = code_execution
+```
+
+is not justified by the content shown.
+
+There is no evidence here of actual Python/code execution.
+
+I would use:
+
+```text domain = finance
+task_family = calculation
+task_subfamily = financial_calculation
+task_composition = atomic
+tool_category = []
+```
+
+Whether `interaction_mode=multi_turn` is retained depends on your formal definition. Since a prior user/result exists, you could keep multi-turn if your taxonomy is conversation-level. But it still isn't a composed task.
+
+---
+
+# 17. ERROR 15 — Capability limitation incorrectly marked as refusal
+
+### JSONL line: **3337**
+
+User asks a legal case question.
+
+Mapping:
+
+```text domain = legal
+task_family = question_answering
+task_subfamily = closed_domain_qa
+
+constraints:
+    declined_request
+
+response_behavior:
+    capability_limitation
+```
+
+### Verdict: ⚠️ PARTIALLY WRONG
+
+The semantic task mapping is good.
+
+The problem is:
+
+```text declined_request
+```
+
+combined with:
+
+```text capability_limitation
+```
+
+This is probably not a refusal.
+
+If the assistant simply lacked access to the specific case information, use:
+
+```text response_behavior = capability_limitation
+```
+
+without:
+
+```text declined_request
+```
+
+This is now a recurring issue.
+
+---
+
+# 18. ERROR 16 — Capability limitation incorrectly marked as declined request
+
+### JSONL line: **9669**
+
+User asks for help identifying an Agatha Christie mystery novel from incomplete information.
+
+Current:
+
+```text humanities
+→ search_and_retrieval
+→ document_retrieval
+
+tool_category:
+    search_engine
+
+constraints:
+    declined_request
+
+response_behavior:
+    capability_limitation
+```
+
+### Verdict: ⚠️ PARTIALLY WRONG
+
+The task classification is reasonable.
+
+`search_engine` is also reasonable **if the environment actually supplies that capability**.
+
+But:
+
+```text declined_request
+```
+
+is misleading.
+
+This should be:
+
+```text response_behavior = capability_limitation
+```
+
+unless the response was genuinely a refusal.
+
+---
+
+# 19. ERROR 17 — Capability limitation + declined request for simple calculation
+
+### JSONL line: **9670**
+
+User:
+
+> "I need help with calculating the tip for my bill."
+
+Current:
+
+```text general
+→ calculation
+→ arithmetic_calculation
+
+tool_category:
+    calculator
+
+constraints:
+    declined_request
+
+response_behavior:
+    capability_limitation
+```
+
+### Verdict: ⚠️ PARTIALLY WRONG
+
+The task classification is fine.
+
+But the combination of:
+
+```text calculator
++
+capability_limitation
++
+declined_request
+```
+
+needs scrutiny.
+
+If the assistant simply couldn't access a calculator tool, that should be:
+
+```text tool_requirement = optional
+tool_category = calculator
+response_behavior = capability_limitation
+```
+
+without `declined_request`.
+
+Again, don't make "I couldn't do that" synonymous with "I refused."
+
+---
+
+# 20. ERROR 18 — One explicit Python request gets unnecessary secondary labels
+
+### JSONL line: **13557**
+
+This deserves special emphasis because it is representative of a broader issue.
+
+User explicitly asks for a Python program.
+
+The mapper correctly gets:
+
+```text code_generation
+```
+
+but then adds:
+
+```text code_transformation
+refactoring
+```
+
+There is no evidence that the user requested either.
+
+### Verdict
+
+**Remove both.**
+
+The same principle should be enforced across the entire dataset:
+
+> **Only add a secondary task when the user independently requested that activity.**
+
+---
+
+# 21. POSSIBLE OVERCLASSIFICATION — Mathematica histogram question
+
+### JSONL line: **5142**
+
+User is discussing a classifier probability histogram in Mathematica and asks how to interpret/use it.
+
+Current:
+
+```text artificial_intelligence_and_machine_learning
++
+software_engineering
+
+explanation_and_tutoring
++
+code_generation
+```
+
+### Verdict: ⚠️ MOSTLY GOOD, BUT BORDERLINE
+
+The AI/ML domain is clearly relevant.
+
+The explanation component is also reasonable.
+
+But:
+
+```text code_generation
+```
+
+may be too strong unless the user explicitly asks for code.
+
+The user appears primarily to be asking:
+
+> how to obtain/interpret the histogram.
+
+So this might be better as:
+
+```text task_family = explanation_and_tutoring
+```
+
+with `code_generation` only if the intended answer is explicitly implementation code.
+
+This is a **medium-confidence issue**, not a hard error.
+
+---
+
+# 22. Good example — mathematical problem generation
+
+### JSONL line: **6816**
+
+User:
+
+> "Create a new mathematical problem by extending a known theory or concept."
+
+Current:
+
+```text mathematics
+→ generation
+→ pure_mathematics
+→ text_generation
+```
+
+### Verdict: ✅ GOOD
+
+This is exactly what the user asks.
+
+---
+
+# 23. Good example — scientific summarization
+
+### JSONL line: **489**
+
+User asks to summarize a SARS-CoV-2 research abstract into a title.
+
+Current:
+
+```text science_and_research
+→ summarization
+→ life_sciences_research
+→ abstractive_summarization
+```
+
+### Verdict: ✅ GOOD
+
+This is a very clean mapping.
+
+---
+
+# 24. Good example — clinical recommendation
+
+### JSONL line: **1236**
+
+The ventilator-adjustment question maps to:
+
+```text healthcare
+→ recommendation
+→ clinical_care
+→ action_recommendation
+```
+
+### Verdict: ✅ GOOD
+
+The multi-step classification also makes sense.
+
+This is the sort of domain-specific semantic mapping your taxonomy is doing well.
+
+---
+
+# 25. Good example — shell-script generation
+
+### JSONL line: **10447**
+
+User asks for a shell script to analyze disk usage and generate a chart.
+
+Current:
+
+```text software_engineering
+→ code_generation
+→ devops_and_infrastructure
++
+general_purpose_programming
+```
+
+with:
+
+```text output = CODE / SH
+```
+
+### Verdict: ✅ GOOD
+
+This is exactly the kind of code task that should remain under software engineering.
+
+---
+
+# 26. Good example — what-if analysis
+
+### JSONL line: **13928**
+
+User asks:
+
+> What if the Apollo 1 fire and subsequent safety changes had happened much later?
+
+Current:
+
+```text humanities
+→ simulation_and_scenario_analysis
+→ history
+→ what_if_analysis
+```
+
+### Verdict: ✅ GOOD
+
+This is a very nice mapping.
+
+---
+
+# 27. The biggest recurring error in the whole sample
+
+After looking across the final-SFT data, this is the thing I would prioritize above everything else:
+
+## **Programming problem ≠ mathematics task**
+
+Your mapper is repeatedly doing:
+
+```text mathematical structure
+        ↓
+mathematics
+```
+
+when it should sometimes do:
+
+```text requested artifact = code
+        ↓
+software_engineering / code_generation
+
+mathematical structure
+        ↓
+secondary reasoning/problem characteristic
+```
+
+This is especially visible in the `code_pipeline_team2` section.
+
+That means this isn't one accidental misclassification.
+
+It is a **systemic mapper rule problem**.
+
+---
+
+# 28. The second biggest recurring error
+
+## `reasoning_scratchpad` is not a tool
+
+Your current final data has:
+
+### **6,077 / 15,722 records**
+
+containing `reasoning_scratchpad` in `tool_category`.
+
+That's approximately:
+
+## **38.6% of the entire sample**
+
+That is much too high.
+
+Your tool distribution becomes misleading.
+
+For example:
+
+```text tool_category:
+    reasoning_scratchpad
+```
+
+doesn't tell a downstream consumer that the dataset uses an external tool.
+
+It tells them only that the sample contains or was processed with some reasoning representation.
+
+Those are different things.
+
+### I would remove this category from `tool_category` entirely.
+
+---
+
+# 29. Third biggest issue
+
+## `task_subfamily` is doing too much
+
+You're currently putting things like:
+
+```text factoid_qa
+closed_domain_qa
+open_domain_qa
+multi_hop_qa
+logical_deduction
+step_by_step_walkthrough
+function_generation
+```
+
+inside the same layer.
+
+But these describe different properties.
+
+For example:
+
+```text factoid_qa
+```
+
+= answer/task type
+
+```text closed_domain_qa
+```
+
+= grounding
+
+```text multi_hop_qa
+```
+
+= reasoning structure
+
+```text step_by_step_walkthrough
+```
+
+= response style
+
+Those should not necessarily compete as a single taxonomy dimension.
+
+---
+
+# 30. What I would change in the schema
+
+Your current schema is already close.
+
+I would evolve it into:
+
+```text
+primary_domain
+
+secondary_domains[]
+
+primary_task_family
+
+secondary_task_families[]
+
+task_subfamily
+
+reasoning_type
+
+grounding_type
+
+interaction_mode
+
+task_composition
+
+complexity
+
+tool_requirement
+
+tools_used[]
+
+input
+
+output
+
+constraints
+
+response_behavior
+
+confidence
+
+mapping_status
+```
+
+This gives each concept its own home.
+
+---
+
+# 31. Recommended `reasoning_type`
+
+This would solve a LOT of your current errors.
+
+Something like:
+
+```text
+reasoning_type:
+    none
+    arithmetic
+    algebraic
+    deductive
+    constraint_satisfaction
+    combinatorial
+    optimization
+    causal
+    temporal
+    spatial
+    comparative
+    multi_hop
+```
+
+Then your archaeology programming problem can be:
+
+```text
+primary_task_family:
+    code_generation
+
+reasoning_type:
+    combinatorial_optimization
+```
+
+instead of:
+
+```text mathematics
+→ proof_and_formal_reasoning
+```
+
+Much cleaner.
+
+---
+
+# 32. Tool schema should become
+
+Instead of:
+
+```text tool_requirement
+tool_category
+```
+
+use:
+
+```text tool_requirement
+tools_used
+```
+
+For example:
+
+```text tool_requirement = required
+tools_used = []
+```
+
+is perfectly valid.
+
+This means:
+
+> "This task requires a tool, but the assistant didn't successfully use one."
+
+That is much more informative.
+
+---
+
+# 33. Response behavior is now one of your strongest facets
+
+Keep:
+
+```text normal
+policy_refusal
+capability_limitation
+clarification_required
+```
+
+and consider adding:
+
+```text unavailable_information
+partial_completion
+safe_redirection
+tool_failure
+```
+
+The structure is already moving in the right direction.
+
+---
+
+# 34. Constraint mapping needs one major rule
+
+Never let:
+
+```text response_behavior
+```
+
+automatically create:
+
+```text declined_request
+```
+
+A response can fail because:
+
+* tool unavailable
+* capability unavailable
+* request ambiguous
+* information missing
+* environment failure
+
+without being a refusal.
+
+This will clean up rows like:
+
+* **3337**
+* **9669**
+* **9670**
+* **9977**
+
+---
+
+# 35. The dataset-level statistics
+
+From the final 15,722 records:
+
+### Task family
+
+| Task family                   | Count |
+| ----------------------------- | ----: |
+| calculation                   | 3,508 |
+| question_answering            | 3,187 |
+| code_generation               | 1,443 |
+| proof_and_formal_reasoning    | 1,043 |
+| generation                    |   940 |
+| explanation_and_tutoring      |   761 |
+| classification                |   730 |
+| tool_use_and_function_calling |   633 |
+| summarization                 |   317 |
+| analysis                      |   301 |
+
+The problem is particularly visible in the **1,043 proof/formal-reasoning** records.
+
+A substantial part of that bucket is actually algorithmic/programming data.
+
+---
+
+# 36. Interaction distribution
+
+```text
+single_turn    13,570
+multi_turn      1,284
+agentic_loop      868
+```
+
+This looks plausible.
+
+I don't see a catastrophic problem here.
+
+Some individual rows are overclassified as multi-turn because the underlying source format contains prior tool/user messages, but that's a definition question you should document.
+
+---
+
+# 37. Complexity distribution
+
+```text
+single_step       8,014
+multi_step        7,157
+complex_workflow    551
+```
+
+This looks reasonable.
+
+The complexity facet is not one of your major problems right now.
+
+---
+
+# 38. Composition distribution
+
+```text
+atomic       13,370
+composed      2,352
+```
+
+Also reasonable.
+
+The problem is **individual false composed classifications**, not the aggregate distribution.
+
+For example:
+
+### JSONL line 10088
+
+One dividend-per-share calculation is marked:
+
+```text composed
+```
+
+I'd make it atomic.
+
+---
+
+# 39. Output metadata is excellent
+
+The mapper is doing a very good job with:
+
+```text TEXT
+CODE
+LABEL
+STRUCTURED_DATA
+STRUCTURED_QUERY
+```
+
+and formats such as:
+
+```text PY
+JAVA
+SQL
+JSON
+MARKDOWN
+```
+
+This is valuable metadata.
+
+I would actually consider making IO classification mostly deterministic rather than LLM-controlled.
+
+---
+
+# 40. Domain mapping is better than task-family mapping
+
+This may sound strange, but looking at the final corpus, I trust your **domain labels** more than your **task-subfamily labels**.
+
+For ordinary samples:
+
+```text healthcare
+finance
+legal
+science_and_research
+humanities
+software_engineering
+```
+
+are usually sensible.
+
+Where things start breaking is when the mapper has to answer:
+
+> "What kind of reasoning/programming operation is this?"
+
+That is where the domain gets hijacked.
+
+---
+
+# 41. The taxonomy itself is not the main problem anymore
+
+This is important.
+
+I wouldn't redesign your whole taxonomy.
+
+You already have enough structure.
+
+The main issue is **cross-field leakage**.
+
+Examples:
+
+```text code problem
+→ mathematics
+
+logical constraints
+→ mathematics
+
+Python used
+→ code-generation
+
+scratchpad exists
+→ tool
+
+assistant couldn't answer
+→ declined_request
+
+structured answer
+→ generation
+```
+
+These are decision-policy mistakes.
+
+---
+
+# 42. What I would change in Claude Code now
+
+I would put these rules directly into the mapper:
+
+```text
+RULE 1:
+Identify the requested output/task before identifying the subject matter.
+
+RULE 2:
+If the user asks to write/implement/debug code,
+code-related task family takes precedence over mathematical
+or scientific reasoning labels.
+
+RULE 3:
+Mathematical concepts may be represented as reasoning/problem characteristics,
+but they do not automatically define the primary task domain.
+
+RULE 4:
+Logical deduction does not imply mathematics.
+
+RULE 5:
+Constraints do not imply proof_and_formal_reasoning.
+
+RULE 6:
+Assistant execution method must never redefine the user task.
+
+RULE 7:
+Internal reasoning/scratchpad is not a tool.
+
+RULE 8:
+Only assign a secondary task if it corresponds to an independently
+requested user objective.
+
+RULE 9:
+Tool requirement describes what is necessary.
+tools_used describes what actually happened.
+
+RULE 10:
+Capability limitation is not the same as policy refusal.
+
+RULE 11:
+Clarification required is not a refusal.
+
+RULE 12:
+Timezone conversion is distinct from unit conversion.
+
+RULE 13:
+Do not infer tool usage from the mere possibility of using a tool.
+
+RULE 14:
+Atomic means one user objective, even if solving it requires many reasoning steps.
+
+RULE 15:
+Composed means the user requested multiple independently meaningful objectives.
+```
+
+---
+
+# 43. My honest final assessment
+
+### What's working
+
+Your taxonomy now handles these quite well:
+
+**QA:** ✅
+
+**basic math:** ✅
+
+**healthcare:** ✅
+
+**legal:** ✅
+
+**finance:** ✅
+
+**scientific literature:** ✅
+
+**summarization:** ✅
+
+**classification:** ✅
+
+**ordinary code generation:** ✅
+
+**SQL/database tasks:** ✅
+
+**agentic tool use:** ✅
+
+**IO metadata:** ✅
+
+**response behavior:** ✅
+
+---
+
+### What's still shaky
+
+**algorithmic programming problems:** ⚠️
+
+**reasoning-heavy real-world scenarios:** ⚠️
+
+**task_subfamily:** ⚠️
+
+**secondary-label discipline:** ⚠️
+
+**tool_category:** ⚠️
+
+**response-behavior/constraint separation:** ⚠️
+
+**primary vs secondary domain:** ⚠️
+
+---
+
+# 44. Final rating
+
+## **7.9 / 10**
+
+More precisely:
+
+```text
+Taxonomy architecture       8.5
+Semantic domain mapping      7.8
+Task-family mapping          7.9
+Task-subfamily mapping       7.3
+Tool/agent mapping           8.3
+IO mapping                   9.0
+Response behavior            8.5
+Consistency                  7.2
+Production readiness         7.8
+```
+
+## And my recommendation:
+
+### **KEEP THIS TAXONOMY.**
+
+Do not rebuild it.
+
+### **CHANGE THE MAPPER RULES.**
+
+Especially the distinction between:
+
+```text
+TASK TYPE
+vs
+SUBJECT MATTER
+vs
+REASONING METHOD
+vs
+EXECUTION METHOD
+```
+
+That is where most of the remaining mistakes live.
+
+---
+
+# 45. Priority order for the next mapper revision
+
+### P0: Fix immediately
+
+**1. Remove `reasoning_scratchpad` from `tool_category`.**
+
+**2. Stop mapping programming problems as mathematics when code is the requested output.**
+
+**3. Stop treating logical/constraint reasoning as automatically mathematical.**
+
+**4. Separate capability limitation / clarification / tool failure from refusal.**
+
+### P1
+
+**5. Introduce primary vs secondary task/domain.**
+
+**6. Add `tools_used`.**
+
+**7. Prevent secondary task inflation.**
+
+**8. Split reasoning characteristics from task family.**
+
+### P2
+
+**9. Expand transformation subfamilies such as `timezone_conversion`.**
+
+**10. Tighten software-engineering subfamilies.**
+
+---
+
+# Final conclusion
+
+Your current final-SFT mapping is **good enough to be useful**.
+
+It is **not yet clean enough to become unquestioned metadata**.
+
+The encouraging part is that the remaining problems are now highly concentrated.
+
+You don't have:
+
+> "the mapper is garbage."
+
+You have:
+
+> "the mapper has learned the ontology, but it still occasionally lets one dimension contaminate another."
+
+That's a very fixable problem.
+
+**My current confidence in the taxonomy direction: HIGH.**
+
+**My confidence in every individual generated mapping: MEDIUM-HIGH.**
+
+**My recommendation: V4 mapper → one more rule-focused revision → regenerate this sample → compare specifically against these line-level failure cases.**

@@ -1,0 +1,217 @@
+{
+ "total_files": 71,
+ "total_rows": 36329531,
+ "violation_counts": {
+  "does_not_end_with_assistant": 287737,
+  "empty_assistant": 12099,
+  "null_in_args": 8695,
+  "unknown_role": 1062,
+  "tool_without_call": 5290,
+  "system_then_assistant": 1203
+ },
+ "files_with_violations": 18,
+ "per_file": {
+  "Exgentic__agent-llm-traces.jsonl": {
+   "rows": 1780,
+   "violations": {
+    "does_not_end_with_assistant": 317,
+    "empty_assistant": 9,
+    "null_in_args": 39,
+    "unknown_role": 62
+   },
+   "first_line": {
+    "does_not_end_with_assistant": 14,
+    "empty_assistant": 26,
+    "null_in_args": 345,
+    "unknown_role": 367
+   }
+  },
+  "HuggingFaceH4__ultrachat_200k.jsonl": {
+   "rows": 515293,
+   "violations": {
+    "empty_assistant": 61,
+    "does_not_end_with_assistant": 284318
+   },
+   "first_line": {
+    "empty_assistant": 21059,
+    "does_not_end_with_assistant": 138577
+   }
+  },
+  "Jarrodbarnes__tau2-sft-v4-dataset.jsonl": {
+   "rows": 219,
+   "violations": {
+    "tool_without_call": 70,
+    "does_not_end_with_assistant": 6
+   },
+   "first_line": {
+    "tool_without_call": 0,
+    "does_not_end_with_assistant": 2
+   }
+  },
+  "SWE-Gym__OpenHands-Sampled-Trajectories.jsonl": {
+   "rows": 491,
+   "violations": {
+    "null_in_args": 2
+   },
+   "first_line": {
+    "null_in_args": 48
+   }
+  },
+  "Srijan-Chakraborty__GLM-5.2-Agent-Distilled.jsonl": {
+   "rows": 318,
+   "violations": {
+    "tool_without_call": 315,
+    "does_not_end_with_assistant": 5
+   },
+   "first_line": {
+    "tool_without_call": 0,
+    "does_not_end_with_assistant": 99
+   }
+  },
+  "TIGER-Lab__SWE-QA-Pro-SFT-Trajectories.jsonl": {
+   "rows": 1000,
+   "violations": {
+    "tool_without_call": 1000,
+    "unknown_role": 1000
+   },
+   "first_line": {
+    "tool_without_call": 0,
+    "unknown_role": 0
+   }
+  },
+  "Solaris99__AgentBank.jsonl": {
+   "rows": 53205,
+   "violations": {
+    "does_not_end_with_assistant": 136
+   },
+   "first_line": {
+    "does_not_end_with_assistant": 7435
+   }
+  },
+  "TIGER-Lab__SWE-Next-SFT-Trajectories.jsonl": {
+   "rows": 3693,
+   "violations": {
+    "tool_without_call": 3693,
+    "system_then_assistant": 1
+   },
+   "first_line": {
+    "tool_without_call": 0,
+    "system_then_assistant": 3657
+   }
+  },
+  "fuvty__tau-bench-synthetic.jsonl": {
+   "rows": 1200,
+   "violations": {
+    "system_then_assistant": 1200
+   },
+   "first_line": {
+    "system_then_assistant": 0
+   }
+  },
+  "agent-data__misc-merged-claude-code-traces-v1.jsonl": {
+   "rows": 901,
+   "violations": {
+    "does_not_end_with_assistant": 854,
+    "system_then_assistant": 2,
+    "empty_assistant": 6,
+    "tool_without_call": 4
+   },
+   "first_line": {
+    "does_not_end_with_assistant": 0,
+    "system_then_assistant": 91,
+    "empty_assistant": 123,
+    "tool_without_call": 124
+   }
+  },
+  "internlm__Agent-FLAN.jsonl": {
+   "rows": 34440,
+   "violations": {
+    "empty_assistant": 9815
+   },
+   "first_line": {
+    "empty_assistant": 19132
+   }
+  },
+  "allenai__ultrafeedback_binarized_cleaned.jsonl": {
+   "rows": 186421,
+   "violations": {
+    "empty_assistant": 368
+   },
+   "first_line": {
+    "empty_assistant": 48
+   }
+  },
+  "glaiveai__glaive-function-calling-v2.jsonl": {
+   "rows": 112960,
+   "violations": {
+    "does_not_end_with_assistant": 1997,
+    "tool_without_call": 165,
+    "empty_assistant": 2,
+    "null_in_args": 7
+   },
+   "first_line": {
+    "does_not_end_with_assistant": 30,
+    "tool_without_call": 464,
+    "empty_assistant": 11267,
+    "null_in_args": 36403
+   }
+  },
+  "Lite-Coder__LiteCoder-Terminal-SFT.jsonl": {
+   "rows": 11255,
+   "violations": {
+    "does_not_end_with_assistant": 91
+   },
+   "first_line": {
+    "does_not_end_with_assistant": 9854
+   }
+  },
+  "Agent-Ark__Toucan-1.5M_2.jsonl": {
+   "rows": 236839,
+   "violations": {
+    "null_in_args": 2234,
+    "empty_assistant": 26,
+    "tool_without_call": 27,
+    "does_not_end_with_assistant": 4
+   },
+   "first_line": {
+    "null_in_args": 16,
+    "empty_assistant": 22298,
+    "tool_without_call": 22298,
+    "does_not_end_with_assistant": 35007
+   }
+  },
+  "allenai__WildChat.jsonl": {
+   "rows": 529428,
+   "violations": {
+    "empty_assistant": 57
+   },
+   "first_line": {
+    "empty_assistant": 24699
+   }
+  },
+  "allenai__WildChat-1M.jsonl": {
+   "rows": 837989,
+   "violations": {
+    "empty_assistant": 1
+   },
+   "first_line": {
+    "empty_assistant": 132715
+   }
+  },
+  "Agent-Ark__Toucan-1.5M_1.jsonl": {
+   "rows": 513384,
+   "violations": {
+    "null_in_args": 6413,
+    "empty_assistant": 1754,
+    "tool_without_call": 16,
+    "does_not_end_with_assistant": 9
+   },
+   "first_line": {
+    "null_in_args": 622,
+    "empty_assistant": 3143,
+    "tool_without_call": 3143,
+    "does_not_end_with_assistant": 52661
+   }
+  }
+ }
+}

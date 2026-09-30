@@ -1,0 +1,89 @@
+{
+ "total_files": 69,
+ "total_rows": 36327623,
+ "violation_counts": {
+  "null_in_args": 8695,
+  "tool_without_call": 3972
+ },
+ "files_with_violations": 8,
+ "per_file": {
+  "Exgentic__agent-llm-traces.jsonl": {
+   "rows": 1780,
+   "violations": {
+    "null_in_args": 39
+   },
+   "first_line": {
+    "null_in_args": 345
+   }
+  },
+  "Jarrodbarnes__tau2-sft-v4-dataset.jsonl": {
+   "rows": 219,
+   "violations": {
+    "tool_without_call": 70
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "SWE-Gym__OpenHands-Sampled-Trajectories.jsonl": {
+   "rows": 491,
+   "violations": {
+    "null_in_args": 2
+   },
+   "first_line": {
+    "null_in_args": 48
+   }
+  },
+  "TIGER-Lab__SWE-Next-SFT-Trajectories.jsonl": {
+   "rows": 3692,
+   "violations": {
+    "tool_without_call": 3692
+   },
+   "first_line": {
+    "tool_without_call": 0
+   }
+  },
+  "agent-data__misc-merged-claude-code-traces-v1.jsonl": {
+   "rows": 895,
+   "violations": {
+    "tool_without_call": 4
+   },
+   "first_line": {
+    "tool_without_call": 121
+   }
+  },
+  "glaiveai__glaive-function-calling-v2.jsonl": {
+   "rows": 112960,
+   "violations": {
+    "tool_without_call": 163,
+    "null_in_args": 7
+   },
+   "first_line": {
+    "tool_without_call": 464,
+    "null_in_args": 36403
+   }
+  },
+  "Agent-Ark__Toucan-1.5M_2.jsonl": {
+   "rows": 236839,
+   "violations": {
+    "null_in_args": 2234,
+    "tool_without_call": 27
+   },
+   "first_line": {
+    "null_in_args": 16,
+    "tool_without_call": 22298
+   }
+  },
+  "Agent-Ark__Toucan-1.5M_1.jsonl": {
+   "rows": 513384,
+   "violations": {
+    "null_in_args": 6413,
+    "tool_without_call": 16
+   },
+   "first_line": {
+    "null_in_args": 622,
+    "tool_without_call": 3143
+   }
+  }
+ }
+}
